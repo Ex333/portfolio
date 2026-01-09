@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Contact | Mateusz{% endblock %}
+
+{% block content %}
+<section>
+    <h1 style="font-size:36px; font-weight:700;">Contact</h1>
+
+    <p class="muted" style="margin-top:10px;">
+        Feel free to reach out to me.
+    </p>
+
+    <form style="margin-top:30px; max-width:500px;">
+        <div style="margin-bottom:15px;">
+            <label>Name</label><br>
+            <input type="text" style="width:100%; padding:10px;">
+        </div>
+
+        <div style="margin-bottom:15px;">
+            <label>Email</label><br>
+            <input type="email" style="width:100%; padding:10px;">
+        </div>
+
+        <div style="margin-bottom:20px;">
+            <label>Message</label><br>
+            <textarea rows="5" style="width:100%; padding:10px;"></textarea>
+        </div>
+
+        <button type="submit" class="btn">Send message</button>
+    </form>
+</section>
+{% endblock %}

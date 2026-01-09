@@ -1,0 +1,113 @@
+:root {
+    --green: #2ecc71;
+    --green-dark: #27ae60;
+    --text: #1f2933;
+    --muted: #6b7280;
+    --bg: #ffffff;
+    --border: #e5e7eb;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===== BODY LAYOUT (STICKY FOOTER) ===== */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== LINKS ===== */
+a {
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+    border-bottom: 1px solid var(--border);
+    padding: 22px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: 0.5px;
+}
+
+.nav a {
+    margin-left: 34px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.nav a:hover {
+    color: var(--green);
+}
+
+/* ===== MAIN CONTENT ===== */
+.content {
+    flex: 1;
+    max-width: 1100px;
+    width: 100%;
+    margin: 80px auto;
+    padding: 0 20px;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+    border-top: 1px solid var(--border);
+    padding: 22px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 14px;
+    background-color: #fff;
+}
+
+/* ===== BUTTON ===== */
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    border-radius: 30px;
+    background-color: var(--green);
+    color: #fff;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.btn:hover {
+    background-color: var(--green-dark);
+}
+
+/* ===== UTILITIES ===== */
+.muted {
+    color: var(--muted);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 20px;
+    }
+
+    .nav a {
+        margin-left: 18px;
+    }
+
+    .content {
+        margin: 60px auto;
+    }
+}

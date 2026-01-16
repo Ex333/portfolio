@@ -3,28 +3,44 @@
 {% block title %}Projects | Mateusz{% endblock %}
 
 {% block content %}
-<section>
-    <h1 style="font-size:36px; font-weight:700;">Projects</h1>
-    <p class="muted" style="margin-top:10px;">
-        A selection of projects I’ve built while learning web development.
-    </p>
+<section class="projects-section">
+    <div class="container">
 
-    <div style="margin-top:40px; display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:30px;">
-        
-        <div style="border:1px solid #e5e7eb; padding:24px; border-radius:12px;">
-            <h3>Portfolio Website</h3>
-            <p class="muted" style="margin:10px 0;">
-                Personal portfolio built with Django.
-            </p>
-            <p><strong>Tech:</strong> Python, Django, HTML, CSS</p>
-        </div>
+        <h1>Projects</h1>
 
-        <div style="border:1px solid #e5e7eb; padding:24px; border-radius:12px;">
-            <h3>Django CRUD App</h3>
-            <p class="muted" style="margin:10px 0;">
-                Simple CRUD application with admin panel.
-            </p>
-            <p><strong>Tech:</strong> Django, SQLite</p>
+        <p class="muted">
+            A selection of projects I’ve built while learning web development.
+        </p>
+
+        <div class="projects-grid">
+
+            {% for project in projects %}
+                <div class="project-card">
+                    
+                    <h3>{{ project.title }}</h3>
+
+                    <p class="muted">
+                        {{ project.short_description }}
+                    </p>
+
+                    {% if project.image %}
+                        <img 
+                            src="{{ project.image.url }}" 
+                            alt="{{ project.title }}"
+                        >
+                    {% endif %}
+
+                    {% if project.url %}
+                        <a href="{{ project.url }}" target="_blank" rel="noopener">
+                            View project →
+                        </a>
+                    {% endif %}
+
+                </div>
+            {% empty %}
+                <p>No projects available yet.</p>
+            {% endfor %}
+
         </div>
 
     </div>

@@ -56,3 +56,12 @@ class Skill(models.Model):
         return self.name
         
 
+class SkillRequirement(models.Model):
+    LEVEL_CHOICES = [
+        ("beginner", "Beginner"),
+        ("intermediate", "Intermediate"),
+        ("advanced", "Advanmced"),
+    ]
+    skill = models.ForeignKey(Skill, on_delete=models.CASCADE)
+    level = models.CharField(max_length=20, choices=LEVEL_CHOICES)
+    description = models.TextField(blank=True)

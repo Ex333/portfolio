@@ -72,6 +72,7 @@ class ProjectAdmin(admin.ModelAdmin):
 
 @admin.register(Skill)
 class SkillAdmin(admin.ModelAdmin):
+    
     list_display = (
         "name",
         "category",
@@ -89,3 +90,5 @@ class SkillAdmin(admin.ModelAdmin):
     ordering = (
         "name",
     )
+
+    

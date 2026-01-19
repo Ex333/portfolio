@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Project
+from .models import Project, Skill
 
 
 @admin.register(Project)
@@ -68,4 +68,24 @@ class ProjectAdmin(admin.ModelAdmin):
     readonly_fields = (
         "created_at",
         "updated_at",
+    )
+
+@admin.register(Skill)
+class SkillAdmin(admin.ModelAdmin):
+    list_display = (
+        "name",
+        "category",
+    )
+
+    list_filter = (
+        "category",
+    )
+
+    search_fields = (
+        "name",
+        "description",
+    )
+
+    ordering = (
+        "name",
     )

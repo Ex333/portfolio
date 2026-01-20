@@ -1,172 +1,286 @@
-:root {
-    --green: #3ddc97;
-    --green-dark: #2bbf84;
-
-    --bg: #0f172a;           /* głębokie navy */
-    --bg-soft: #111827;      /* sekcje / navbar */
-    --border: #1f2937;
-
-    --text: #e5e7eb;         /* off-white */
-    --muted: #9ca3af;        /* muted text */
-}
-
-/* ===== RESET ===== */
+/* ==============================
+   RESET
+================================ */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* ===== BODY ===== */
+/* ==============================
+   BASE
+================================ */
 body {
-    font-family: 'Inter', sans-serif;
-    background-color: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
-
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+  background: #ffffff;
+  color: #111111;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.7;
 }
 
-/* ===== LINKS ===== */
-a {
-    text-decoration: none;
-    color: inherit;
-    transition: color 0.2s ease;
-}
-
-/* ===== NAVBAR ===== */
+/* ==============================
+   NAVBAR
+================================ */
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    padding: 22px 60px;
-    background-color: var(--bg-soft);
-    border-bottom: 1px solid var(--border);
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 24px 64px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #ffffff;
 }
 
-/* LEFT */
 .navbar-left {
-    display: flex;
-    align-items: center;
-    gap: 40px;
+  display: flex;
+  align-items: center;
 }
 
 .logo {
-    font-size: 22px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    color: var(--text);
+  font-size: 20px;
+  font-weight: 600;
+  margin-right: 32px;
 }
 
-/* NAV LINKS */
 .nav {
-    display: flex;
-    align-items: center;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 32px;
 }
 
 .nav a {
-    margin-left: 34px;
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--muted);
+  text-decoration: none;
+  color: #111111;
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .nav a:hover {
-    color: var(--green);
+  opacity: 0.6;
 }
 
-/* RIGHT (SOCIAL ICONS) */
 .navbar-right {
-    display: flex;
-    align-items: center;
-    gap: 16px;
+  margin-left: auto;
+  display: flex;
+  gap: 16px;
 }
 
-.navbar-right a {
-    display: inline-flex;
-    align-items: center;
-}
-
-/* ICONS */
 .navbar-right img {
-    width: 22px;
-    height: 22px;
-    opacity: 0.7;
-    filter: brightness(0) invert(1); /* 🔥 SVG na jasne */
-    transition: opacity 0.2s ease, transform 0.2s ease;
+  width: 20px;
+  height: 20px;
+  opacity: 0.8;
 }
 
 .navbar-right img:hover {
-    opacity: 1;
-    transform: translateY(-2px);
+  opacity: 1;
 }
 
-/* ===== MAIN CONTENT ===== */
-.content {
-    flex: 1;
-    max-width: 1100px;
-    width: 100%;
-    margin: 90px auto;
-    padding: 0 20px;
+/* ==============================
+   HOME HERO
+================================ */
+.hero-wallpaper {
+  width: 100%;
+  height: 75vh;
+  min-height: 520px;
+  background-image: url("/static/images/herowallpaper.jpg");
+  background-size: cover;
+  background-position: right center;
+  background-repeat: no-repeat;
 }
 
-/* ===== BUTTON ===== */
-.btn {
-    display: inline-block;
-    padding: 12px 32px;
-    border-radius: 999px;
-
-    background-color: var(--green);
-    color: #022c22;
-    font-weight: 600;
-
-    transition: background-color 0.2s ease, transform 0.15s ease;
+.hero-card {
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 64px;
 }
 
-.btn:hover {
-    background-color: var(--green-dark);
-    transform: translateY(-1px);
+.hero-card h1 {
+  font-size: 3.6rem;
+  margin-bottom: 20px;
 }
 
-/* ===== FOOTER ===== */
-.footer {
-    background-color: var(--bg-soft);
-    border-top: 1px solid var(--border);
-    padding: 22px;
-    text-align: center;
-    font-size: 14px;
-    color: var(--muted);
+.hero-card p {
+  max-width: 520px;
+  margin-bottom: 36px;
+  color: #374151;
 }
 
-/* ===== UTIL ===== */
-.muted {
-    color: var(--muted);
+.hero-card .btn {
+  align-self: flex-start;
+  padding: 14px 32px;
+  border-radius: 999px;
+  background: #111111;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
 }
 
-/* ===== RESPONSIVE ===== */
-@media (max-width: 768px) {
-    .navbar {
-        padding: 18px 20px;
-    }
+/* ==============================
+   CONTACT HERO – CENTERED
+================================ */
+.contact-wallpaper {
+  width: 100%;
+  height: 80vh;
+  min-height: 600px;
 
-    .navbar-left {
-        gap: 22px;
-    }
+  background-image: url("/static/images/contactwallpaper.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 
-    .nav a {
-        margin-left: 18px;
-        font-size: 14px;
-    }
+  display: flex;
+  align-items: center;
+  justify-content: center; /* ⬅️ KLUCZ: centrowanie */
+}
 
-    .navbar-right img {
-        width: 20px;
-        height: 20px;
-    }
+/* KARTA Z FORMULARZEM */
+.contact-card {
+  width: 100%;
+  max-width: 560px;
 
-    .content {
-        margin: 60px auto;
-    }
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  padding: 0 24px;
+}
+
+.contact-card h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.contact-card p {
+  margin-bottom: 32px;
+  color: #374151;
+  text-align: center;
+}
+
+/* ==============================
+   CONTACT FORM
+================================ */
+.contact-form {
+  width: 100%;
+}
+
+.contact-form label {
+  font-weight: 500;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 6px;
+  margin-bottom: 20px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-family: inherit;
+}
+
+.contact-form textarea {
+  resize: vertical;
+}
+
+.contact-form .btn {
+  align-self: center;
+  margin-top: 10px;
+}
+
+/* ==============================
+   FOOTER
+================================ */
+footer {
+  padding: 32px 0;
+  text-align: center;
+  font-size: 13px;
+  color: #6b7280;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* ==============================
+   RESPONSIVE
+================================ */
+@media (max-width: 900px) {
+  .navbar {
+    padding: 20px 24px;
+  }
+
+  .hero-wallpaper,
+  .contact-wallpaper {
+    height: 65vh;
+  }
+
+  .hero-card {
+    padding: 0 24px;
+  }
+
+  .hero-card h1,
+  .contact-card h1 {
+    font-size: 2.4rem;
+  }
+}
+/* ==============================
+   ABOUT ME SECTION
+================================ */
+.about-section {
+  padding: 140px 0;
+  background: #ffffff;
+}
+
+.about-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 64px;
+
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+/* PHOTO */
+.about-photo img {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  object-fit: cover;
+}
+
+/* CARD */
+.about-card {
+  background: #f9fafb;
+  padding: 48px;
+  border-radius: 20px;
+}
+
+.about-card h2 {
+  font-size: 2.4rem;
+  margin-bottom: 24px;
+}
+
+.about-card p {
+  color: #374151;
+  margin-bottom: 20px;
+  max-width: 520px;
+}
+
+/* ==============================
+   RESPONSIVE
+================================ */
+@media (max-width: 900px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 0 24px;
+  }
+
+  .about-card {
+    padding: 32px;
+  }
 }

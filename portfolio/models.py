@@ -65,3 +65,10 @@ class SkillRequirement(models.Model):
     skill = models.ForeignKey(Skill, on_delete=models.CASCADE)
     level = models.CharField(max_length=20, choices=LEVEL_CHOICES)
     description = models.TextField(blank=True)
+
+class Me(models.Model):
+    name = models.CharField(max_length=100)
+    bio = models.TextField()
+    photo = models.ImageField(upload_to="me/")
+    email = models.EmailField()
+    phone = models.CharField(max_length=20, blank=True)

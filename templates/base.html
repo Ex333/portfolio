@@ -17,18 +17,37 @@
 <body>
 
 <header class="navbar">
-    <div class="logo">Mateusz.</div>
-    <nav class="nav">
-        <a href="/">Home</a>
-        <a href="/projects/">Projects</a>
-        <a href="/about/">About</a>
-        <a href="/contact/">Contact</a>
-    </nav>
+    <div class="navbar-left">
+        <div class="logo">Mateusz.</div>
+
+        <nav class="nav">
+            <a href="/">Home</a>
+            <a href="/projects/">Projects</a>
+            <a href="/about/">About</a>
+            <a href="/contact/">Contact</a>
+            <a href="/blog/">Blog</a>
+        </nav>
+    </div>
+
+    <div class="navbar-right">
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com/in/TWOJ_LINKEDIN"
+           target="_blank"
+           aria-label="LinkedIn">
+            <img src="{% static 'icons/linkedin.svg' %}" alt="LinkedIn">
+        </a>
+
+        <!-- GitHub -->
+        <a href="https://github.com/TWOJ_GITHUB"
+           target="_blank"
+           aria-label="GitHub">
+            <img src="{% static 'icons/github.svg' %}" alt="GitHub">
+        </a>
+    </div>
 </header>
 
 <main class="content">
-    {% block content %}
-    {% endblock %}
+    {% block content %}{% endblock %}
 </main>
 
 <footer class="footer">

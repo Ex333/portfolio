@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Project, Skill
+from .models import Project, Skill, SkillRequirement
 
 
 @admin.register(Project)
@@ -70,9 +70,9 @@ class ProjectAdmin(admin.ModelAdmin):
         "updated_at",
     )
 
+
 @admin.register(Skill)
 class SkillAdmin(admin.ModelAdmin):
-    
     list_display = (
         "name",
         "category",
@@ -91,4 +91,25 @@ class SkillAdmin(admin.ModelAdmin):
         "name",
     )
 
-    
+
+@admin.register(SkillRequirement)
+class SkillRequirementAdmin(admin.ModelAdmin):
+    list_display = (
+        "skill",
+        "level",
+    )
+
+    list_filter = (
+        "level",
+        "skill",
+    )
+
+    search_fields = (
+        "description",
+        "skill__name",
+    )
+
+    ordering = (
+        "skill",
+        "level",
+    )

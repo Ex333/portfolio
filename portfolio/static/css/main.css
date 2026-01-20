@@ -82,10 +82,7 @@ body {
   width: 100%;
   height: 75vh;
   min-height: 520px;
-  background-image: url("/static/images/herowallpaper.jpg");
-  background-size: cover;
-  background-position: right center;
-  background-repeat: no-repeat;
+  background: url("/static/images/herowallpaper.jpg") right center / cover no-repeat;
 }
 
 .hero-card {
@@ -120,81 +117,140 @@ body {
 }
 
 /* ==============================
-   CONTACT HERO – CENTERED
+   CONTACT HERO
 ================================ */
 .contact-wallpaper {
   width: 100%;
   height: 80vh;
   min-height: 600px;
-
-  background-image: url("/static/images/contactwallpaper.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-
+  background: url("/static/images/contactwallpaper.jpg") center / cover no-repeat;
   display: flex;
   align-items: center;
-  justify-content: center; /* ⬅️ KLUCZ: centrowanie */
+  justify-content: center;
 }
 
-/* KARTA Z FORMULARZEM */
 .contact-card {
-  width: 100%;
   max-width: 560px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-
   padding: 0 24px;
+  text-align: center;
 }
 
 .contact-card h1 {
   font-size: 3rem;
   margin-bottom: 10px;
-  text-align: center;
-}
-
-.contact-card p {
-  margin-bottom: 32px;
-  color: #374151;
-  text-align: center;
-}
-
-/* ==============================
-   CONTACT FORM
-================================ */
-.contact-form {
-  width: 100%;
-}
-
-.contact-form label {
-  font-weight: 500;
 }
 
 .contact-form input,
 .contact-form textarea {
   width: 100%;
   padding: 12px;
-  margin-top: 6px;
   margin-bottom: 20px;
   border: 1px solid #d1d5db;
   border-radius: 8px;
   font-family: inherit;
 }
 
-.contact-form textarea {
-  resize: vertical;
+/* ==============================
+   BLOG HERO
+================================ */
+.blog-wallpaper {
+  width: 100%;
+  height: 70vh;
+  min-height: 520px;
+  background: url("/static/images/blogwallpaper.jpg") center / cover no-repeat;
+  display: flex;
+  align-items: center;
 }
 
-.contact-form .btn {
-  align-self: center;
-  margin-top: 10px;
+.blog-card {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 64px;
+}
+
+.blog-card h1 {
+  font-size: 3.6rem;
+  margin-bottom: 12px;
+}
+
+.blog-card p {
+  margin-bottom: 32px;
+  color: #374151;
+}
+
+/* BLOG CATEGORIES */
+.blog-categories {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.blog-categories a {
+  text-decoration: none;
+  color: #111111;
+  font-weight: 500;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+}
+
+.blog-categories a:hover,
+.blog-categories a.active {
+  border-color: #111111;
 }
 
 /* ==============================
-   FOOTER
+   ABOUT ME
 ================================ */
+.about-section {
+  padding: 140px 0;
+  background: #ffffff;
+}
+
+.about-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 64px;
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.about-photo img {
+  width: 100%;
+  border-radius: 16px;
+  object-fit: cover;
+}
+
+.about-card {
+  background: #f9fafb;
+  padding: 48px;
+  border-radius: 20px;
+}
+
+.about-card h2 {
+  font-size: 2.4rem;
+  margin-bottom: 24px;
+}
+
+.about-card p {
+  color: #374151;
+  margin-bottom: 20px;
+}
+
+/* ==============================
+   SECTIONS / FOOTER
+================================ */
+.section {
+  padding: 120px 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 64px;
+}
+
 footer {
   padding: 32px 0;
   text-align: center;
@@ -211,76 +267,20 @@ footer {
     padding: 20px 24px;
   }
 
-  .hero-wallpaper,
-  .contact-wallpaper {
-    height: 65vh;
-  }
-
-  .hero-card {
+  .hero-card,
+  .blog-card,
+  .container {
     padding: 0 24px;
   }
 
   .hero-card h1,
+  .blog-card h1,
   .contact-card h1 {
     font-size: 2.4rem;
   }
-}
-/* ==============================
-   ABOUT ME SECTION
-================================ */
-.about-section {
-  padding: 140px 0;
-  background: #ffffff;
-}
 
-.about-grid {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 64px;
-
-  display: grid;
-  grid-template-columns: 420px 1fr;
-  gap: 80px;
-  align-items: center;
-}
-
-/* PHOTO */
-.about-photo img {
-  width: 100%;
-  height: auto;
-  border-radius: 16px;
-  object-fit: cover;
-}
-
-/* CARD */
-.about-card {
-  background: #f9fafb;
-  padding: 48px;
-  border-radius: 20px;
-}
-
-.about-card h2 {
-  font-size: 2.4rem;
-  margin-bottom: 24px;
-}
-
-.about-card p {
-  color: #374151;
-  margin-bottom: 20px;
-  max-width: 520px;
-}
-
-/* ==============================
-   RESPONSIVE
-================================ */
-@media (max-width: 900px) {
   .about-grid {
     grid-template-columns: 1fr;
     gap: 40px;
-    padding: 0 24px;
-  }
-
-  .about-card {
-    padding: 32px;
   }
 }

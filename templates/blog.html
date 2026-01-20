@@ -1,6 +1,38 @@
 {% extends "base.html" %}
 
+{% block title %}Blog | Mateusz{% endblock %}
+
 {% block content %}
-    <h1>Page title</h1>
-    <p>Your content goes here.</p>
+
+<!-- BLOG HERO / WALLPAPER -->
+<section class="blog-wallpaper">
+  <div class="blog-card">
+
+    <h1>Blog</h1>
+
+    <p class="muted">
+      Notes about frontend, backend, DevOps and tools.
+    </p>
+
+    <nav class="blog-categories">
+      <a href="#" class="active">All</a>
+      <a href="#">Frontend</a>
+      <a href="#">Backend</a>
+      <a href="#">DevOps</a>
+      <a href="#">Tools</a>
+      <a href="#">Other</a>
+    </nav>
+
+  </div>
+</section>
+
+<!-- BLOG CONTENT (na przyszłość: z modeli) -->
+<section class="section">
+  <div class="container">
+    <p class="muted">
+      Blog posts will appear here.
+    </p>
+  </div>
+</section>
+
 {% endblock %}

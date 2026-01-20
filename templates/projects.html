@@ -3,46 +3,56 @@
 {% block title %}Projects | Mateusz{% endblock %}
 
 {% block content %}
+
+<!-- PROJECTS HERO / WALLPAPER -->
+<section class="hero-wallpaper projects">
+
+  <div class="hero-card">
+    <h1>Projects</h1>
+
+    <p class="muted">
+      A selection of projects I’ve built while learning web development.
+    </p>
+  </div>
+
+</section>
+
+<!-- PROJECTS LIST -->
 <section class="projects-section">
-    <div class="container">
+  <div class="container">
 
-        <h1>Projects</h1>
+    <div class="projects-grid">
 
-        <p class="muted">
-            A selection of projects I’ve built while learning web development.
-        </p>
+      {% for project in projects %}
+        <div class="project-card">
 
-        <div class="projects-grid">
+          <h3>{{ project.title }}</h3>
 
-            {% for project in projects %}
-                <div class="project-card">
-                    
-                    <h3>{{ project.title }}</h3>
+          <p class="muted">
+            {{ project.short_description }}
+          </p>
 
-                    <p class="muted">
-                        {{ project.short_description }}
-                    </p>
+          {% if project.image %}
+            <img 
+              src="{{ project.image.url }}" 
+              alt="{{ project.title }}"
+            >
+          {% endif %}
 
-                    {% if project.image %}
-                        <img 
-                            src="{{ project.image.url }}" 
-                            alt="{{ project.title }}"
-                        >
-                    {% endif %}
-
-                    {% if project.url %}
-                        <a href="{{ project.url }}" target="_blank" rel="noopener">
-                            View project →
-                        </a>
-                    {% endif %}
-
-                </div>
-            {% empty %}
-                <p>No projects available yet.</p>
-            {% endfor %}
+          {% if project.url %}
+            <a href="{{ project.url }}" target="_blank" rel="noopener">
+              View project →
+            </a>
+          {% endif %}
 
         </div>
+      {% empty %}
+        <p>No projects available yet.</p>
+      {% endfor %}
 
     </div>
+
+  </div>
 </section>
+
 {% endblock %}

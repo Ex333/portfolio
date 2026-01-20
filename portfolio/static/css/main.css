@@ -76,23 +76,28 @@ body {
 }
 
 /* ==============================
-   HOME HERO
+   HERO (GLOBAL)
 ================================ */
 .hero-wallpaper {
   width: 100%;
   height: 75vh;
   min-height: 520px;
-  background: url("/static/images/herowallpaper.jpg") right center / cover no-repeat;
+  display: flex;
+  align-items: center;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .hero-card {
   max-width: 1200px;
   margin: 0 auto;
-  height: 100%;
+  padding: 0 64px;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0 64px;
 }
 
 .hero-card h1 {
@@ -117,18 +122,36 @@ body {
 }
 
 /* ==============================
-   CONTACT HERO
+   HERO WALLPAPERS
 ================================ */
-.contact-wallpaper {
-  width: 100%;
-  height: 80vh;
-  min-height: 600px;
-  background: url("/static/images/contactwallpaper.jpg") center / cover no-repeat;
-  display: flex;
-  align-items: center;
+.hero-wallpaper.home {
+  background-image: url("/static/images/homewallpaper.jpg");
+}
+
+.hero-wallpaper.blog {
+  background-image: url("/static/images/blogwallpaper.jpg");
+}
+
+.hero-wallpaper.contact {
+  background-image: url("/static/images/contactwallpaper.jpg");
   justify-content: center;
 }
 
+.hero-wallpaper.industrial {
+  background-image: url("/static/images/industrialwallpaper.jpg");
+}
+
+/* ✅ NOWE: PROJECTS HERO */
+.hero-wallpaper.projects {
+  background-image: url("/static/images/projectwallpaper.jpg");
+}
+
+.hero-wallpaper.about {
+  background-image: url("/static/images/aboutwallpaper.jpg");
+}
+/* ==============================
+   CONTACT CARD
+================================ */
 .contact-card {
   max-width: 560px;
   padding: 0 24px;
@@ -151,17 +174,8 @@ body {
 }
 
 /* ==============================
-   BLOG HERO
+   BLOG CONTENT
 ================================ */
-.blog-wallpaper {
-  width: 100%;
-  height: 70vh;
-  min-height: 520px;
-  background: url("/static/images/blogwallpaper.jpg") center / cover no-repeat;
-  display: flex;
-  align-items: center;
-}
-
 .blog-card {
   max-width: 1200px;
   margin: 0 auto;
@@ -178,7 +192,6 @@ body {
   color: #374151;
 }
 
-/* BLOG CATEGORIES */
 .blog-categories {
   display: flex;
   gap: 24px;
@@ -203,13 +216,13 @@ body {
 ================================ */
 .about-section {
   padding: 140px 0;
-  background: #ffffff;
 }
 
 .about-grid {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 64px;
+
   display: grid;
   grid-template-columns: 420px 1fr;
   gap: 80px;

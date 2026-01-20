@@ -19,3 +19,6 @@ def contact(request):
 
 def blog(request):
     return render(request, 'blog.html')
+
+def industrial(request):
+    return render(request, 'industrial.html')

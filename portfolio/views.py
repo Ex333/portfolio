@@ -22,3 +22,9 @@ def blog(request):
 
 def industrial(request):
     return render(request, 'industrial.html')
+
+def imprint(request):
+    return render(request, 'imprint.html')
+
+def privacy_policy(request):
+    return render(request, 'privacy_policy.html')

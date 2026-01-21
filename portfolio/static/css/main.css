@@ -10,15 +10,58 @@
 /* ==============================
    BASE
 ================================ */
+html,
+body {
+  height: 100%;
+}
+
 body {
   background: #ffffff;
   color: #111111;
   font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   line-height: 1.7;
+
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
 }
 
 /* ==============================
-   NAVBAR (NIETKNIĘTY)
+   GLOBAL BUTTON
+================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 14px 32px;
+  border-radius: 999px;
+
+  background: #111111;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+/* ==============================
+   NAVBAR
 ================================ */
 .navbar {
   position: relative;
@@ -82,6 +125,7 @@ body {
   width: 100%;
   height: 75vh;
   min-height: 520px;
+
   display: flex;
   align-items: center;
 
@@ -91,7 +135,7 @@ body {
 }
 
 /* ==============================
-   HERO CARD (HOME ETC.)
+   HERO CARD
 ================================ */
 .hero-card {
   max-width: 1200px;
@@ -114,16 +158,6 @@ body {
   color: #374151;
 }
 
-.hero-card .btn {
-  align-self: flex-start;
-  padding: 14px 32px;
-  border-radius: 999px;
-  background: #111111;
-  color: #ffffff;
-  text-decoration: none;
-  font-weight: 600;
-}
-
 /* ==============================
    HERO WALLPAPERS
 ================================ */
@@ -133,11 +167,6 @@ body {
 
 .hero-wallpaper.blog {
   background-image: url("/static/images/blogwallpaper.jpg");
-}
-
-.hero-wallpaper.contact {
-  background-image: url("/static/images/contactwallpaper.jpg");
-  justify-content: center;
 }
 
 .hero-wallpaper.industrial {
@@ -163,26 +192,31 @@ body {
 }
 
 /* ==============================
-   LEGAL HERO
+   CONTACT HERO (SPECJALNY PRZYPADEK)
+   - bez vh
+   - rośnie z contentem
+   - FORM WYŚRODKOWANY
 ================================ */
-.legal-hero {
-  width: 100%;
-  text-align: center;
-}
+.hero-wallpaper.contact {
+  background-image: url("/static/images/contactwallpaper.jpg");
 
-.legal-hero h1 {
-  font-size: 3.2rem;
-  color: #ffffff;
-  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.65);
+  height: auto;
+  min-height: unset;
+
+  padding: 120px 0 160px;
+
+  justify-content: center;   /* ← JEDYNA ZMIANA */
+  align-items: flex-start;
 }
 
 /* ==============================
-   CONTACT CARD (POPRAWIONE)
+   CONTACT CARD
 ================================ */
 .contact-card {
   max-width: 560px;
   width: 100%;
-  padding: 48px;
+  padding: 40px;
+
   background: rgba(255, 255, 255, 0.95);
   border-radius: 20px;
   text-align: center;
@@ -190,7 +224,7 @@ body {
 }
 
 .contact-card h1 {
-  font-size: 3rem;
+  font-size: 2.6rem;
   margin-bottom: 12px;
 }
 
@@ -201,7 +235,7 @@ body {
 }
 
 /* ==============================
-   CONTACT FORM (KLUCZOWA POPRAWKA)
+   CONTACT FORM
 ================================ */
 .contact-form {
   display: grid;
@@ -236,25 +270,18 @@ body {
 }
 
 .contact-form textarea {
-  min-height: 120px;
+  min-height: 100px;
   resize: vertical;
   line-height: 1.5;
 }
 
-/* BUTTON */
 .contact-form .btn {
   margin-top: 8px;
   padding: 14px;
-  border-radius: 999px;
-  border: none;
-  background: #111111;
-  color: #ffffff;
-  font-weight: 600;
-  cursor: pointer;
 }
 
 /* ==============================
-   BLOG CONTENT
+   BLOG
 ================================ */
 .blog-card {
   max-width: 1200px;
@@ -273,7 +300,7 @@ body {
 }
 
 /* ==============================
-   ABOUT ME
+   ABOUT
 ================================ */
 .about-section {
   padding: 140px 0;
@@ -313,7 +340,7 @@ body {
 }
 
 /* ==============================
-   LEGAL CONTENT
+   LEGAL
 ================================ */
 .legal-page {
   max-width: 800px;
@@ -337,6 +364,16 @@ footer {
   font-size: 13px;
   color: #6b7280;
   border-top: 1px solid #e5e7eb;
+  background: #ffffff;
+}
+
+footer a {
+  color: inherit;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
 }
 
 /* ==============================
@@ -353,7 +390,6 @@ footer {
   }
 
   .hero-card h1,
-  .legal-hero h1,
   .contact-card h1 {
     font-size: 2.2rem;
   }
@@ -366,5 +402,9 @@ footer {
   .contact-card {
     padding: 32px 24px;
     margin: 0 16px;
+  }
+
+  .hero-wallpaper.contact {
+    padding: 96px 0 120px;
   }
 }

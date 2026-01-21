@@ -18,7 +18,7 @@ body {
 }
 
 /* ==============================
-   NAVBAR
+   NAVBAR (NIETKNIĘTY)
 ================================ */
 .navbar {
   position: relative;
@@ -90,6 +90,9 @@ body {
   background-repeat: no-repeat;
 }
 
+/* ==============================
+   HERO CARD (HOME ETC.)
+================================ */
 .hero-card {
   max-width: 1200px;
   margin: 0 auto;
@@ -141,7 +144,6 @@ body {
   background-image: url("/static/images/industrialwallpaper.jpg");
 }
 
-/* ✅ NOWE: PROJECTS HERO */
 .hero-wallpaper.projects {
   background-image: url("/static/images/projectwallpaper.jpg");
 }
@@ -149,28 +151,106 @@ body {
 .hero-wallpaper.about {
   background-image: url("/static/images/aboutwallpaper.jpg");
 }
+
+.hero-wallpaper.imprint {
+  background-image: url("/static/images/imprintwallpaper.jpg");
+  justify-content: center;
+}
+
+.hero-wallpaper.privacy {
+  background-image: url("/static/images/privacypolicywallpaper.jpg");
+  justify-content: center;
+}
+
 /* ==============================
-   CONTACT CARD
+   LEGAL HERO
+================================ */
+.legal-hero {
+  width: 100%;
+  text-align: center;
+}
+
+.legal-hero h1 {
+  font-size: 3.2rem;
+  color: #ffffff;
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.65);
+}
+
+/* ==============================
+   CONTACT CARD (POPRAWIONE)
 ================================ */
 .contact-card {
   max-width: 560px;
-  padding: 0 24px;
+  width: 100%;
+  padding: 48px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
   text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
 }
 
 .contact-card h1 {
   font-size: 3rem;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+}
+
+.contact-card .muted {
+  margin-bottom: 32px;
+  color: #374151;
+  font-size: 15px;
+}
+
+/* ==============================
+   CONTACT FORM (KLUCZOWA POPRAWKA)
+================================ */
+.contact-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.contact-form > div {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.contact-form label {
+  font-size: 13px;
+  margin-bottom: 6px;
+  color: #374151;
 }
 
 .contact-form input,
 .contact-form textarea {
   width: 100%;
-  padding: 12px;
-  margin-bottom: 20px;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
+  padding: 14px 16px;
+  font-size: 14px;
   font-family: inherit;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+}
+
+.contact-form input {
+  height: 48px;
+}
+
+.contact-form textarea {
+  min-height: 120px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+/* BUTTON */
+.contact-form .btn {
+  margin-top: 8px;
+  padding: 14px;
+  border-radius: 999px;
+  border: none;
+  background: #111111;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 /* ==============================
@@ -190,25 +270,6 @@ body {
 .blog-card p {
   margin-bottom: 32px;
   color: #374151;
-}
-
-.blog-categories {
-  display: flex;
-  gap: 24px;
-  flex-wrap: wrap;
-}
-
-.blog-categories a {
-  text-decoration: none;
-  color: #111111;
-  font-weight: 500;
-  padding-bottom: 4px;
-  border-bottom: 2px solid transparent;
-}
-
-.blog-categories a:hover,
-.blog-categories a.active {
-  border-color: #111111;
 }
 
 /* ==============================
@@ -252,18 +313,24 @@ body {
 }
 
 /* ==============================
-   SECTIONS / FOOTER
+   LEGAL CONTENT
 ================================ */
-.section {
-  padding: 120px 0;
+.legal-page {
+  max-width: 800px;
+  margin: 120px auto;
+  padding: 0 24px;
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 64px;
+.legal-page p {
+  font-size: 15px;
+  color: #374151;
+  margin-bottom: 16px;
+  line-height: 1.8;
 }
 
+/* ==============================
+   FOOTER
+================================ */
 footer {
   padding: 32px 0;
   text-align: center;
@@ -281,71 +348,23 @@ footer {
   }
 
   .hero-card,
-  .blog-card,
-  .container {
+  .blog-card {
     padding: 0 24px;
   }
 
   .hero-card h1,
-  .blog-card h1,
+  .legal-hero h1,
   .contact-card h1 {
-    font-size: 2.4rem;
+    font-size: 2.2rem;
   }
 
   .about-grid {
     grid-template-columns: 1fr;
     gap: 40px;
   }
-}
-/* ==============================
-   LEGAL PAGES (IMPRINT / PRIVACY)
-================================ */
-.legal-page {
-  max-width: 800px;
-  margin: 120px auto;
-  padding: 0 24px;
-}
 
-.legal-page h1 {
-  font-size: 2.6rem;
-  margin-bottom: 32px;
-}
-
-.legal-page h2 {
-  font-size: 1.4rem;
-  margin-top: 32px;
-  margin-bottom: 12px;
-}
-
-.legal-page p {
-  font-size: 15px;
-  color: #374151;
-  margin-bottom: 16px;
-  line-height: 1.8;
-}
-
-/* ==============================
-   CONTACT FORM – GDPR CHECKBOX
-================================ */
-.gdpr-consent {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  margin-top: 12px;
-  margin-bottom: 24px;
-  font-size: 13px;
-  color: #374151;
-}
-
-.gdpr-consent input {
-  margin-top: 3px;
-}
-
-.gdpr-consent a {
-  color: #111111;
-  text-decoration: underline;
-}
-
-.gdpr-consent a:hover {
-  opacity: 0.6;
+  .contact-card {
+    padding: 32px 24px;
+    margin: 0 16px;
+  }
 }

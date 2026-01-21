@@ -1,10 +1,13 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}About | Mateusz{% endblock %}
 
 {% block content %}
 
-<!-- ABOUT HERO / WALLPAPER -->
+<!-- ==============================
+     ABOUT HERO / WALLPAPER
+================================ -->
 <section class="hero-wallpaper about">
 
   <div class="hero-card" style="align-items: center; text-align: center;">
@@ -20,7 +23,9 @@
 
 </section>
 
-<!-- ABOUT CONTENT -->
+<!-- ==============================
+     ABOUT CONTENT
+================================ -->
 <section class="section">
   <div class="container" style="text-align:center;">
 
@@ -32,6 +37,43 @@
       <li>HTML & CSS</li>
       <li>Git & GitHub</li>
     </ul>
+
+  </div>
+</section>
+
+<!-- ==============================
+     CV DOWNLOAD SECTION
+================================ -->
+<section class="section">
+  <div class="container" style="text-align:center;">
+
+    <h2>Download CV</h2>
+
+    <p style="margin: 16px 0 32px; color: #374151;">
+      You can download my CV in the following languages:
+    </p>
+
+    <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
+
+      <a href="{% static 'cv/Mateusz_Haldas_CV_EN.pdf' %}"
+         class="btn"
+         target="_blank">
+        🇬🇧 English (PDF)
+      </a>
+
+      <a href="{% static 'cv/Mateusz_Haldas_CV_DE.pdf' %}"
+         class="btn"
+         target="_blank">
+        🇩🇪 Deutsch (PDF)
+      </a>
+
+      <a href="{% static 'cv/Mateusz_Haldas_CV_PL.pdf' %}"
+         class="btn"
+         target="_blank">
+        🇵🇱 Polski (PDF)
+      </a>
+
+    </div>
 
   </div>
 </section>

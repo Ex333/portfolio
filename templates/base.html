@@ -3,14 +3,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+
     <title>{% block title %}Mateusz | Portfolio{% endblock %}</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Personal portfolio of Mateusz Hałdaś.">
 
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
 
-    <!-- MAIN CSS -->
+    <!-- Main CSS -->
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
 </head>
 
@@ -21,28 +26,31 @@
         <div class="logo">My name is Matt.</div>
 
         <nav class="nav">
-            <!-- MAIN -->
             <a href="/">Home</a>
-
-            <!-- SOFTWARE / IT -->
             <a href="/projects/">Projects</a>
             <a href="/blog/">Blog</a>
-
-            <!-- INDUSTRIAL -->
             <a href="/industrial/">Industrial</a>
-
-            <!-- INFO -->
             <a href="/about/">About</a>
             <a href="/contact/">Contact</a>
         </nav>
     </div>
 
     <div class="navbar-right">
-        <a href="https://www.linkedin.com/in/mateusz-ha%C5%82da%C5%9B-914aa0197/" target="_blank" aria-label="LinkedIn">
+        <a
+            href="https://www.linkedin.com/in/mateusz-ha%C5%82da%C5%9B-914aa0197/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+        >
             <img src="{% static 'icons/linkedin.svg' %}" alt="LinkedIn">
         </a>
 
-        <a href="https://github.com/Ex333" target="_blank" aria-label="GitHub">
+        <a
+            href="https://github.com/Ex333"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+        >
             <img src="{% static 'icons/github.svg' %}" alt="GitHub">
         </a>
     </div>
@@ -53,7 +61,11 @@
 </main>
 
 <footer>
-    © 2026 Mateusz Hałdaś · Portfolio
+    <p>© 2026 Mateusz Hałdaś · Portfolio</p>
+    <p>
+        <a href="{% url 'imprint' %}">Imprint</a> |
+        <a href="{% url 'privacy_policy' %}">Privacy Policy</a>
+    </p>
 </footer>
 
 </body>

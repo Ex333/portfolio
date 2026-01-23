@@ -6,31 +6,8 @@
   padding: 0;
   box-sizing: border-box;
 }
-
 /* ==============================
-   BASE
-================================ */
-html,
-body {
-  height: 100%;
-}
-
-body {
-  background: #ffffff;
-  color: #111111;
-  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  line-height: 1.7;
-
-  display: flex;
-  flex-direction: column;
-}
-
-main {
-  flex: 1;
-}
-
-/* ==============================
-   GLOBAL BUTTON
+   GLOBAL BUTTON – dla wszystkich .btn
 ================================ */
 .btn {
   display: inline-flex;
@@ -48,12 +25,13 @@ main {
 
   border: none;
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
 }
 
 .btn:hover {
   opacity: 0.9;
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.25);
 }
 
 .btn:active {
@@ -61,7 +39,18 @@ main {
 }
 
 /* ==============================
-   NAVBAR
+   BASE
+================================ */
+
+body {
+  background: #ffffff;
+  color: #111111;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.7;
+}
+
+/* ==============================
+   NAVBAR (NIETKNIĘTY)
 ================================ */
 .navbar {
   position: relative;
@@ -125,7 +114,6 @@ main {
   width: 100%;
   height: 75vh;
   min-height: 520px;
-
   display: flex;
   align-items: center;
 
@@ -135,7 +123,7 @@ main {
 }
 
 /* ==============================
-   HERO CARD
+   HERO CARD (HOME ETC.)
 ================================ */
 .hero-card {
   max-width: 1200px;
@@ -158,6 +146,16 @@ main {
   color: #374151;
 }
 
+.hero-card .btn {
+  align-self: flex-start;
+  padding: 14px 32px;
+  border-radius: 999px;
+  background: #111111;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
 /* ==============================
    HERO WALLPAPERS
 ================================ */
@@ -167,6 +165,11 @@ main {
 
 .hero-wallpaper.blog {
   background-image: url("/static/images/blogwallpaper.jpg");
+}
+
+.hero-wallpaper.contact {
+  background-image: url("/static/images/contactwallpaper.jpg");
+  justify-content: center;
 }
 
 .hero-wallpaper.industrial {
@@ -192,31 +195,26 @@ main {
 }
 
 /* ==============================
-   CONTACT HERO (SPECJALNY PRZYPADEK)
-   - bez vh
-   - rośnie z contentem
-   - FORM WYŚRODKOWANY
+   LEGAL HERO
 ================================ */
-.hero-wallpaper.contact {
-  background-image: url("/static/images/contactwallpaper.jpg");
+.legal-hero {
+  width: 100%;
+  text-align: center;
+}
 
-  height: auto;
-  min-height: unset;
-
-  padding: 120px 0 160px;
-
-  justify-content: center;   /* ← JEDYNA ZMIANA */
-  align-items: flex-start;
+.legal-hero h1 {
+  font-size: 3.2rem;
+  color: #ffffff;
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.65);
 }
 
 /* ==============================
-   CONTACT CARD
+   CONTACT CARD (POPRAWIONE)
 ================================ */
 .contact-card {
   max-width: 560px;
   width: 100%;
-  padding: 40px;
-
+  padding: 48px;
   background: rgba(255, 255, 255, 0.95);
   border-radius: 20px;
   text-align: center;
@@ -224,7 +222,7 @@ main {
 }
 
 .contact-card h1 {
-  font-size: 2.6rem;
+  font-size: 3rem;
   margin-bottom: 12px;
 }
 
@@ -235,7 +233,7 @@ main {
 }
 
 /* ==============================
-   CONTACT FORM
+   CONTACT FORM (KLUCZOWA POPRAWKA)
 ================================ */
 .contact-form {
   display: grid;
@@ -270,18 +268,25 @@ main {
 }
 
 .contact-form textarea {
-  min-height: 100px;
+  min-height: 120px;
   resize: vertical;
   line-height: 1.5;
 }
 
+/* BUTTON */
 .contact-form .btn {
   margin-top: 8px;
   padding: 14px;
+  border-radius: 999px;
+  border: none;
+  background: #111111;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 /* ==============================
-   BLOG
+   BLOG CONTENT
 ================================ */
 .blog-card {
   max-width: 1200px;
@@ -300,7 +305,7 @@ main {
 }
 
 /* ==============================
-   ABOUT
+   ABOUT ME
 ================================ */
 .about-section {
   padding: 140px 0;
@@ -340,7 +345,7 @@ main {
 }
 
 /* ==============================
-   LEGAL
+   LEGAL CONTENT
 ================================ */
 .legal-page {
   max-width: 800px;
@@ -364,16 +369,6 @@ footer {
   font-size: 13px;
   color: #6b7280;
   border-top: 1px solid #e5e7eb;
-  background: #ffffff;
-}
-
-footer a {
-  color: inherit;
-  text-decoration: none;
-}
-
-footer a:hover {
-  text-decoration: underline;
 }
 
 /* ==============================
@@ -390,6 +385,7 @@ footer a:hover {
   }
 
   .hero-card h1,
+  .legal-hero h1,
   .contact-card h1 {
     font-size: 2.2rem;
   }
@@ -402,9 +398,5 @@ footer a:hover {
   .contact-card {
     padding: 32px 24px;
     margin: 0 16px;
-  }
-
-  .hero-wallpaper.contact {
-    padding: 96px 0 120px;
   }
 }

@@ -1,39 +1,50 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Blog | Mateusz{% endblock %}
 
 {% block content %}
 
-<!-- BLOG HERO / WALLPAPER -->
 <section class="hero-wallpaper blog">
-
   <div class="blog-card">
-
     <h1>Blog</h1>
-
-    <p class="muted">
-      Notes about frontend, backend, DevOps and tools.
-    </p>
+    <p class="muted">Notes about frontend, backend, DevOps and tools.</p>
 
     <nav class="blog-categories">
-      <a href="#" class="active">All</a>
-      <a href="#">Frontend</a>
-      <a href="#">Backend</a>
-      <a href="#">DevOps</a>
-      <a href="#">Tools</a>
-      <a href="#">Other</a>
+      <a href="{% url 'blog' %}"
+         class="{% if not active_category %}active{% endif %}">
+        All
+      </a>
+
+      {% for category in categories %}
+        <a href="{% url 'blog' %}?category={{ category.slug }}"
+           class="{% if active_category and category.id == active_category.id %}active{% endif %}">
+          {{ category.name }}
+        </a>
+      {% endfor %}
     </nav>
-
   </div>
-
 </section>
 
-<!-- BLOG CONTENT (na przyszłość: z modeli) -->
-<section class="section">
-  <div class="container">
-    <p class="muted">
-      Blog posts will appear here.
-    </p>
+<section class="blog-list">
+  <div class="blog-grid">
+
+    {% for post in posts %}
+      <a href="{% url 'blog_detail' post.slug %}" class="blog-card-item">
+
+        <div class="blog-image">
+          {% if post.cover_image %}
+            <img src="{{ post.cover_image.url }}" alt="{{ post.title }}">
+          {% endif %}
+        </div>
+
+        <h2 class="blog-title">
+          {{ post.title }}
+        </h2>
+
+      </a>
+    {% endfor %}
+
   </div>
 </section>
 

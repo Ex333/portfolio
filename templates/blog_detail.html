@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ post.title }} | Blog{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/blog.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="hero-wallpaper blog">
+  <div class="blog-card">
+    <h1>{{ post.title }}</h1>
+    <p class="muted">
+      {{ post.created_at|date:"d M Y" }}
+      {% if post.category %} · {{ post.category.name }}{% endif %}
+    </p>
+  </div>
+</section>
+
+<!-- CONTENT -->
+<section class="blog-detail">
+  <div class="blog-container">
+
+    {% if post.content %}
+      <div class="blog-text">
+        {{ post.content|linebreaks }}
+      </div>
+    {% endif %}
+
+    <div class="blog-content">
+      {% for block in post.blocks.all %}
+
+        {% if block.text %}
+          <div class="blog-text">
+            {{ block.text|linebreaks }}
+          </div>
+        {% endif %}
+
+        {% if block.image %}
+          <figure class="blog-image-block">
+            <img src="{{ block.image.url }}" alt="{{ block.alt_text }}">
+            {% if block.alt_text %}
+              <figcaption>{{ block.alt_text }}</figcaption>
+            {% endif %}
+          </figure>
+        {% endif %}
+
+      {% endfor %}
+    </div>
+
+    <a href="{% url 'blog' %}" class="blog-back">← Back to blog</a>
+
+  </div>
+</section>
+
+{% endblock %}

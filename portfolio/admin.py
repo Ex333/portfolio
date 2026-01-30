@@ -1,6 +1,17 @@
 from django.contrib import admin
-from .models import Project, Skill, SkillRequirement
+from .models import (
+    Project,
+    Skill,
+    SkillRequirement,
+    BlogCategory,
+    BlogPost,
+    BlogBlock,
+)
 
+
+# ==========================
+# PROJECTS
+# ==========================
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
@@ -37,7 +48,7 @@ class ProjectAdmin(admin.ModelAdmin):
     )
 
     fieldsets = (
-        ("Podstawowe informacje", {
+        ("Basic information", {
             "fields": (
                 "title",
                 "slug",
@@ -46,18 +57,18 @@ class ProjectAdmin(admin.ModelAdmin):
                 "image",
             )
         }),
-        ("Linki", {
+        ("Links", {
             "fields": (
                 "url",
             )
         }),
-        ("Publikacja", {
+        ("Publication", {
             "fields": (
                 "is_published",
                 "order",
             )
         }),
-        ("Daty", {
+        ("Dates", {
             "fields": (
                 "created_at",
                 "updated_at",
@@ -70,6 +81,10 @@ class ProjectAdmin(admin.ModelAdmin):
         "updated_at",
     )
 
+
+# ==========================
+# SKILLS
+# ==========================
 
 @admin.register(Skill)
 class SkillAdmin(admin.ModelAdmin):
@@ -112,4 +127,110 @@ class SkillRequirementAdmin(admin.ModelAdmin):
     ordering = (
         "skill",
         "level",
+    )
+
+
+# ==========================
+# BLOG CATEGORIES
+# ==========================
+
+@admin.register(BlogCategory)
+class BlogCategoryAdmin(admin.ModelAdmin):
+    list_display = (
+        "name",
+        "slug",
+        "order",
+    )
+
+    prepopulated_fields = {
+        "slug": ("name",)
+    }
+
+    list_editable = (
+        "order",
+    )
+
+    ordering = (
+        "order",
+        "name",
+    )
+
+
+# ==========================
+# BLOG BLOCKS INLINE
+# ==========================
+
+class BlogBlockInline(admin.TabularInline):
+    model = BlogBlock
+    extra = 1
+    ordering = ("order",)
+
+    fields = (
+        "order",
+        "text",
+        "image",
+        "alt_text",
+    )
+
+
+# ==========================
+# BLOG POSTS
+# ==========================
+
+@admin.register(BlogPost)
+class BlogPostAdmin(admin.ModelAdmin):
+    list_display = (
+        "title",
+        "category",
+        "is_published",
+        "created_at",
+    )
+
+    list_filter = (
+        "category",
+        "is_published",
+        "created_at",
+    )
+
+    search_fields = (
+        "title",
+    )
+
+    prepopulated_fields = {
+        "slug": ("title",)
+    }
+
+    inlines = [
+        BlogBlockInline,
+    ]
+
+    ordering = (
+        "-created_at",
+    )
+
+    fieldsets = (
+        ("Post", {
+            "fields": (
+                "title",
+                "slug",
+                "category",
+                "cover_image",
+            )
+        }),
+        ("Publication", {
+            "fields": (
+                "is_published",
+            )
+        }),
+        ("Dates", {
+            "fields": (
+                "created_at",
+                "updated_at",
+            )
+        }),
+    )
+
+    readonly_fields = (
+        "created_at",
+        "updated_at",
     )

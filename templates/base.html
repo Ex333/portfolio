@@ -17,6 +17,8 @@
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+    {% block extra_css %}{% endblock %}
 </head>
 
 <body>
@@ -36,27 +38,19 @@
     </div>
 
     <div class="navbar-right">
-        <a
-            href="https://www.linkedin.com/in/mateusz-ha%C5%82da%C5%9B-914aa0197/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-        >
+        <a href="https://www.linkedin.com/in/mateusz-ha%C5%82da%C5%9B-914aa0197/"
+           target="_blank" rel="noopener noreferrer">
             <img src="{% static 'icons/linkedin.svg' %}" alt="LinkedIn">
         </a>
 
-        <a
-            href="https://github.com/Ex333"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub"
-        >
+        <a href="https://github.com/Ex333"
+           target="_blank" rel="noopener noreferrer">
             <img src="{% static 'icons/github.svg' %}" alt="GitHub">
         </a>
     </div>
 </header>
 
-<main>
+<main class="page">
     {% block content %}{% endblock %}
 </main>
 

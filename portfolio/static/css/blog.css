@@ -1,0 +1,143 @@
+/* ==============================
+   BLOG HERO
+================================ */
+.blog-hero {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-image: url("/static/images/blogwallpaper.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.blog-hero-inner {
+  max-width: 760px;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.blog-meta {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 16px;
+}
+
+.blog-title {
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* ==============================
+   BLOG INTRO
+================================ */
+.blog-intro {
+  font-size: 1.1rem;
+  color: #374151;
+  margin-bottom: 80px;
+}
+
+/* ==============================
+   BLOG CONTENT
+================================ */
+.blog-content {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+.blog-block {
+  animation: fadeUp 0.6s ease both;
+}
+
+.blog-text {
+  font-size: 1rem;
+  line-height: 1.9;
+  color: #111;
+}
+
+/* ==============================
+   BLOG IMAGES
+================================ */
+.blog-image {
+  margin-top: 32px;
+  text-align: center;
+}
+
+.blog-image img {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.15);
+  transition: transform 0.4s ease;
+}
+
+.blog-image img:hover {
+  transform: scale(1.02);
+}
+
+.blog-image figcaption {
+  font-size: 13px;
+  color: #6b7280;
+  margin-top: 10px;
+}
+
+/* ==============================
+   BACK LINK
+================================ */
+.blog-back {
+  display: inline-block;
+  margin-top: 100px;
+  font-weight: 500;
+  text-decoration: none;
+  color: #111;
+}
+
+.blog-back:hover {
+  text-decoration: underline;
+}
+
+/* ==============================
+   ANIMATION
+================================ */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* ==============================
+   BLOG CARD ENTRANCE ANIMATION
+================================ */
+
+@keyframes blogFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* start state */
+.blog-tile {
+  opacity: 0;
+  animation: blogFadeUp 0.6s ease forwards;
+}
+
+/* stagger (delay per card) */
+.blog-tile:nth-child(1) { animation-delay: 0.05s; }
+.blog-tile:nth-child(2) { animation-delay: 0.1s; }
+.blog-tile:nth-child(3) { animation-delay: 0.15s; }
+.blog-tile:nth-child(4) { animation-delay: 0.2s; }
+.blog-tile:nth-child(5) { animation-delay: 0.25s; }
+.blog-tile:nth-child(6) { animation-delay: 0.3s; }
+.blog-tile:nth-child(7) { animation-delay: 0.35s; }
+.blog-tile:nth-child(8) { animation-delay: 0.4s; }

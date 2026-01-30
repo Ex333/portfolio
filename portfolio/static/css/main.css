@@ -1,75 +1,96 @@
 /* ==============================
    RESET
 ================================ */
-* {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 /* ==============================
-   GLOBAL BUTTON – dla wszystkich .btn
+   ROOT / VARIABLES
 ================================ */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 14px 32px;
-  border-radius: 999px;
-
-  background: #111111;
-  color: #ffffff;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 14px;
-
-  border: none;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
-}
-
-.btn:hover {
-  opacity: 0.9;
-  transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(0,0,0,0.25);
-}
-
-.btn:active {
-  transform: translateY(0);
+:root {
+  --color-text: #111111;
+  --color-muted: #6b7280;
+  --color-border: #e5e7eb;
+  --color-bg: #ffffff;
+  --radius-lg: 20px;
+  --radius-md: 12px;
+  --shadow-sm: 0 8px 20px rgba(0,0,0,0.08);
+  --shadow-md: 0 20px 50px rgba(0,0,0,0.15);
 }
 
 /* ==============================
    BASE
 ================================ */
-
 body {
-  background: #ffffff;
-  color: #111111;
+  background: var(--color-bg);
+  color: var(--color-text);
   font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* ==============================
-   NAVBAR (NIETKNIĘTY)
+   TYPOGRAPHY
+================================ */
+h1, h2, h3 {
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+p {
+  color: var(--color-text);
+}
+
+.muted {
+  color: var(--color-muted);
+  font-size: 14px;
+}
+
+/* ==============================
+   GLOBAL BUTTON
+================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 32px;
+  border-radius: 999px;
+  background: #111;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  opacity: .95;
+}
+
+/* ==============================
+   NAVBAR
 ================================ */
 .navbar {
   position: relative;
   display: flex;
   align-items: center;
   padding: 24px 64px;
-  border-bottom: 1px solid #e5e7eb;
-  background: #ffffff;
-}
-
-.navbar-left {
-  display: flex;
-  align-items: center;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg);
 }
 
 .logo {
   font-size: 20px;
   font-weight: 600;
-  margin-right: 32px;
 }
 
 .nav {
@@ -82,13 +103,13 @@ body {
 
 .nav a {
   text-decoration: none;
-  color: #111111;
+  color: var(--color-text);
   font-size: 14px;
   font-weight: 500;
 }
 
 .nav a:hover {
-  opacity: 0.6;
+  opacity: .6;
 }
 
 .navbar-right {
@@ -100,7 +121,7 @@ body {
 .navbar-right img {
   width: 20px;
   height: 20px;
-  opacity: 0.8;
+  opacity: .8;
 }
 
 .navbar-right img:hover {
@@ -108,204 +129,63 @@ body {
 }
 
 /* ==============================
-   HERO (GLOBAL)
+   HERO
 ================================ */
 .hero-wallpaper {
   width: 100%;
-  height: 75vh;
-  min-height: 520px;
+  min-height: 75vh;
   display: flex;
   align-items: center;
-
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
 }
 
-/* ==============================
-   HERO CARD (HOME ETC.)
-================================ */
-.hero-card {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 64px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.hero-card h1 {
-  font-size: 3.6rem;
-  margin-bottom: 20px;
-}
-
-.hero-card p {
-  max-width: 520px;
-  margin-bottom: 36px;
-  color: #374151;
-}
-
-.hero-card .btn {
-  align-self: flex-start;
-  padding: 14px 32px;
-  border-radius: 999px;
-  background: #111111;
-  color: #ffffff;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-/* ==============================
-   HERO WALLPAPERS
-================================ */
-.hero-wallpaper.home {
-  background-image: url("/static/images/homewallpaper.jpg");
-}
-
-.hero-wallpaper.blog {
-  background-image: url("/static/images/blogwallpaper.jpg");
-}
-
-.hero-wallpaper.contact {
-  background-image: url("/static/images/contactwallpaper.jpg");
-  justify-content: center;
-}
-
-.hero-wallpaper.industrial {
-  background-image: url("/static/images/industrialwallpaper.jpg");
-}
-
-.hero-wallpaper.projects {
-  background-image: url("/static/images/projectwallpaper.jpg");
-}
-
-.hero-wallpaper.about {
-  background-image: url("/static/images/aboutwallpaper.jpg");
-}
-
-.hero-wallpaper.imprint {
-  background-image: url("/static/images/imprintwallpaper.jpg");
-  justify-content: center;
-}
-
-.hero-wallpaper.privacy {
-  background-image: url("/static/images/privacypolicywallpaper.jpg");
-  justify-content: center;
-}
-
-/* ==============================
-   LEGAL HERO
-================================ */
-.legal-hero {
-  width: 100%;
-  text-align: center;
-}
-
-.legal-hero h1 {
-  font-size: 3.2rem;
-  color: #ffffff;
-  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.65);
-}
-
-/* ==============================
-   CONTACT CARD (POPRAWIONE)
-================================ */
-.contact-card {
-  max-width: 560px;
-  width: 100%;
-  padding: 48px;
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 20px;
-  text-align: center;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
-}
-
-.contact-card h1 {
-  font-size: 3rem;
-  margin-bottom: 12px;
-}
-
-.contact-card .muted {
-  margin-bottom: 32px;
-  color: #374151;
-  font-size: 15px;
-}
-
-/* ==============================
-   CONTACT FORM (KLUCZOWA POPRAWKA)
-================================ */
-.contact-form {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
-}
-
-.contact-form > div {
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-}
-
-.contact-form label {
-  font-size: 13px;
-  margin-bottom: 6px;
-  color: #374151;
-}
-
-.contact-form input,
-.contact-form textarea {
-  width: 100%;
-  padding: 14px 16px;
-  font-size: 14px;
-  font-family: inherit;
-  border: 1px solid #d1d5db;
-  border-radius: 10px;
-}
-
-.contact-form input {
-  height: 48px;
-}
-
-.contact-form textarea {
-  min-height: 120px;
-  resize: vertical;
-  line-height: 1.5;
-}
-
-/* BUTTON */
-.contact-form .btn {
-  margin-top: 8px;
-  padding: 14px;
-  border-radius: 999px;
-  border: none;
-  background: #111111;
-  color: #ffffff;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-/* ==============================
-   BLOG CONTENT
-================================ */
+.hero-card,
 .blog-card {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 64px;
 }
 
+.hero-card h1,
 .blog-card h1 {
   font-size: 3.6rem;
-  margin-bottom: 12px;
-}
-
-.blog-card p {
-  margin-bottom: 32px;
-  color: #374151;
+  margin-bottom: 16px;
 }
 
 /* ==============================
-   ABOUT ME
+   HERO BACKGROUNDS
+================================ */
+.hero-wallpaper.home {
+  background-image: url("/static/images/homewallpaper.jpg");
+}
+.hero-wallpaper.blog {
+  background-image: url("/static/images/blogwallpaper.jpg");
+}
+.hero-wallpaper.projects {
+  background-image: url("/static/images/projectwallpaper.jpg");
+}
+.hero-wallpaper.about {
+  background-image: url("/static/images/aboutwallpaper.jpg");
+}
+.hero-wallpaper.contact {
+  background-image: url("/static/images/contactwallpaper.jpg");
+  justify-content: center;
+}
+.hero-wallpaper.industrial {
+  background-image: url("/static/images/industrialwallpaper.jpg");
+}
+.hero-wallpaper.imprint {
+  background-image: url("/static/images/imprintwallpaper.jpg");
+  justify-content: center;
+}
+.hero-wallpaper.privacy {
+  background-image: url("/static/images/privacypolicywallpaper.jpg");
+  justify-content: center;
+}
+
+/* ==============================
+   ABOUT
 ================================ */
 .about-section {
   padding: 140px 0;
@@ -315,7 +195,6 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 64px;
-
   display: grid;
   grid-template-columns: 420px 1fr;
   gap: 80px;
@@ -324,40 +203,26 @@ body {
 
 .about-photo img {
   width: 100%;
-  border-radius: 16px;
+  border-radius: var(--radius-lg);
   object-fit: cover;
 }
 
 .about-card {
   background: #f9fafb;
   padding: 48px;
-  border-radius: 20px;
-}
-
-.about-card h2 {
-  font-size: 2.4rem;
-  margin-bottom: 24px;
-}
-
-.about-card p {
-  color: #374151;
-  margin-bottom: 20px;
+  border-radius: var(--radius-lg);
 }
 
 /* ==============================
-   LEGAL CONTENT
+   CONTACT
 ================================ */
-.legal-page {
-  max-width: 800px;
-  margin: 120px auto;
-  padding: 0 24px;
-}
-
-.legal-page p {
-  font-size: 15px;
-  color: #374151;
-  margin-bottom: 16px;
-  line-height: 1.8;
+.contact-card {
+  max-width: 560px;
+  padding: 48px;
+  background: rgba(255,255,255,.95);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  box-shadow: var(--shadow-md);
 }
 
 /* ==============================
@@ -367,8 +232,8 @@ footer {
   padding: 32px 0;
   text-align: center;
   font-size: 13px;
-  color: #6b7280;
-  border-top: 1px solid #e5e7eb;
+  color: var(--color-muted);
+  border-top: 1px solid var(--color-border);
 }
 
 /* ==============================
@@ -380,13 +245,13 @@ footer {
   }
 
   .hero-card,
-  .blog-card {
+  .blog-card,
+  .about-grid {
     padding: 0 24px;
   }
 
   .hero-card h1,
-  .legal-hero h1,
-  .contact-card h1 {
+  .blog-card h1 {
     font-size: 2.2rem;
   }
 
@@ -394,9 +259,25 @@ footer {
     grid-template-columns: 1fr;
     gap: 40px;
   }
+}
+/* ==============================
+   GLOBAL PAGE CONTAINER
+================================ */
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 
-  .contact-card {
-    padding: 32px 24px;
-    margin: 0 16px;
-  }
+/* ==============================
+   SECTION CONTAINER (REUSABLE)
+================================ */
+.section {
+  padding: 120px 0;
+}
+
+.container {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 24px;
 }

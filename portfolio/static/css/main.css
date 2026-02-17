@@ -185,9 +185,44 @@ body {
 }
 
 .hero-wallpaper.imprint {
+  height: 45vh;
   background-image: url("/static/images/imprintwallpaper.jpg");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+
+  display: flex;
+  align-items: center;
   justify-content: center;
 }
+
+/* ciemna warstwa, żeby tekst się wtopił */
+.hero-wallpaper.imprint::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.45),
+    rgba(0, 0, 0, 0.25)
+  );
+}
+
+.legal-hero {
+  position: relative;
+  z-index: 2;
+}
+
+/* sam napis */
+.legal-hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 40px;
+  font-weight: 400;
+  letter-spacing: 4px;
+
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+}
+
 
 .hero-wallpaper.privacy {
   background-image: url("/static/images/privacypolicywallpaper.jpg");

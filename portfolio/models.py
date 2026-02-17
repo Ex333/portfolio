@@ -41,6 +41,7 @@ from django.db import models
 
 class Skill(models.Model):
     CATEGORY_CHOICES = [
+      ("django", "Django"),
       ("frontend", "Frontend"),
       ("backend", "Backend"),
       ("devops", "DevOps"),

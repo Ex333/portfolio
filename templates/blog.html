@@ -1,49 +1,68 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}Blog | Mateusz{% endblock %}
+{% block title %}Blog{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/blog.css' %}">
+{% endblock %}
 
 {% block content %}
 
-<section class="hero-wallpaper blog">
-  <div class="blog-card">
-    <h1>Blog</h1>
-    <p class="muted">Notes about frontend, backend, DevOps and tools.</p>
+<section class="blog-filter">
+  <div class="blog-container">
+    <div class="blog-categories">
 
-    <nav class="blog-categories">
       <a href="{% url 'blog' %}"
          class="{% if not active_category %}active{% endif %}">
-        All
+         All
       </a>
 
       {% for category in categories %}
-        <a href="{% url 'blog' %}?category={{ category.slug }}"
-           class="{% if active_category and category.id == active_category.id %}active{% endif %}">
-          {{ category.name }}
+        <a href="?category={{ category.slug }}"
+           class="{% if active_category == category %}active{% endif %}">
+           {{ category.name }}
         </a>
       {% endfor %}
-    </nav>
+
+    </div>
   </div>
 </section>
 
 <section class="blog-list">
-  <div class="blog-grid">
+  <div class="blog-container">
 
-    {% for post in posts %}
-      <a href="{% url 'blog_detail' post.slug %}" class="blog-card-item">
+    <div class="blog-grid">
 
-        <div class="blog-image">
-          {% if post.cover_image %}
-            <img src="{{ post.cover_image.url }}" alt="{{ post.title }}">
-          {% endif %}
-        </div>
+      {% for post in posts %}
+        <a href="{% url 'blog_detail' post.slug %}" class="blog-tile">
 
-        <h2 class="blog-title">
-          {{ post.title }}
-        </h2>
+          <div class="blog-tile-image">
 
-      </a>
-    {% endfor %}
+            {% if post.cover_image %}
+              <img src="{{ post.cover_image.url }}" alt="{{ post.title }}">
+            {% else %}
+              <div class="blog-fallback"></div>
+            {% endif %}
+
+            <div class="blog-tile-overlay">
+              <h2>{{ post.title }}</h2>
+              <p>
+                {{ post.created_at|date:"d M Y" }}
+                {% if post.category %}
+                  · {{ post.category.name }}
+                {% endif %}
+              </p>
+            </div>
+
+          </div>
+
+        </a>
+      {% empty %}
+        <p>No posts yet.</p>
+      {% endfor %}
+
+    </div>
 
   </div>
 </section>

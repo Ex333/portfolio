@@ -1,27 +1,47 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}Home | My name is Matt.{% endblock %}
+{% block title %}Home | Mateusz{% endblock %}
 
 {% block content %}
 
-<!-- HERO / WALLPAPER -->
-<section class="hero-wallpaper home">
-  <div class="hero-card">
-    <h1>Hi, I’m Mateusz </h1>
+<!-- HERO SECTION -->
+<section class="hero-home">
 
-    <p>
-      I build web applications, learn Django and create my developer portfolio.
-    </p>
+  <div class="hero-home-container">
 
-    <a href="/projects/" class="btn">View projects</a>
+    <!-- LEFT SIDE -->
+    <div class="hero-left">
+      <h1>Hi, I’m Mateusz</h1>
+
+      <p>
+        I build web applications, learn Django and create my developer portfolio.
+      </p>
+
+      <a href="{% url 'projects' %}" class="btn">View projects</a>
+    </div>
+
+    <!-- RIGHT SIDE (PHOTO) -->
+    <div class="hero-right">
+
+      {% if profile and profile.hero_image %}
+        <img src="{{ profile.hero_image.url }}" alt="Mateusz">
+      {% else %}
+        <img src="{% static 'images/profile-placeholder.jpg' %}" alt="Mateusz">
+      {% endif %}
+
+    </div>
+
   </div>
+
 </section>
 
-<!-- CONTENT -->
+
+<!-- ABOUT SECTION -->
 <section class="section">
   <div class="container">
     <h2>About me</h2>
+
     <p>
       I am a beginner backend developer focused on Python and Django.
       I enjoy building clean, functional web applications and learning
@@ -29,9 +49,11 @@
     </p>
 
     <h2 style="margin-top:60px;">What’s next?</h2>
+
     <p>
       Here I will add my skills, technologies I use, and selected projects.
     </p>
+
   </div>
 </section>
 

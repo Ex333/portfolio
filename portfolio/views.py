@@ -3,6 +3,7 @@ from .models import (
     Project,
     BlogPost,
     BlogCategory,
+    SiteProfile,
 )
 
 
@@ -11,7 +12,10 @@ from .models import (
 # ==========================
 
 def home(request):
-    return render(request, "home.html")
+    profile = SiteProfile.objects.first()
+    return render(request, "home.html", {
+        "profile": profile
+    })
 
 
 def projects(request):

@@ -1,5 +1,30 @@
 from django.db import models
 
+# ==========================
+# SITE PROFILE (HOME PAGE)
+# ==========================
+
+class SiteProfile(models.Model):
+    name = models.CharField(max_length=100, default="Mateusz")
+    hero_title = models.CharField(
+        max_length=200,
+        default="Hi, I’m Mateusz"
+    )
+    hero_description = models.TextField(
+        default="I build web applications, learn Django and create my developer portfolio."
+    )
+
+    hero_image = models.ImageField(
+        upload_to="profile/",
+        blank=True,
+        null=True,
+        help_text="Profile photo shown on home page"
+    )
+
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return "Site Profile"
 
 class Project(models.Model):
     title = models.CharField(max_length=200)

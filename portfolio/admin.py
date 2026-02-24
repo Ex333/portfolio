@@ -6,8 +6,12 @@ from .models import (
     BlogCategory,
     BlogPost,
     BlogBlock,
+    SiteProfile
 )
 
+@admin.register(SiteProfile)
+class SiteProfileAdmin(admin.ModelAdmin):
+    pass
 
 # ==========================
 # PROJECTS
@@ -234,3 +238,5 @@ class BlogPostAdmin(admin.ModelAdmin):
         "created_at",
         "updated_at",
     )
+
+

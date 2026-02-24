@@ -10,17 +10,22 @@
 }
 
 /* ==============================
-   ROOT / VARIABLES
+   ROOT
 ================================ */
 :root {
-  --color-text: #111111;
+  --color-text: #111;
   --color-muted: #6b7280;
   --color-border: #e5e7eb;
   --color-bg: #ffffff;
+  --color-soft: #f9fafb;
+
+  --radius-xl: 28px;
   --radius-lg: 20px;
-  --radius-md: 12px;
-  --shadow-sm: 0 8px 20px rgba(0,0,0,0.08);
-  --shadow-md: 0 20px 50px rgba(0,0,0,0.15);
+  --radius-md: 14px;
+
+  --shadow-sm: 0 8px 20px rgba(0,0,0,0.06);
+  --shadow-md: 0 20px 50px rgba(0,0,0,0.12);
+  --shadow-lg: 0 30px 70px rgba(0,0,0,0.18);
 }
 
 /* ==============================
@@ -29,7 +34,7 @@
 body {
   background: var(--color-bg);
   color: var(--color-text);
-  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
 }
@@ -42,8 +47,11 @@ h1, h2, h3 {
   line-height: 1.2;
 }
 
+h1 { font-size: 3.4rem; }
+h2 { font-size: 2rem; }
+
 p {
-  color: var(--color-text);
+  font-size: 16px;
 }
 
 .muted {
@@ -52,13 +60,13 @@ p {
 }
 
 /* ==============================
-   GLOBAL BUTTON
+   BUTTON
 ================================ */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 14px 32px;
+  padding: 16px 36px;
   border-radius: 999px;
   background: #111;
   color: #fff;
@@ -67,32 +75,35 @@ p {
   font-size: 14px;
   border: none;
   cursor: pointer;
-  transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
+  transition: all .25s ease;
 }
 
 .btn:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-  opacity: .95;
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
 }
 
 /* ==============================
-   NAVBAR
+   NAVBAR – FIXED (CENTER MENU + RIGHT ICONS)
 ================================ */
+
 .navbar {
   position: relative;
   display: flex;
   align-items: center;
   padding: 24px 64px;
   border-bottom: 1px solid var(--color-border);
-  background: var(--color-bg);
+  background: #fff;
 }
 
+/* LOGO */
 .logo {
   font-size: 20px;
   font-weight: 600;
+  z-index: 2;
 }
 
+/* CENTER MENU (ABSOLUTE – zostaje jak było) */
 .nav {
   position: absolute;
   left: 50%;
@@ -106,130 +117,233 @@ p {
   color: var(--color-text);
   font-size: 14px;
   font-weight: 500;
+  transition: opacity .2s ease;
 }
 
 .nav a:hover {
   opacity: .6;
 }
 
+/* RIGHT SIDE */
 .navbar-right {
-  margin-left: auto;
+  margin-left: auto;   /* 🔥 TO JEST KLUCZ */
   display: flex;
-  gap: 16px;
+  align-items: center;
+  gap: 18px;
+}
+
+.navbar-right a {
+  display: flex;
+  align-items: center;
 }
 
 .navbar-right img {
-  width: 20px;
-  height: 20px;
-  opacity: .8;
+  width: 22px;
+  height: 22px;
+  opacity: 0.85;
+  transition: opacity .2s ease, transform .2s ease;
 }
 
 .navbar-right img:hover {
   opacity: 1;
+  transform: translateY(-2px);
+}
+/* ==============================
+   HOME HERO (CZYSTY)
+================================ */
+.hero-home {
+  min-height: 85vh;
+  display: flex;
+  align-items: center;
+  background-image: url("/static/images/homewallpaper.jpg");
+  background-size: cover;
+  
+}
+
+.hero-home-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 64px;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 80px;
+  align-items: center;
+}
+
+.hero-left h1 {
+  margin-bottom: 20px;
+}
+
+.hero-left p {
+  font-size: 18px;
+  color: var(--color-muted);
+  margin-bottom: 30px;
+  max-width: 500px;
+}
+
+.hero-right {
+  display: flex;
+  justify-content: center;
+}
+
+.hero-right img {
+  width: 380px;
+  height: 380px;
+  object-fit: cover;
+  object-position: center 30%;
+  border-radius: 50%;
+  box-shadow: var(--shadow-lg);
 }
 
 /* ==============================
-   HERO
+   HERO WALLPAPER (SUBPAGES ONLY)
 ================================ */
 .hero-wallpaper {
   width: 100%;
   min-height: 75vh;
   display: flex;
   align-items: center;
+  justify-content: center;
   background-size: cover;
   background-position: center;
 }
 
-.hero-card,
-.blog-card {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 64px;
+.hero-wallpaper.blog { background-image: url("/static/images/blogwallpaper.jpg"); }
+.hero-wallpaper.projects { background-image: url("/static/images/projectwallpaper.jpg"); }
+.hero-wallpaper.about { background-image: url("/static/images/aboutwallpaper.jpg"); }
+.hero-wallpaper.contact { background-image: url("/static/images/contactwallpaper.jpg"); }
+.hero-wallpaper.industrial { background-image: url("/static/images/industrialwallpaper.jpg"); }
+.hero-wallpaper.imprint { background-image: url("/static/images/imprintwallpaper.jpg"); }
+.hero-wallpaper.privacy { background-image: url("/static/images/privacypolicywallpaper.jpg"); }
+
+/* ==============================
+   SECTION
+================================ */
+.section {
+  padding: 120px 0;
 }
 
-.hero-card h1,
-.blog-card h1 {
-  font-size: 3.6rem;
-  margin-bottom: 16px;
+.container {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 24px;
 }
 
 /* ==============================
-   HERO BACKGROUNDS
+   CONTACT – CLEAN PRO VERSION
 ================================ */
-.hero-wallpaper.home {
-  background-image: url("/static/images/homewallpaper.jpg");
-}
-.hero-wallpaper.blog {
-  background-image: url("/static/images/blogwallpaper.jpg");
-}
-.hero-wallpaper.projects {
-  background-image: url("/static/images/projectwallpaper.jpg");
-}
-.hero-wallpaper.about {
-  background-image: url("/static/images/aboutwallpaper.jpg");
-}
+
 .hero-wallpaper.contact {
-  background-image: url("/static/images/contactwallpaper.jpg");
-  justify-content: center;
-}
-.hero-wallpaper.industrial {
-  background-image: url("/static/images/industrialwallpaper.jpg");
-}
-.hero-wallpaper.imprint {
-  background-image: url("/static/images/imprintwallpaper.jpg");
-  justify-content: center;
-}
-.hero-wallpaper.privacy {
-  background-image: url("/static/images/privacypolicywallpaper.jpg");
-  justify-content: center;
-}
-
-/* ==============================
-   ABOUT
-================================ */
-.about-section {
-  padding: 140px 0;
-}
-
-.about-grid {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 64px;
-  display: grid;
-  grid-template-columns: 420px 1fr;
-  gap: 80px;
+  display: flex;
   align-items: center;
+  justify-content: center;
+  padding: 120px 20px;
 }
 
-.about-photo img {
+/* WRAPPER (centrowanie) */
+.contact-container {
   width: 100%;
-  border-radius: var(--radius-lg);
-  object-fit: cover;
+  display: flex;
+  justify-content: center;
 }
 
-.about-card {
+/* CARD */
+.contact-box {
+  width: 100%;
+  max-width: 760px;
+  background: #ffffff;
+  padding: 90px 80px;
+  border-radius: var(--radius-xl);
+  box-shadow: 0 50px 100px rgba(0,0,0,0.12);
+}
+
+/* HEADER */
+.contact-header {
+  margin-bottom: 60px;
+}
+
+.contact-header h1 {
+  font-size: 2.6rem;
+  margin-bottom: 14px;
+}
+
+.contact-header .muted {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* FORM */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+/* GROUP */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+/* INPUTS */
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 20px 22px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  font-size: 15px;
+  font-family: inherit;
   background: #f9fafb;
-  padding: 48px;
-  border-radius: var(--radius-lg);
+  transition: all .25s ease;
 }
 
-/* ==============================
-   CONTACT
-================================ */
-.contact-card {
-  max-width: 560px;
-  padding: 48px;
-  background: rgba(255,255,255,.95);
-  border-radius: var(--radius-lg);
-  text-align: center;
-  box-shadow: var(--shadow-md);
+.contact-form textarea {
+  min-height: 190px;
+  resize: vertical;
 }
 
+/* FOCUS EFFECT */
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  background: #ffffff;
+  border-color: #111;
+  box-shadow: 0 0 0 4px rgba(0,0,0,0.05);
+  transform: translateY(-2px);
+}
+
+/* BUTTON */
+.contact-btn {
+  width: 100%;
+  margin-top: 20px;
+  padding: 20px;
+  font-size: 15px;
+  border-radius: 999px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .contact-box {
+    padding: 60px 30px;
+  }
+
+  .contact-header h1 {
+    font-size: 2rem;
+  }
+}
 /* ==============================
    FOOTER
 ================================ */
 footer {
-  padding: 32px 0;
+  padding: 40px 0;
   text-align: center;
   font-size: 13px;
   color: var(--color-muted);
@@ -240,44 +354,27 @@ footer {
    RESPONSIVE
 ================================ */
 @media (max-width: 900px) {
+
   .navbar {
     padding: 20px 24px;
   }
 
-  .hero-card,
-  .blog-card,
-  .about-grid {
-    padding: 0 24px;
+  .hero-home-container {
+    grid-template-columns: 1fr;
+    gap: 50px;
+    text-align: center;
   }
 
-  .hero-card h1,
-  .blog-card h1 {
+  .hero-right img {
+    width: 260px;
+    height: 260px;
+  }
+
+  h1 {
     font-size: 2.2rem;
   }
 
-  .about-grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
+  .contact-box {
+    padding: 50px 28px;
   }
-}
-/* ==============================
-   GLOBAL PAGE CONTAINER
-================================ */
-.page {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-/* ==============================
-   SECTION CONTAINER (REUSABLE)
-================================ */
-.section {
-  padding: 120px 0;
-}
-
-.container {
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 0 24px;
 }

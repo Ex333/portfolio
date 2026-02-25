@@ -25,6 +25,44 @@ class SiteProfile(models.Model):
 
     def __str__(self):
         return "Site Profile"
+# ==========================
+# HOME PAGE (DYNAMIC BLOCKS)
+# ==========================
+
+class HomePage(models.Model):
+    title = models.CharField(max_length=200, default="Home")
+
+    def __str__(self):
+        return self.title
+
+
+class HomeBlock(models.Model):
+    page = models.ForeignKey(
+        HomePage,
+        related_name="blocks",
+        on_delete=models.CASCADE
+    )
+
+    order = models.PositiveIntegerField(default=0)
+
+    text = models.TextField(
+        blank=True,
+        help_text="Optional text content"
+    )
+
+    image = models.ImageField(
+        upload_to="home/blocks/",
+        blank=True,
+        null=True
+    )
+
+    alt_text = models.CharField(max_length=200, blank=True)
+
+    class Meta:
+        ordering = ["order"]
+
+    def __str__(self):
+        return f"Home Block {self.order} for {self.page.title}"
 
 class Project(models.Model):
     title = models.CharField(max_length=200)

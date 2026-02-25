@@ -5,20 +5,36 @@
 
 {% block content %}
 
-<!-- HERO SECTION -->
+<!-- ==============================
+     HERO SECTION
+================================ -->
 <section class="hero-home">
 
   <div class="hero-home-container">
 
     <!-- LEFT SIDE -->
     <div class="hero-left">
-      <h1>Hi, I’m Mateusz</h1>
+
+      <h1>
+        {% if profile %}
+          {{ profile.hero_title }}
+        {% else %}
+          Hi, I’m Mateusz
+        {% endif %}
+      </h1>
 
       <p>
-        I build web applications, learn Django and create my developer portfolio.
+        {% if profile %}
+          {{ profile.hero_description }}
+        {% else %}
+          I build web applications, learn Django and create my developer portfolio.
+        {% endif %}
       </p>
 
-      <a href="{% url 'projects' %}" class="btn">View projects</a>
+      <a href="{% url 'projects' %}" class="btn">
+        View projects
+      </a>
+
     </div>
 
     <!-- RIGHT SIDE (PHOTO) -->
@@ -37,24 +53,35 @@
 </section>
 
 
-<!-- ABOUT SECTION -->
-<section class="section">
-  <div class="container">
-    <h2>About me</h2>
+<!-- ==============================
+     DYNAMIC HOME BLOCKS
+================================ -->
+{% if page %}
+<section class="industrial-section">
+  <div class="industrial-container">
 
-    <p>
-      I am a beginner backend developer focused on Python and Django.
-      I enjoy building clean, functional web applications and learning
-      how real-world systems work under the hood.
-    </p>
+    {% for block in page.blocks.all %}
 
-    <h2 style="margin-top:60px;">What’s next?</h2>
+      {% if block.image %}
+        <div class="industrial-image">
+          <img src="{{ block.image.url }}" alt="{{ block.alt_text|default:'' }}">
+        </div>
+      {% endif %}
 
-    <p>
-      Here I will add my skills, technologies I use, and selected projects.
-    </p>
+      {% if block.text %}
+        <div class="industrial-text">
+          {{ block.text|linebreaks }}
+        </div>
+      {% endif %}
+
+    {% empty %}
+      <div class="industrial-text" style="text-align:center;">
+        <p>Content coming soon.</p>
+      </div>
+    {% endfor %}
 
   </div>
 </section>
+{% endif %}
 
 {% endblock %}

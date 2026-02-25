@@ -11,9 +11,22 @@ from .models import (
     IndustrialBlock,
     AboutPage,
     AboutBlock,
+    HomePage,
+    HomeBlock
+
 
 )
 
+
+
+class HomeBlockInline(admin.TabularInline):
+    model = HomeBlock
+    extra = 1
+
+
+@admin.register(HomePage)
+class HomePageAdmin(admin.ModelAdmin):
+    inlines = [HomeBlockInline]
 @admin.register(SiteProfile)
 class SiteProfileAdmin(admin.ModelAdmin):
     pass

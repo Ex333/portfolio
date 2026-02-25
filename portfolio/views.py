@@ -7,6 +7,7 @@ from .models import (
     IndustrialPage,
     AboutPage,
     AboutBlock,
+    HomePage,
 
 )
 
@@ -14,10 +15,14 @@ from .models import (
 # BASIC PAGES
 # ==========================
 
+
 def home(request):
     profile = SiteProfile.objects.first()
+    page = HomePage.objects.first()
+
     return render(request, "home.html", {
-        "profile": profile
+        "profile": profile,
+        "page": page
     })
 
 

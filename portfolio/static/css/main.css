@@ -378,3 +378,71 @@ footer {
     padding: 50px 28px;
   }
 }
+
+/* ==============================
+   INDUSTRIAL – DYNAMIC BLOCKS
+================================ */
+
+.industrial-section {
+  padding: 120px 0;
+}
+
+.industrial-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* IMAGE BLOCK */
+.industrial-image {
+  margin: 70px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.industrial-image img {
+  width: 100%;
+  max-width: 900px;
+  height: 460px;              /* 🔥 stała wysokość */
+  object-fit: cover;          /* 🔥 zawsze ten sam rozmiar */
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+
+.industrial-image img:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* TEXT BLOCK */
+.industrial-text {
+  max-width: 760px;
+  margin: 50px auto;
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--color-text);
+}
+
+.industrial-text p {
+  margin-bottom: 18px;
+}
+
+/* Optional subtle divider between blocks */
+.industrial-text + .industrial-image,
+.industrial-image + .industrial-text {
+  margin-top: 80px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+
+  .industrial-image img {
+    height: 280px;
+  }
+
+  .industrial-text {
+    font-size: 16px;
+  }
+
+}

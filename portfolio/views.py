@@ -4,8 +4,8 @@ from .models import (
     BlogPost,
     BlogCategory,
     SiteProfile,
+    IndustrialPage
 )
-
 
 # ==========================
 # BASIC PAGES
@@ -34,7 +34,10 @@ def contact(request):
 
 
 def industrial(request):
-    return render(request, "industrial.html")
+    page = IndustrialPage.objects.first()
+    return render(request, "industrial.html", {
+        "page": page
+    })
 
 
 def imprint(request):
@@ -53,6 +56,7 @@ def blog(request):
     category_slug = request.GET.get("category")
 
     categories = BlogCategory.objects.all().order_by("order", "name")
+
     posts = BlogPost.objects.filter(
         is_published=True
     ).select_related(

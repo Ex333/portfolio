@@ -6,7 +6,9 @@ from .models import (
     BlogCategory,
     BlogPost,
     BlogBlock,
-    SiteProfile
+    SiteProfile,
+    IndustrialPage,
+    IndustrialBlock,
 )
 
 @admin.register(SiteProfile)
@@ -239,4 +241,12 @@ class BlogPostAdmin(admin.ModelAdmin):
         "updated_at",
     )
 
+# ======== INDUSTRIAL PAGE ============ 
+class IndustrialBlockInline(admin.TabularInline):
+    model = IndustrialBlock
+    extra = 1
 
+
+@admin.register(IndustrialPage)
+class IndustrialPageAdmin(admin.ModelAdmin):
+    inlines = [IndustrialBlockInline]

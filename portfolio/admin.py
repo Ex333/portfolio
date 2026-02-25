@@ -9,6 +9,9 @@ from .models import (
     SiteProfile,
     IndustrialPage,
     IndustrialBlock,
+    AboutPage,
+    AboutBlock,
+
 )
 
 @admin.register(SiteProfile)
@@ -250,3 +253,15 @@ class IndustrialBlockInline(admin.TabularInline):
 @admin.register(IndustrialPage)
 class IndustrialPageAdmin(admin.ModelAdmin):
     inlines = [IndustrialBlockInline]
+
+
+#========= ABOUT PAGE ==============
+
+class AboutBlockInline(admin.TabularInline):
+    model = AboutBlock
+    extra = 1
+
+
+@admin.register(AboutPage)
+class AboutPageAdmin(admin.ModelAdmin):
+    inlines = [AboutBlockInline]

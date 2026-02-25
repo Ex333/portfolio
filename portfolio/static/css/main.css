@@ -446,3 +446,34 @@ footer {
   }
 
 }
+
+.hero-wallpaper.about .hero-card p {
+    max-width: 650px;
+    margin: 24px auto 0;
+    line-height: 1.7;
+    font-size: 17px;
+}
+
+/* ==============================
+   ABOUT HERO PREMIUM
+================================ */
+
+.about-hero {
+    text-align: center;
+    align-items: center;
+}
+
+.about-subtitle {
+    max-width: 720px;
+    margin: 24px auto 0;
+    line-height: 1.7;
+    font-size: 17px;
+}
+
+.hero-cv-buttons {
+    margin-top: 36px;
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    flex-wrap: wrap;
+}

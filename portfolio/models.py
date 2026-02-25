@@ -220,3 +220,41 @@ class IndustrialBlock(models.Model):
 
     def __str__(self):
         return f"Block {self.order} for {self.page.title}"
+
+
+# ==========================
+# ABOUT PAGE
+# ==========================
+
+class AboutPage(models.Model):
+    title = models.CharField(max_length=200, default="About Me")
+    subtitle = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.title
+
+
+class AboutBlock(models.Model):
+    page = models.ForeignKey(
+        AboutPage,
+        related_name="blocks",
+        on_delete=models.CASCADE
+    )
+
+    order = models.PositiveIntegerField()
+
+    text = models.TextField(blank=True)
+
+    image = models.ImageField(
+        upload_to="about/blocks/",
+        blank=True,
+        null=True
+    )
+
+    alt_text = models.CharField(max_length=200, blank=True)
+
+    class Meta:
+        ordering = ["order"]
+
+    def __str__(self):
+        return f"Block {self.order} for {self.page.title}"

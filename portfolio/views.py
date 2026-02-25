@@ -4,7 +4,10 @@ from .models import (
     BlogPost,
     BlogCategory,
     SiteProfile,
-    IndustrialPage
+    IndustrialPage,
+    AboutPage,
+    AboutBlock,
+
 )
 
 # ==========================
@@ -26,7 +29,10 @@ def projects(request):
 
 
 def about(request):
-    return render(request, "about.html")
+    page = AboutPage.objects.first()
+    return render(request, "about.html", {
+        "page": page
+    })
 
 
 def contact(request):

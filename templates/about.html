@@ -1,81 +1,87 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}About | Mateusz{% endblock %}
+{% block title %}
+  {% if page %}
+    {{ page.title }} | Mateusz
+  {% else %}
+    About | Mateusz
+  {% endif %}
+{% endblock %}
 
 {% block content %}
 
 <!-- ==============================
-     ABOUT HERO / WALLPAPER
+     HERO SECTION
 ================================ -->
 <section class="hero-wallpaper about">
 
-  <div class="hero-card" style="align-items: center; text-align: center;">
+  <div class="hero-card about-hero">
 
-    <h1>About Me</h1>
+    {% if page %}
+      <h1>{{ page.title }}</h1>
 
-    <p>
-      I’m a beginner Python & Django developer focused on building clean,
-      functional web applications and improving my backend skills step by step.
-    </p>
+      {% if page.subtitle %}
+        <p class="about-subtitle">{{ page.subtitle }}</p>
+      {% endif %}
+    {% else %}
+      <h1>About Me</h1>
+    {% endif %}
 
-  </div>
-
-</section>
-
-<!-- ==============================
-     ABOUT CONTENT
-================================ -->
-<section class="section">
-  <div class="container" style="text-align:center;">
-
-    <h2>Skills</h2>
-
-    <ul style="margin-top:24px; line-height:1.9; list-style:none; padding:0;">
-      <li>Python</li>
-      <li>Django</li>
-      <li>HTML & CSS</li>
-      <li>Git & GitHub</li>
-    </ul>
-
-  </div>
-</section>
-
-<!-- ==============================
-     CV DOWNLOAD SECTION
-================================ -->
-<section class="section">
-  <div class="container" style="text-align:center;">
-
-    <h2>Download CV</h2>
-
-    <p style="margin: 16px 0 32px; color: #374151;">
-      You can download my CV in the following languages:
-    </p>
-
-    <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
-
+    <!-- PREMIUM CV BUTTONS (VISIBLE IMMEDIATELY) -->
+    <div class="hero-cv-buttons">
       <a href="{% static 'cv/Mateusz_Haldas_CV_EN.pdf' %}"
          class="btn"
          target="_blank">
-        🇬🇧 English (PDF)
+        🇬🇧 CV (EN)
       </a>
 
       <a href="{% static 'cv/Mateusz_Haldas_CV_DE.pdf' %}"
          class="btn"
          target="_blank">
-        🇩🇪 Deutsch (PDF)
+        🇩🇪 CV (DE)
       </a>
 
       <a href="{% static 'cv/Mateusz_Haldas_CV_PL.pdf' %}"
          class="btn"
          target="_blank">
-        🇵🇱 Polski (PDF)
+        🇵🇱 CV (PL)
       </a>
-
     </div>
 
   </div>
+
 </section>
 
+
+<!-- ==============================
+     DYNAMIC CONTENT BLOCKS
+================================ -->
+{% if page %}
+<section class="industrial-section">
+  <div class="industrial-container">
+
+    {% for block in page.blocks.all %}
+
+      {% if block.image %}
+        <div class="industrial-image">
+          <img src="{{ block.image.url }}" alt="{{ block.alt_text|default:'' }}">
+        </div>
+      {% endif %}
+
+      {% if block.text %}
+        <div class="industrial-text">
+          {{ block.text|linebreaks }}
+        </div>
+      {% endif %}
+
+    {% empty %}
+        <div class="industrial-text" style="text-align:center;">
+          <p>Content coming soon.</p>
+        </div>
+    {% endfor %}
+
+  </div>
+</section>
+{% endif %}
 {% endblock %}

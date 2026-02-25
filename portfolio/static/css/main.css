@@ -90,8 +90,8 @@ p {
 .navbar {
   position: relative;
   display: flex;
-  align-items: center;
-  padding: 24px 64px;
+  align-items: center;        /* 🔥 idealne wyrównanie pionowe */
+  padding: 20px 64px;         /* 🔥 lekko ciaśniej */
   border-bottom: 1px solid var(--color-border);
   background: #fff;
 }
@@ -101,22 +101,29 @@ p {
   font-size: 20px;
   font-weight: 600;
   z-index: 2;
+  display: flex;
+  align-items: center;        /* 🔥 wyrównanie tekstu logo */
+  line-height: 1;
 }
 
-/* CENTER MENU (ABSOLUTE – zostaje jak było) */
+/* CENTER MENU (ABSOLUTE – poprawione) */
 .nav {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 32px;
+  gap: 40px;
+  align-items: center;
+  top: 50%;                 /* 🔥 wyśrodkowanie pionowe */
+  transform: translate(-50%, -50%);
 }
 
 .nav a {
   text-decoration: none;
   color: var(--color-text);
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 18px;          /* większy font */
+  font-weight: 600;
+  line-height: 1;
   transition: opacity .2s ease;
 }
 
@@ -126,10 +133,10 @@ p {
 
 /* RIGHT SIDE */
 .navbar-right {
-  margin-left: auto;   /* 🔥 TO JEST KLUCZ */
+  margin-left: auto;
   display: flex;
-  align-items: center;
-  gap: 18px;
+  align-items: center;        /* 🔥 ikony w tej samej osi */
+  gap: 20px;
 }
 
 .navbar-right a {
@@ -138,8 +145,8 @@ p {
 }
 
 .navbar-right img {
-  width: 22px;
-  height: 22px;
+  width: 24px;                /* 🔥 minimalnie większe */
+  height: 24px;
   opacity: 0.85;
   transition: opacity .2s ease, transform .2s ease;
 }

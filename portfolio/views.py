@@ -27,7 +27,14 @@ def home(request):
 
 
 def projects(request):
-    projects = Project.objects.filter(is_published=True)
+    projects = Project.objects.filter(
+        is_published=True
+    ).exclude(
+        url__isnull=True
+    ).exclude(
+        url__exact=""
+    )
+
     return render(request, "projects.html", {
         "projects": projects
     })

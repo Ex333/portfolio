@@ -4,50 +4,51 @@
 
 {% block content %}
 
-<!-- PROJECTS HERO / WALLPAPER -->
+<!-- ==============================
+     PROJECTS HERO
+================================ -->
 <section class="hero-wallpaper projects">
-
   <div class="hero-card">
     <h1>Projects</h1>
-
     <p class="muted">
       A selection of projects I’ve built while learning web development.
     </p>
   </div>
-
 </section>
 
-<!-- PROJECTS LIST -->
-<section class="projects-section">
+
+<!-- ==============================
+     PROJECTS GRID
+================================ -->
+<section class="section">
   <div class="container">
 
     <div class="projects-grid">
 
       {% for project in projects %}
-        <div class="project-card">
+        {% if project.url %}
+          <a href="{{ project.url }}"
+             class="project-card"
+             target="_blank"
+             rel="noopener">
 
-          <h3>{{ project.title }}</h3>
+            {% if project.image %}
+              <img 
+                src="{{ project.image.url }}" 
+                alt="{{ project.title }}">
+            {% endif %}
 
-          <p class="muted">
-            {{ project.short_description }}
-          </p>
+            <div class="project-overlay">
+              <h3>{{ project.title }}</h3>
+              <p>{{ project.short_description }}</p>
+            </div>
 
-          {% if project.image %}
-            <img 
-              src="{{ project.image.url }}" 
-              alt="{{ project.title }}"
-            >
-          {% endif %}
-
-          {% if project.url %}
-            <a href="{{ project.url }}" target="_blank" rel="noopener">
-              View project →
-            </a>
-          {% endif %}
-
-        </div>
+          </a>
+        {% endif %}
       {% empty %}
-        <p>No projects available yet.</p>
+        <div style="text-align:center;">
+          <p>No projects available yet.</p>
+        </div>
       {% endfor %}
 
     </div>

@@ -1,4 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.core.mail import send_mail
+from django.conf import settings
+
+from .forms import ContactForm
 from .models import (
     Project,
     BlogPost,
@@ -8,13 +12,11 @@ from .models import (
     AboutPage,
     AboutBlock,
     HomePage,
-
 )
 
 # ==========================
 # BASIC PAGES
 # ==========================
-
 
 def home(request):
     profile = SiteProfile.objects.first()
@@ -47,8 +49,64 @@ def about(request):
     })
 
 
+# ==========================
+# CONTACT (MAIL + THANK YOU PAGE)
+# ==========================
+
 def contact(request):
-    return render(request, "contact.html")
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+
+        if form.is_valid():
+            name = form.cleaned_data["name"]
+            email = form.cleaned_data["email"]
+            message = form.cleaned_data["message"]
+
+            full_message = f"""
+New message from portfolio:
+
+Name: {name}
+Email: {email}
+
+Message:
+{message}
+"""
+
+            # Mail do Ciebie
+            send_mail(
+                subject="New Contact Form Message",
+                message=full_message,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[settings.DEFAULT_FROM_EMAIL],
+            )
+
+            # Auto-reply do użytkownika
+            send_mail(
+                subject="Thank you for contacting me!",
+                message=(
+                    "Hi!\n\n"
+                    "Thank you for your message. "
+                    "I will get back to you as soon as possible.\n\n"
+                    "Best regards,\n"
+                    "Mateusz"
+                ),
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[email],
+            )
+
+            # 🔥 POPRAWNY redirect po nazwie URL
+            return redirect("contact_thank_you")
+
+    else:
+        form = ContactForm()
+
+    return render(request, "contact.html", {
+        "form": form
+    })
+
+
+def contact_thank_you(request):
+    return render(request, "contact_thank_you.html")
 
 
 def industrial(request):

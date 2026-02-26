@@ -540,3 +540,74 @@ footer {
   font-size: 14px;
   opacity: 0.9;
 }
+
+/* ==============================
+   THANK YOU PAGE
+================================ */
+
+.thankyou-wrapper {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 20px;
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.thankyou-box {
+  max-width: 600px;
+}
+
+.thankyou-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 30px;
+}
+
+.thankyou-box h1 {
+  font-size: 2.4rem;
+  margin-bottom: 20px;
+}
+
+.thankyou-box p {
+  font-size: 1.05rem;
+  color: #666;
+  margin-bottom: 35px;
+  line-height: 1.6;
+}
+
+/* SVG animation */
+
+.checkmark circle {
+  stroke: #4CAF50;
+  stroke-width: 4;
+  fill: none;
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  animation: stroke 0.6s ease forwards;
+}
+
+.checkmark path {
+  stroke: #4CAF50;
+  stroke-width: 4;
+  fill: none;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: stroke 0.4s 0.6s ease forwards;
+}
+
+@keyframes stroke {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

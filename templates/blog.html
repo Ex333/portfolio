@@ -34,13 +34,15 @@
 
     <div class="blog-grid">
 
-      {% for post in posts %}
+      {% for post in page_obj %}
         <a href="{% url 'blog_detail' post.slug %}" class="blog-tile">
 
           <div class="blog-tile-image">
 
             {% if post.cover_image %}
-              <img src="{{ post.cover_image.url }}" alt="{{ post.title }}">
+              <img src="{{ post.cover_image.url }}"
+                   alt="{{ post.title }}"
+                   loading="lazy">
             {% else %}
               <div class="blog-fallback"></div>
             {% endif %}
@@ -63,6 +65,31 @@
       {% endfor %}
 
     </div>
+
+    <!-- 🔥 PAGINACJA W STYLU PILL -->
+    {% if page_obj.paginator.num_pages > 1 %}
+    <div class="blog-pagination">
+
+      {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}{% if active_category %}&category={{ active_category.slug }}{% endif %}"
+           class="pagination-pill">
+           ← Previous
+        </a>
+      {% endif %}
+
+      <span class="pagination-current">
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+      </span>
+
+      {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}{% if active_category %}&category={{ active_category.slug }}{% endif %}"
+           class="pagination-pill">
+           Next →
+        </a>
+      {% endif %}
+
+    </div>
+    {% endif %}
 
   </div>
 </section>

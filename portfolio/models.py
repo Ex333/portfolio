@@ -175,7 +175,7 @@ class BlogPost(models.Model):
     content = models.TextField(blank=True)
 
     is_published = models.BooleanField(default=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True, db_index=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:

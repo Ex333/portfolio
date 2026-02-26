@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.mail import send_mail
 from django.conf import settings
+from django.core.paginator import Paginator
 
 from .forms import ContactForm
 from .models import (
@@ -50,7 +51,7 @@ def about(request):
 
 
 # ==========================
-# CONTACT (MAIL + THANK YOU PAGE)
+# CONTACT
 # ==========================
 
 def contact(request):
@@ -72,7 +73,6 @@ Message:
 {message}
 """
 
-            # Mail do Ciebie
             send_mail(
                 subject="New Contact Form Message",
                 message=full_message,
@@ -80,7 +80,6 @@ Message:
                 recipient_list=[settings.DEFAULT_FROM_EMAIL],
             )
 
-            # Auto-reply do użytkownika
             send_mail(
                 subject="Thank you for contacting me!",
                 message=(
@@ -94,7 +93,6 @@ Message:
                 recipient_list=[email],
             )
 
-            # 🔥 POPRAWNY redirect po nazwie URL
             return redirect("contact_thank_you")
 
     else:
@@ -125,20 +123,28 @@ def privacy_policy(request):
 
 
 # ==========================
-# BLOG
+# BLOG (PRODUCTION READY 🔥)
 # ==========================
 
 def blog(request):
     category_slug = request.GET.get("category")
 
-    categories = BlogCategory.objects.all().order_by("order", "name")
+    categories = BlogCategory.objects.all()
 
-    posts = BlogPost.objects.filter(
-        is_published=True
-    ).select_related(
-        "category"
-    ).order_by(
-        "-created_at"
+    posts = (
+        BlogPost.objects
+        .filter(is_published=True)
+        .select_related("category")
+        .only(
+            "id",
+            "title",
+            "slug",
+            "cover_image",
+            "created_at",
+            "category__name",
+            "category__slug"
+        )
+        .order_by("-created_at")
     )
 
     active_category = None
@@ -150,8 +156,12 @@ def blog(request):
         )
         posts = posts.filter(category=active_category)
 
+    paginator = Paginator(posts, 9)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
     return render(request, "blog.html", {
-        "posts": posts,
+        "page_obj": page_obj,
         "categories": categories,
         "active_category": active_category,
     })

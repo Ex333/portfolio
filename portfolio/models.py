@@ -1,4 +1,9 @@
 from django.db import models
+from PIL import Image
+from io import BytesIO
+from django.core.files.base import ContentFile
+import os
+
 
 # ==========================
 # SITE PROFILE (HOME PAGE)
@@ -172,6 +177,14 @@ class BlogPost(models.Model):
         help_text="Main image shown on blog list"
     )
 
+    # 🔥 NOWE POLE MINIATURY
+    thumbnail = models.ImageField(
+        upload_to="blog/thumbnails/",
+        blank=True,
+        null=True,
+        editable=False
+    )
+
     content = models.TextField(blank=True)
 
     is_published = models.BooleanField(default=True)
@@ -181,10 +194,37 @@ class BlogPost(models.Model):
     class Meta:
         ordering = ["-created_at"]
 
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        if self.cover_image:
+            img = Image.open(self.cover_image.path)
+
+            max_width = 600  # 🔥 szerokość miniatury
+
+            if img.width > max_width:
+                ratio = max_width / float(img.width)
+                new_height = int(float(img.height) * ratio)
+
+                img = img.resize((max_width, new_height), Image.LANCZOS)
+
+            # 🔥 konwertujemy do JPEG i kompresujemy
+            thumb_io = BytesIO()
+            img.convert("RGB").save(thumb_io, format="JPEG", quality=85)
+
+            filename = os.path.basename(self.cover_image.name)
+            thumb_name = f"thumb_{filename}"
+
+            self.thumbnail.save(
+                thumb_name,
+                ContentFile(thumb_io.getvalue()),
+                save=False
+            )
+
+            super().save(update_fields=["thumbnail"])
+
     def __str__(self):
         return self.title
-
-
 # ==========================
 # CONTENT BLOCKS
 # ==========================

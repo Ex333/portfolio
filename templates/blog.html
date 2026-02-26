@@ -39,7 +39,11 @@
 
           <div class="blog-tile-image">
 
-            {% if post.cover_image %}
+            {% if post.thumbnail %}
+              <img src="{{ post.thumbnail.url }}"
+                   alt="{{ post.title }}"
+                   loading="lazy">
+            {% elif post.cover_image %}
               <img src="{{ post.cover_image.url }}"
                    alt="{{ post.title }}"
                    loading="lazy">
@@ -66,7 +70,7 @@
 
     </div>
 
-    <!-- 🔥 PAGINACJA W STYLU PILL -->
+    <!-- PAGINATION -->
     {% if page_obj.paginator.num_pages > 1 %}
     <div class="blog-pagination">
 

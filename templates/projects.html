@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Projects | Mateusz{% endblock %}
 
@@ -25,7 +26,7 @@
 
     <div class="projects-grid">
 
-      {% for project in projects %}
+      {% for project in page_obj %}
         {% if project.url %}
           <a href="{{ project.url }}"
              class="project-card"
@@ -35,7 +36,8 @@
             {% if project.image %}
               <img 
                 src="{{ project.image.url }}" 
-                alt="{{ project.title }}">
+                alt="{{ project.title }}"
+                loading="lazy">
             {% endif %}
 
             <div class="project-overlay">
@@ -46,12 +48,37 @@
           </a>
         {% endif %}
       {% empty %}
-        <div style="text-align:center;">
-          <p>No projects available yet.</p>
-        </div>
+        <p style="text-align:center;">No projects available yet.</p>
       {% endfor %}
 
     </div>
+
+    <!-- ==============================
+         PAGINATION (IDENTICAL TO BLOG)
+    ================================= -->
+    {% if page_obj.paginator.num_pages > 1 %}
+    <div class="blog-pagination">
+
+      {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}"
+           class="pagination-pill">
+           ← Previous
+        </a>
+      {% endif %}
+
+      <span class="pagination-current">
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+      </span>
+
+      {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}"
+           class="pagination-pill">
+           Next →
+        </a>
+      {% endif %}
+
+    </div>
+    {% endif %}
 
   </div>
 </section>

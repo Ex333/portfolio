@@ -30,16 +30,20 @@ def home(request):
 
 
 def projects(request):
-    projects = Project.objects.filter(
-        is_published=True
-    ).exclude(
-        url__isnull=True
-    ).exclude(
-        url__exact=""
+    projects_list = (
+        Project.objects
+        .filter(is_published=True)
+        .exclude(url__isnull=True)
+        .exclude(url__exact="")
+        .order_by("-id")
     )
 
+    paginator = Paginator(projects_list, 4)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
     return render(request, "projects.html", {
-        "projects": projects
+        "page_obj": page_obj
     })
 
 

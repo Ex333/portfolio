@@ -38,7 +38,7 @@ def projects(request):
         .order_by("-id")
     )
 
-    paginator = Paginator(projects_list, 4)
+    paginator = Paginator(projects_list, 9)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 

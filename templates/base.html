@@ -54,12 +54,17 @@
     {% block content %}{% endblock %}
 </main>
 
-<footer>
-    <p>© 2026 Mateusz Hałdaś · Portfolio</p>
-    <p>
-        <a href="{% url 'imprint' %}">Imprint</a> |
-        <a href="{% url 'privacy_policy' %}">Privacy Policy</a>
-    </p>
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-copy">
+            © 2026 Mateusz Hałdaś · Portfolio
+        </div>
+
+        <div class="footer-links">
+            <a href="{% url 'imprint' %}">Imprint</a>
+            <a href="{% url 'privacy_policy' %}">Privacy Policy</a>
+        </div>
+    </div>
 </footer>
 
 </body>

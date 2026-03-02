@@ -669,3 +669,139 @@ footer {
   border-radius: var(--radius-md);
   font-size: 0.9rem;
 }
+
+/* ==============================
+   PRIVACY HERO FIX (PREMIUM)
+================================ */
+
+.hero-wallpaper.privacy {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Dark overlay */
+.hero-wallpaper.privacy::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+/* Hero content */
+.hero-wallpaper.privacy .legal-hero {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 20px;
+}
+
+/* Heading style */
+.hero-wallpaper.privacy .legal-hero h1 {
+  color: #ffffff;
+  font-size: 3.2rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+/* ==============================
+   IMPRINT HERO FIX
+================================ */
+
+.hero-wallpaper.imprint {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 55vh; /* trochę mniejsze niż default 75vh */
+  text-align: center;
+}
+
+/* overlay tylko dla imprint */
+.hero-wallpaper.imprint::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+/* tekst */
+.hero-wallpaper.imprint .legal-hero {
+  position: relative;
+  z-index: 2;
+  padding: 0 20px;
+}
+
+.hero-wallpaper.imprint .legal-hero h1 {
+  color: #ffffff;
+  font-size: 3.2rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+/* ==============================
+   FOOTER – PREMIUM MINIMAL
+================================ */
+
+.footer {
+  padding: 50px 20px;
+  border-top: 1px solid var(--color-border);
+  background: #ffffff;
+}
+
+.footer-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.footer-copy {
+  font-size: 14px;
+  color: var(--color-muted);
+  margin-bottom: 14px;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
+
+.footer-links a {
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text);
+  position: relative;
+  transition: opacity 0.2s ease;
+}
+
+.footer-links a:hover {
+  opacity: 0.6;
+}
+
+/* ==============================
+   BACK TO BLOG BUTTON
+================================ */
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: #111;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.25s ease;
+}
+
+.back-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}

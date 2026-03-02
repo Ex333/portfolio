@@ -174,15 +174,7 @@ class BlogPost(models.Model):
         upload_to="blog/covers/",
         blank=True,
         null=True,
-        help_text="Main image shown on blog list"
-    )
-
-    # 🔥 NOWE POLE MINIATURY
-    thumbnail = models.ImageField(
-        upload_to="blog/thumbnails/",
-        blank=True,
-        null=True,
-        editable=False
+        help_text="Main blog cover image"
     )
 
     content = models.TextField(blank=True)
@@ -200,28 +192,30 @@ class BlogPost(models.Model):
         if self.cover_image:
             img = Image.open(self.cover_image.path)
 
-            max_width = 600  # 🔥 szerokość miniatury
+            # 🔥 Retina ready width
+            max_width = 1600
 
             if img.width > max_width:
                 ratio = max_width / float(img.width)
                 new_height = int(float(img.height) * ratio)
-
                 img = img.resize((max_width, new_height), Image.LANCZOS)
 
-            # 🔥 konwertujemy do JPEG i kompresujemy
-            thumb_io = BytesIO()
-            img.convert("RGB").save(thumb_io, format="JPEG", quality=85)
+            # Convert to RGB (important for PNG uploads)
+            img = img.convert("RGB")
 
-            filename = os.path.basename(self.cover_image.name)
-            thumb_name = f"thumb_{filename}"
-
-            self.thumbnail.save(
-                thumb_name,
-                ContentFile(thumb_io.getvalue()),
-                save=False
+            # Compress
+            img.save(
+                self.cover_image.path,
+                format="JPEG",
+                quality=82,
+                optimize=True
             )
 
-            super().save(update_fields=["thumbnail"])
+    def delete(self, *args, **kwargs):
+        if self.cover_image:
+            if os.path.isfile(self.cover_image.path):
+                os.remove(self.cover_image.path)
+        super().delete(*args, **kwargs)
 
     def __str__(self):
         return self.title

@@ -649,3 +649,23 @@ footer {
     font-size: 14px;
     color: #777;
 }
+
+/* ==============================
+   FORM ERRORS (DJANGO BACKEND)
+================================ */
+
+.field-error {
+  color: #e11d48;               /* ładny czerwony */
+  font-size: 0.85rem;
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+.form-error {
+  background: #fff1f2;
+  border: 1px solid #fecdd3;
+  color: #b91c1c;
+  padding: 14px 18px;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+}

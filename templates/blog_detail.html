@@ -24,13 +24,14 @@
 <section class="blog-detail">
   <div class="blog-container">
 
-    {% if post.content %}
-      <div class="blog-text">
-        {{ post.content|linebreaks }}
-      </div>
-    {% endif %}
+    <article class="blog-article">
 
-    <div class="blog-content">
+      {% if post.content %}
+        <div class="blog-text">
+          {{ post.content|linebreaks }}
+        </div>
+      {% endif %}
+
       {% for block in post.blocks.all %}
 
         {% if block.text %}
@@ -49,10 +50,11 @@
         {% endif %}
 
       {% endfor %}
-    </div>
+
+    </article>
 
     <a href="{% url 'blog' %}" class="back-btn">
-    ← Back to blog
+      ← Back to blog
     </a>
 
   </div>

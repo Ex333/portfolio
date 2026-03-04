@@ -4,96 +4,139 @@
 {% block title %}Blog{% endblock %}
 
 {% block extra_css %}
+
 <link rel="stylesheet" href="{% static 'css/blog.css' %}">
 {% endblock %}
 
 {% block content %}
 
-<section class="blog-filter">
+<!-- SEARCH BAR -->
+
+<section class="blog-search-section">
   <div class="blog-container">
-    <div class="blog-categories">
+<div class="blog-search">
+  <form method="get">
 
-      <a href="{% url 'blog' %}"
-         class="{% if not active_category %}active{% endif %}">
-         All
-      </a>
+    <input
+      type="text"
+      name="q"
+      placeholder="Search articles..."
+      value="{{ query }}"
+    >
 
-      {% for category in categories %}
-        <a href="?category={{ category.slug }}"
-           class="{% if active_category == category %}active{% endif %}">
-           {{ category.name }}
-        </a>
-      {% endfor %}
+    {% if active_category %}
+    <input type="hidden" name="category" value="{{ active_category.slug }}">
+    {% endif %}
 
-    </div>
+    <button type="submit">Search</button>
+
+  </form>
+</div>
+
+
   </div>
 </section>
+
+<!-- CATEGORY FILTER -->
+
+<section class="blog-filter">
+  <div class="blog-container">
+
+
+<div class="blog-categories">
+
+  <a href="{% url 'blog' %}{% if query %}?q={{ query }}{% endif %}"
+     class="{% if not active_category %}active{% endif %}">
+     All
+  </a>
+
+  {% for category in categories %}
+    <a href="?category={{ category.slug }}{% if query %}&q={{ query }}{% endif %}"
+       class="{% if active_category == category %}active{% endif %}">
+       {{ category.name }}
+    </a>
+  {% endfor %}
+
+</div>
+
+
+  </div>
+</section>
+
+<!-- BLOG LIST -->
 
 <section class="blog-list">
   <div class="blog-container">
 
-    <div class="blog-grid">
 
-      {% for post in page_obj %}
-        <a href="{% url 'blog_detail' post.slug %}" class="blog-tile">
+<div class="blog-grid">
 
-          <div class="blog-tile-image">
+  {% for post in page_obj %}
+    <a href="{% url 'blog_detail' post.slug %}" class="blog-tile">
 
-            {% if post.thumbnail %}
-              <img src="{{ post.thumbnail.url }}"
-                   alt="{{ post.title }}"
-                   loading="lazy">
-            {% elif post.cover_image %}
-              <img src="{{ post.cover_image.url }}"
-                   alt="{{ post.title }}"
-                   loading="lazy">
-            {% else %}
-              <div class="blog-fallback"></div>
+      <div class="blog-tile-image">
+
+        {% if post.thumbnail %}
+          <img src="{{ post.thumbnail.url }}"
+               alt="{{ post.title }}"
+               loading="lazy">
+
+        {% elif post.cover_image %}
+          <img src="{{ post.cover_image.url }}"
+               alt="{{ post.title }}"
+               loading="lazy">
+
+        {% else %}
+          <div class="blog-fallback"></div>
+        {% endif %}
+
+        <div class="blog-tile-overlay">
+          <h2>{{ post.title }}</h2>
+
+          <p>
+            {{ post.created_at|date:"d M Y" }}
+            {% if post.category %}
+              · {{ post.category.name }}
             {% endif %}
+          </p>
+        </div>
 
-            <div class="blog-tile-overlay">
-              <h2>{{ post.title }}</h2>
-              <p>
-                {{ post.created_at|date:"d M Y" }}
-                {% if post.category %}
-                  · {{ post.category.name }}
-                {% endif %}
-              </p>
-            </div>
+      </div>
 
-          </div>
+    </a>
 
-        </a>
-      {% empty %}
-        <p>No posts yet.</p>
-      {% endfor %}
+  {% empty %}
+    <p>No posts found.</p>
+  {% endfor %}
 
-    </div>
+</div>
 
-    <!-- PAGINATION -->
-    {% if page_obj.paginator.num_pages > 1 %}
-    <div class="blog-pagination">
 
-      {% if page_obj.has_previous %}
-        <a href="?page={{ page_obj.previous_page_number }}{% if active_category %}&category={{ active_category.slug }}{% endif %}"
-           class="pagination-pill">
-           ← Previous
-        </a>
-      {% endif %}
+<!-- PAGINATION -->
+{% if page_obj.paginator.num_pages > 1 %}
+<div class="blog-pagination">
 
-      <span class="pagination-current">
-        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
-      </span>
+  {% if page_obj.has_previous %}
+    <a href="?page={{ page_obj.previous_page_number }}{% if active_category %}&category={{ active_category.slug }}{% endif %}{% if query %}&q={{ query }}{% endif %}"
+       class="pagination-pill">
+       ← Previous
+    </a>
+  {% endif %}
 
-      {% if page_obj.has_next %}
-        <a href="?page={{ page_obj.next_page_number }}{% if active_category %}&category={{ active_category.slug }}{% endif %}"
-           class="pagination-pill">
-           Next →
-        </a>
-      {% endif %}
+  <span class="pagination-current">
+    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+  </span>
 
-    </div>
-    {% endif %}
+  {% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number }}{% if active_category %}&category={{ active_category.slug }}{% endif %}{% if query %}&q={{ query }}{% endif %}"
+       class="pagination-pill">
+       Next →
+    </a>
+  {% endif %}
+
+</div>
+{% endif %}
+
 
   </div>
 </section>

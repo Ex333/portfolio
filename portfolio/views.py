@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.core.mail import send_mail
 from django.conf import settings
 from django.core.paginator import Paginator
+from django.db.models import Q
 from .forms import ContactForm
 from .models import (
     Project,
@@ -131,7 +132,9 @@ def privacy_policy(request):
 # ==========================
 
 def blog(request):
+
     category_slug = request.GET.get("category")
+    query = request.GET.get("q")
 
     categories = BlogCategory.objects.all()
 
@@ -160,6 +163,14 @@ def blog(request):
         )
         posts = posts.filter(category=active_category)
 
+    # 🔎 SEARCH (TITLE + CONTENT + CATEGORY)
+    if query:
+        posts = posts.filter(
+            Q(title__icontains=query) |
+            Q(content__icontains=query) |
+            Q(category__name__icontains=query)
+        )
+
     paginator = Paginator(posts, 9)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
@@ -168,6 +179,7 @@ def blog(request):
         "page_obj": page_obj,
         "categories": categories,
         "active_category": active_category,
+        "query": query
     })
 
 

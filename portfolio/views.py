@@ -14,6 +14,7 @@ from .models import (
     HomePage,
 )
 
+
 # ==========================
 # BASIC PAGES
 # ==========================

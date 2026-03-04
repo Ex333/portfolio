@@ -1,42 +1,42 @@
 /* ==============================
-   RESET
+RESET
 ================================ */
 *,
 *::before,
 *::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+margin: 0;
+padding: 0;
+box-sizing: border-box;
 }
 
 /* ==============================
-   ROOT
+ROOT
 ================================ */
-:root {
-  --color-text: #111;
-  --color-muted: #6b7280;
-  --color-border: #e5e7eb;
-  --color-bg: #ffffff;
-  --color-soft: #f9fafb;
+{
+--color-text: #111;
+--color-muted: #6b7280;
+--color-border: #e5e7eb;
+--color-bg: #ffffff;
+--color-soft: #f9fafb;
 
-  --radius-xl: 28px;
-  --radius-lg: 20px;
-  --radius-md: 14px;
+--radius-xl: 28px;
+--radius-lg: 20px;
+--radius-md: 14px;
 
-  --shadow-sm: 0 8px 20px rgba(0,0,0,0.06);
-  --shadow-md: 0 20px 50px rgba(0,0,0,0.12);
-  --shadow-lg: 0 30px 70px rgba(0,0,0,0.18);
+--shadow-sm: 0 8px 20px rgba(0,0,0,0.06);
+--shadow-md: 0 20px 50px rgba(0,0,0,0.12);
+--shadow-lg: 0 30px 70px rgba(0,0,0,0.18);
 }
 
 /* ==============================
-   BASE
+BASE
 ================================ */
 body {
-  background: var(--color-bg);
-  color: var(--color-text);
-  font-family: "Inter", system-ui, -apple-system, sans-serif;
-  line-height: 1.7;
-  -webkit-font-smoothing: antialiased;
+background: var(--color-bg);
+color: var(--color-text);
+font-family: "Inter", system-ui, -apple-system, sans-serif;
+line-height: 1.7;
+-webkit-font-smoothing: antialiased;
 }
 
 /* ==============================
@@ -83,45 +83,56 @@ p {
   box-shadow: var(--shadow-lg);
 }
 
-/* ==============================
-   NAVBAR – FIXED (CENTER MENU + RIGHT ICONS)
-================================ */
+/* NAVBAR */
+.navbar{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:18px 32px;
+border-bottom:1px solid var(--color-border);
+background:#fff;
+position:relative;
+z-index:1000;
+}
 
-.navbar {
-  position: relative;
+/* LEFT SIDE */
+.navbar-left {
   display: flex;
-  align-items: center;        /* 🔥 idealne wyrównanie pionowe */
-  padding: 20px 64px;         /* 🔥 lekko ciaśniej */
-  border-bottom: 1px solid var(--color-border);
-  background: #fff;
+  align-items: center;
+  gap: 28px;
 }
 
 /* LOGO */
 .logo {
-  font-size: 20px;
-  font-weight: 600;
-  z-index: 2;
   display: flex;
-  align-items: center;        /* 🔥 wyrównanie tekstu logo */
-  line-height: 1;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  color: inherit;
+  font-size: 18px;
 }
 
-/* CENTER MENU (ABSOLUTE – poprawione) */
+.logo img {
+    height: 130px;
+    margin-top: -15px;
+    margin-bottom: -15px;
+}
+
+/* CENTER MENU */
 .nav {
   position: absolute;
   left: 50%;
-  transform: translateX(-50%);
+  top: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   gap: 40px;
-  align-items: center;
-  top: 50%;                 /* 🔥 wyśrodkowanie pionowe */
-  transform: translate(-50%, -50%);
 }
 
 .nav a {
   text-decoration: none;
   color: var(--color-text);
-  font-size: 18px;          /* większy font */
+  font-size: 17px;
   font-weight: 600;
   line-height: 1;
   transition: opacity .2s ease;
@@ -135,7 +146,7 @@ p {
 .navbar-right {
   margin-left: auto;
   display: flex;
-  align-items: center;        /* 🔥 ikony w tej samej osi */
+  align-items: center;
   gap: 20px;
 }
 
@@ -145,8 +156,8 @@ p {
 }
 
 .navbar-right img {
-  width: 24px;                /* 🔥 minimalnie większe */
-  height: 24px;
+  width: 22px;
+  height: 22px;
   opacity: 0.85;
   transition: opacity .2s ease, transform .2s ease;
 }
@@ -804,4 +815,56 @@ footer {
 .back-btn:hover {
   transform: translateY(-3px);
   box-shadow: var(--shadow-lg);
+}
+
+/* HAMBURGER */
+
+.hamburger{
+display:none;
+flex-direction:column;
+gap:5px;
+background:none;
+border:none;
+cursor:pointer;
+}
+
+.hamburger span{
+width:24px;
+height:2px;
+background:black;
+display:block;
+transition:0.3s;
+}
+
+/* MOBILE NAV */
+
+@media (max-width:900px){
+
+.nav{
+position:fixed;
+top:70px;
+left:0;
+width:100%;
+background:white;
+
+display:none;
+flex-direction:column;
+align-items:center;
+
+gap:24px;
+padding:40px 0;
+
+border-bottom:1px solid #eee;
+
+z-index:999;
+}
+
+.nav a{
+font-size:20px;
+}
+
+.nav.active{
+display:flex;
+}
+
 }

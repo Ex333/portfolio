@@ -28,7 +28,7 @@
 
       {% if post.content %}
         <div class="blog-text">
-          {{ post.content|linebreaks }}
+          {{ post.content|safe }}
         </div>
       {% endif %}
 
@@ -36,7 +36,7 @@
 
         {% if block.text %}
           <div class="blog-text">
-            {{ block.text|linebreaks }}
+            {{ block.text|safe }}
           </div>
         {% endif %}
 

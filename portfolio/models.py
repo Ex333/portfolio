@@ -2,6 +2,7 @@ from django.db import models
 from PIL import Image
 from io import BytesIO
 from django.core.files.base import ContentFile
+from ckeditor.fields import RichTextField
 import os
 
 
@@ -177,7 +178,7 @@ class BlogPost(models.Model):
         help_text="Main blog cover image"
     )
 
-    content = models.TextField(blank=True)
+    content = RichTextField()
 
     is_published = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True, db_index=True)
@@ -234,7 +235,7 @@ class BlogBlock(models.Model):
         help_text="Order of this block inside the post"
     )
 
-    text = models.TextField(
+    text = RichTextField(
         blank=True,
         help_text="Text content for this block (optional)"
     )

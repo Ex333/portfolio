@@ -22,4 +22,9 @@ urlpatterns = [
     path("industrial/", views.industrial, name="industrial"),
     path("imprint/", views.imprint, name="imprint"),
     path("privacy-policy/", views.privacy_policy, name="privacy_policy"),
+    #     TEST  
+    # path("test403/", views.test403),
+    # path("test500/", views.test500),
+    # path("preview404/", views.preview404),
+    
 ]

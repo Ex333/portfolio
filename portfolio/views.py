@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.mail import send_mail
+from django.core.exceptions import PermissionDenied
 from django.conf import settings
 from django.core.paginator import Paginator
 from django.db.models import Q
@@ -195,3 +196,17 @@ def blog_detail(request, slug):
     return render(request, "blog_detail.html", {
         "post": post
     })
+
+# ===== TEST =====
+
+# Test 403
+# def test403(request):
+#     raise PermissionDenied
+
+# Test 500
+# def test500(request):
+#     x = 1 / 0
+
+# Test 404
+# def preview404(request):
+#     return render(request, "404.html")

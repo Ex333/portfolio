@@ -14,46 +14,69 @@
 
 <!-- HERO SECTION -->
 <section class="hero-wallpaper industrial">
-  <div class="hero-card">
 
-    {% if page %}
-      <h1>{{ page.title }}</h1>
 
-      {% if page.subtitle %}
-        <p>{{ page.subtitle }}</p>
+  <div class="hero-container">
+    <div class="hero-card">
+
+      {% if page %}
+
+        <h1 class="hero-title">
+          {{ page.title }}
+        </h1>
+
+        {% if page.subtitle %}
+          <div class="hero-description">
+            {{ page.subtitle|safe }}
+          </div>
+        {% endif %}
+
+      {% else %}
+
+        <h1 class="hero-title">
+          Industrial Experience
+        </h1>
+
+        <p class="hero-description">
+          Automation, maintenance and industrial systems.
+        </p>
+
       {% endif %}
 
-    {% else %}
-      <h1>Industrial Experience</h1>
-      <p>Automation, maintenance and industrial systems.</p>
-    {% endif %}
-
+    </div>
   </div>
+
 </section>
 
 
-<!-- INDUSTRIAL CONTENT BLOCKS -->
+<!-- INDUSTRIAL CONTENT -->
 {% if page %}
 <section class="industrial-section">
+
   <div class="industrial-container">
 
     {% for block in page.blocks.all %}
 
-      {% if block.image %}
-        <div class="industrial-image">
-          <img src="{{ block.image.url }}" alt="{{ block.alt_text|default:'' }}">
-        </div>
-      {% endif %}
+      <div class="industrial-block">
 
-      {% if block.text %}
-        <div class="industrial-text">
-          {{ block.text|safe }}
-        </div>
-      {% endif %}
+        {% if block.image %}
+          <div class="industrial-image">
+            <img src="{{ block.image.url }}" alt="{{ block.alt_text|default:'' }}">
+          </div>
+        {% endif %}
+
+        {% if block.text %}
+          <div class="industrial-text">
+            {{ block.text|safe }}
+          </div>
+        {% endif %}
+
+      </div>
 
     {% endfor %}
 
   </div>
+
 </section>
 {% endif %}
 

@@ -402,27 +402,35 @@ footer {
 ================================ */
 
 .industrial-section {
-  padding: 120px 0;
+  padding: 120px 20px;
+  background: #f7f7f7;
 }
 
 .industrial-container {
-  max-width: 900px;
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 0 24px;
 }
 
+
+/* BLOCK WRAPPER */
+
+.industrial-block {
+  margin-bottom: 100px;
+}
+
+
 /* IMAGE BLOCK */
+
 .industrial-image {
-  margin: 70px 0;
+  margin-bottom: 40px;
   display: flex;
   justify-content: center;
 }
 
 .industrial-image img {
   width: 100%;
-  max-width: 900px;
-  height: 460px;              /* 🔥 stała wysokość */
-  object-fit: cover;          /* 🔥 zawsze ten sam rozmiar */
+  height: 500px;
+  object-fit: cover;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
   transition: transform .35s ease, box-shadow .35s ease;
@@ -433,27 +441,39 @@ footer {
   box-shadow: var(--shadow-lg);
 }
 
+
 /* TEXT BLOCK */
+
 .industrial-text {
   max-width: 760px;
-  margin: 50px auto;
-  font-size: 17px;
+  margin: 0 auto;
+  font-size: 18px;
   line-height: 1.8;
   color: var(--color-text);
 }
 
 .industrial-text p {
-  margin-bottom: 18px;
+  margin-bottom: 20px;
 }
 
-/* Optional subtle divider between blocks */
-.industrial-text + .industrial-image,
-.industrial-image + .industrial-text {
-  margin-top: 80px;
+
+/* HEADINGS INSIDE TEXT */
+
+.industrial-text h2,
+.industrial-text h3 {
+  margin-top: 40px;
+  margin-bottom: 16px;
+  font-weight: 600;
 }
+
 
 /* RESPONSIVE */
+
 @media (max-width: 768px) {
+
+  .industrial-section {
+    padding: 80px 20px;
+  }
 
   .industrial-image img {
     height: 280px;
@@ -464,14 +484,45 @@ footer {
   }
 
 }
-
-.hero-wallpaper.about .hero-card p {
-    max-width: 650px;
-    margin: 24px auto 0;
-    line-height: 1.7;
-    font-size: 17px;
+.hero-wallpaper {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  padding: 140px 20px 120px;
 }
 
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.75);
+}
+
+.hero-container {
+  position: relative;
+  z-index: 2;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.hero-title {
+  font-size: 52px;
+  margin-bottom: 24px;
+}
+
+.hero-description {
+  max-width: 720px;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.hero-description h3 {
+  font-size: 26px;
+  margin-bottom: 14px;
+}
+
+.hero-description p {
+  margin-bottom: 14px;
+}
 /* ==============================
    ABOUT HERO PREMIUM
 ================================ */

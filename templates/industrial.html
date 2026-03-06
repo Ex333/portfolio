@@ -47,7 +47,7 @@
 
       {% if block.text %}
         <div class="industrial-text">
-          {{ block.text|linebreaks }}
+          {{ block.text|safe }}
         </div>
       {% endif %}
 

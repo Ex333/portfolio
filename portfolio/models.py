@@ -1,38 +1,40 @@
 from django.db import models
 from PIL import Image
-from io import BytesIO
-from django.core.files.base import ContentFile
-from ckeditor.fields import RichTextField
 import os
+from django_ckeditor_5.fields import CKEditor5Field
 
 
 # ==========================
-# SITE PROFILE (HOME PAGE)
+# SITE PROFILE
 # ==========================
 
 class SiteProfile(models.Model):
     name = models.CharField(max_length=100, default="Mateusz")
+
     hero_title = models.CharField(
         max_length=200,
         default="Hi, I’m Mateusz"
     )
-    hero_description = models.TextField(
-        default="I build web applications, learn Django and create my developer portfolio."
+
+    hero_description = CKEditor5Field(
+        'Hero description',
+        config_name='default'
     )
 
     hero_image = models.ImageField(
         upload_to="profile/",
         blank=True,
-        null=True,
-        help_text="Profile photo shown on home page"
+        null=True
     )
 
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return "Site Profile"
+
+
 # ==========================
-# HOME PAGE (DYNAMIC BLOCKS)
+# HOME PAGE
 # ==========================
 
 class HomePage(models.Model):
@@ -51,9 +53,10 @@ class HomeBlock(models.Model):
 
     order = models.PositiveIntegerField(default=0)
 
-    text = models.TextField(
-        blank=True,
-        help_text="Optional text content"
+    text = CKEditor5Field(
+        'Text',
+        config_name='default',
+        blank=True
     )
 
     image = models.ImageField(
@@ -68,17 +71,23 @@ class HomeBlock(models.Model):
         ordering = ["order"]
 
     def __str__(self):
-        return f"Home Block {self.order} for {self.page.title}"
+        return f"Home Block {self.order}"
+
+
+# ==========================
+# PROJECTS
+# ==========================
 
 class Project(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=220, unique=True)
 
-    short_description = models.CharField(
-        max_length=300,
-        help_text="Krótki opis widoczny na liście projektów"
+    short_description = models.CharField(max_length=300)
+
+    description = CKEditor5Field(
+        'Description',
+        config_name='default'
     )
-    description = models.TextField()
 
     image = models.ImageField(
         upload_to="projects/",
@@ -86,11 +95,7 @@ class Project(models.Model):
         null=True
     )
 
-    url = models.URLField(
-        blank=True,
-        null=True,
-        help_text="Link do live demo lub repozytorium"
-    )
+    url = models.URLField(blank=True, null=True)
 
     is_published = models.BooleanField(default=True)
     order = models.PositiveIntegerField(default=0)
@@ -105,6 +110,10 @@ class Project(models.Model):
         return self.title
 
 
+# ==========================
+# SKILLS
+# ==========================
+
 class Skill(models.Model):
     CATEGORY_CHOICES = [
         ("frontend", "Frontend"),
@@ -114,13 +123,20 @@ class Skill(models.Model):
         ("other", "Other"),
     ]
 
-    name = models.CharField(max_length=64, unique=True, blank=False)
+    name = models.CharField(max_length=64, unique=True)
+
     category = models.CharField(
         max_length=40,
         choices=CATEGORY_CHOICES,
         default="other"
     )
-    description = models.TextField(blank=True)
+
+    description = CKEditor5Field(
+        'Description',
+        config_name='default',
+        blank=True
+    )
+
     photo = models.ImageField(upload_to="skills/", blank=True, null=True)
 
     def __str__(self):
@@ -135,12 +151,21 @@ class SkillRequirement(models.Model):
     ]
 
     skill = models.ForeignKey(Skill, on_delete=models.CASCADE)
-    level = models.CharField(max_length=20, choices=LEVEL_CHOICES)
-    description = models.TextField(blank=True)
+
+    level = models.CharField(
+        max_length=20,
+        choices=LEVEL_CHOICES
+    )
+
+    description = CKEditor5Field(
+        'Description',
+        config_name='default',
+        blank=True
+    )
 
 
 # ==========================
-# BLOG CATEGORIES
+# BLOG CATEGORY
 # ==========================
 
 class BlogCategory(models.Model):
@@ -156,7 +181,7 @@ class BlogCategory(models.Model):
 
 
 # ==========================
-# BLOG
+# BLOG POST
 # ==========================
 
 class BlogPost(models.Model):
@@ -174,14 +199,17 @@ class BlogPost(models.Model):
     cover_image = models.ImageField(
         upload_to="blog/covers/",
         blank=True,
-        null=True,
-        help_text="Main blog cover image"
+        null=True
     )
 
-    content = RichTextField()
+    content = CKEditor5Field(
+        'Content',
+        config_name='default'
+    )
 
     is_published = models.BooleanField(default=True)
-    created_at = models.DateTimeField(auto_now_add=True, db_index=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
@@ -193,18 +221,16 @@ class BlogPost(models.Model):
         if self.cover_image:
             img = Image.open(self.cover_image.path)
 
-            # 🔥 Retina ready width
             max_width = 1600
 
             if img.width > max_width:
                 ratio = max_width / float(img.width)
-                new_height = int(float(img.height) * ratio)
+                new_height = int(img.height * ratio)
+
                 img = img.resize((max_width, new_height), Image.LANCZOS)
 
-            # Convert to RGB (important for PNG uploads)
             img = img.convert("RGB")
 
-            # Compress
             img.save(
                 self.cover_image.path,
                 format="JPEG",
@@ -216,12 +242,15 @@ class BlogPost(models.Model):
         if self.cover_image:
             if os.path.isfile(self.cover_image.path):
                 os.remove(self.cover_image.path)
+
         super().delete(*args, **kwargs)
 
     def __str__(self):
         return self.title
+
+
 # ==========================
-# CONTENT BLOCKS
+# BLOG BLOCKS
 # ==========================
 
 class BlogBlock(models.Model):
@@ -231,26 +260,21 @@ class BlogBlock(models.Model):
         on_delete=models.CASCADE
     )
 
-    order = models.PositiveIntegerField(
-        help_text="Order of this block inside the post"
-    )
+    order = models.PositiveIntegerField()
 
-    text = RichTextField(
-        blank=True,
-        help_text="Text content for this block (optional)"
+    text = CKEditor5Field(
+        'Text',
+        config_name='default',
+        blank=True
     )
 
     image = models.ImageField(
         upload_to="blog/blocks/",
         blank=True,
-        null=True,
-        help_text="Image for this block (optional)"
+        null=True
     )
 
-    alt_text = models.CharField(
-        max_length=200,
-        blank=True
-    )
+    alt_text = models.CharField(max_length=200, blank=True)
 
     class Meta:
         ordering = ["order"]
@@ -258,13 +282,19 @@ class BlogBlock(models.Model):
     def __str__(self):
         return f"Block {self.order} for {self.post.title}"
 
+
 # ==========================
 # INDUSTRIAL PAGE
 # ==========================
 
 class IndustrialPage(models.Model):
     title = models.CharField(max_length=200, default="Industrial Experience")
-    subtitle = models.TextField(blank=True)
+
+    subtitle = CKEditor5Field(
+        'Subtitle',
+        config_name='default',
+        blank=True
+    )
 
     def __str__(self):
         return self.title
@@ -279,7 +309,12 @@ class IndustrialBlock(models.Model):
 
     order = models.PositiveIntegerField()
 
-    text = models.TextField(blank=True)
+    text = CKEditor5Field(
+        'Text',
+        config_name='default',
+        blank=True
+    )
+
     image = models.ImageField(
         upload_to="industrial/blocks/",
         blank=True,
@@ -291,9 +326,6 @@ class IndustrialBlock(models.Model):
     class Meta:
         ordering = ["order"]
 
-    def __str__(self):
-        return f"Block {self.order} for {self.page.title}"
-
 
 # ==========================
 # ABOUT PAGE
@@ -301,7 +333,12 @@ class IndustrialBlock(models.Model):
 
 class AboutPage(models.Model):
     title = models.CharField(max_length=200, default="About Me")
-    subtitle = models.TextField(blank=True)
+
+    subtitle = CKEditor5Field(
+        'Subtitle',
+        config_name='default',
+        blank=True
+    )
 
     def __str__(self):
         return self.title
@@ -316,7 +353,11 @@ class AboutBlock(models.Model):
 
     order = models.PositiveIntegerField()
 
-    text = models.TextField(blank=True)
+    text = CKEditor5Field(
+        'Text',
+        config_name='default',
+        blank=True
+    )
 
     image = models.ImageField(
         upload_to="about/blocks/",
@@ -328,6 +369,3 @@ class AboutBlock(models.Model):
 
     class Meta:
         ordering = ["order"]
-
-    def __str__(self):
-        return f"Block {self.order} for {self.page.title}"

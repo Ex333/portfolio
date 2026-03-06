@@ -69,9 +69,9 @@
         </div>
       {% endif %}
 
-      {% if block.text %}
+      {% if block.text|safe %}
         <div class="industrial-text">
-          {{ block.text|linebreaks }}
+          {{ block.text|safe}}
         </div>
       {% endif %}
 

@@ -22,7 +22,7 @@
       <h1>{{ page.title }}</h1>
 
       {% if page.subtitle %}
-        <p class="about-subtitle">{{ page.subtitle }}</p>
+        <p class="about-subtitle">{{ page.subtitle|safe }}</p>
       {% endif %}
     {% else %}
       <h1>About Me</h1>

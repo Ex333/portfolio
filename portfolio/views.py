@@ -4,6 +4,7 @@ from django.core.exceptions import PermissionDenied
 from django.conf import settings
 from django.core.paginator import Paginator
 from django.db.models import Q
+
 from .forms import ContactForm
 from .models import (
     Project,
@@ -14,6 +15,7 @@ from .models import (
     AboutPage,
     AboutBlock,
     HomePage,
+    Skill
 )
 
 
@@ -22,16 +24,26 @@ from .models import (
 # ==========================
 
 def home(request):
+
     profile = SiteProfile.objects.first()
     page = HomePage.objects.first()
 
+    skills = Skill.objects.all().order_by("category", "name")
+
+    categories = {}
+
+    for skill in skills:
+        categories.setdefault(skill.category, []).append(skill)
+
     return render(request, "home.html", {
         "profile": profile,
-        "page": page
+        "page": page,
+        "skill_categories": categories
     })
 
 
 def projects(request):
+
     projects_list = (
         Project.objects
         .filter(is_published=True)
@@ -50,8 +62,19 @@ def projects(request):
 
 
 def about(request):
+
     page = AboutPage.objects.first()
+
     return render(request, "about.html", {
+        "page": page
+    })
+
+
+def industrial(request):
+
+    page = IndustrialPage.objects.first()
+
+    return render(request, "industrial.html", {
         "page": page
     })
 
@@ -61,10 +84,13 @@ def about(request):
 # ==========================
 
 def contact(request):
+
     if request.method == "POST":
+
         form = ContactForm(request.POST)
 
         if form.is_valid():
+
             name = form.cleaned_data["name"]
             email = form.cleaned_data["email"]
             message = form.cleaned_data["message"]
@@ -86,6 +112,7 @@ Message:
                 recipient_list=[settings.DEFAULT_FROM_EMAIL],
             )
 
+            # Auto reply
             send_mail(
                 subject="Thank you for contacting me!",
                 message=(
@@ -110,26 +137,26 @@ Message:
 
 
 def contact_thank_you(request):
+
     return render(request, "contact_thank_you.html")
 
 
-def industrial(request):
-    page = IndustrialPage.objects.first()
-    return render(request, "industrial.html", {
-        "page": page
-    })
-
+# ==========================
+# LEGAL
+# ==========================
 
 def imprint(request):
+
     return render(request, "imprint.html")
 
 
 def privacy_policy(request):
+
     return render(request, "privacy_policy.html")
 
 
 # ==========================
-# BLOG (PRODUCTION READY 🔥)
+# BLOG
 # ==========================
 
 def blog(request):
@@ -157,6 +184,7 @@ def blog(request):
 
     active_category = None
 
+    # CATEGORY FILTER
     if category_slug:
         active_category = get_object_or_404(
             BlogCategory,
@@ -164,7 +192,7 @@ def blog(request):
         )
         posts = posts.filter(category=active_category)
 
-    # 🔎 SEARCH (TITLE + CONTENT + CATEGORY)
+    # SEARCH
     if query:
         posts = posts.filter(
             Q(title__icontains=query) |
@@ -185,6 +213,7 @@ def blog(request):
 
 
 def blog_detail(request, slug):
+
     post = get_object_or_404(
         BlogPost.objects
         .select_related("category")
@@ -197,16 +226,16 @@ def blog_detail(request, slug):
         "post": post
     })
 
-# ===== TEST =====
 
-# Test 403
+# ==========================
+# TEST ERRORS
+# ==========================
+
 # def test403(request):
 #     raise PermissionDenied
 
-# Test 500
 # def test500(request):
 #     x = 1 / 0
 
-# Test 404
 # def preview404(request):
 #     return render(request, "404.html")

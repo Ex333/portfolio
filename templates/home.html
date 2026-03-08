@@ -13,47 +13,99 @@
 
   <div class="hero-home-container">
 
+    <div class="hero-left">
 
-<!-- LEFT SIDE -->
-<div class="hero-left">
+      <h1>
+        {% if profile %}
+          {{ profile.hero_title }}
+        {% else %}
+          Hi, I'm Mateusz
+        {% endif %}
+      </h1>
 
-  <h1>
-    {% if profile %}
-      {{ profile.hero_title }}
-    {% else %}
-      Hi, I’m Mateusz
-    {% endif %}
-  </h1>
+      <p>
+        {% if profile %}
+          {{ profile.hero_description|safe }}
+        {% else %}
+          I build web applications, learn Django and create my developer portfolio.
+        {% endif %}
+      </p>
 
-  <p>
-    {% if profile %}
-      {{ profile.hero_description|safe }}
-    {% else %}
-      I build web applications, learn Django and create my developer portfolio.
-    {% endif %}
-  </p>
+      <a href="{% url 'projects' %}" class="btn">
+        View projects
+      </a>
 
-  <a href="{% url 'projects' %}" class="btn">
-    View projects
-  </a>
+    </div>
 
-</div>
+    <div class="hero-right">
 
-<!-- RIGHT SIDE (PHOTO) -->
-<div class="hero-right">
+      {% if profile and profile.hero_image %}
+        <img src="{{ profile.hero_image.url }}" alt="Mateusz">
+      {% else %}
+        <img src="{% static 'images/profile-placeholder.jpg' %}" alt="Mateusz">
+      {% endif %}
 
-  {% if profile and profile.hero_image %}
-    <img src="{{ profile.hero_image.url }}" alt="Mateusz">
-  {% else %}
-    <img src="{% static 'images/profile-placeholder.jpg' %}" alt="Mateusz">
-  {% endif %}
-
-</div>
-```
+    </div>
 
   </div>
 
 </section>
+
+
+<!-- ==============================
+     TECH STACK
+================================ -->
+
+<section class="skills-section">
+
+  <div class="skills-wrapper">
+
+    <h2 class="skills-title">Tech Stack</h2>
+
+    <p class="skills-subtitle">
+      Technologies I work with in my projects
+    </p>
+
+    {% for category, skills in skill_categories.items %}
+
+      <h3 class="skills-category">
+        {{ category }}
+      </h3>
+
+      <div class="skills-grid">
+
+        {% for skill in skills %}
+
+          <div class="skill-card">
+
+            {% if skill.photo %}
+              <div class="skill-icon">
+                <img src="{{ skill.photo.url }}" alt="{{ skill.name }}">
+              </div>
+            {% endif %}
+
+            <h4 class="skill-name">
+              {{ skill.name }}
+            </h4>
+
+            {% if skill.description %}
+              <div class="skill-description">
+                {{ skill.description|safe }}
+              </div>
+            {% endif %}
+
+          </div>
+
+        {% endfor %}
+
+      </div>
+
+    {% endfor %}
+
+  </div>
+
+</section>
+
 
 <!-- ==============================
      DYNAMIC HOME BLOCKS
@@ -61,33 +113,36 @@
 
 {% if page %}
 
-<section class="industrial-section">
-  <div class="industrial-container">
+<section class="home-blocks-section">
 
-```
-{% for block in page.blocks.all %}
+  <div class="home-blocks-container">
 
-  {% if block.image %}
-    <div class="industrial-image">
-      <img src="{{ block.image.url }}" alt="{{ block.alt_text|default:'' }}">
-    </div>
-  {% endif %}
+    {% for block in page.blocks.all %}
 
-  {% if block.text %}
-    <div class="industrial-text ck-content">
-      {{ block.text|safe }}
-    </div>
-  {% endif %}
+      {% if block.image %}
+        <div class="home-block-image">
+          <img src="{{ block.image.url }}" alt="{{ block.alt_text|default:'' }}">
+        </div>
+      {% endif %}
 
-{% empty %}
-  <div class="industrial-text" style="text-align:center;">
-    <p>Content coming soon.</p>
+      {% if block.text %}
+        <div class="home-block-text ck-content">
+          {{ block.text|safe }}
+        </div>
+      {% endif %}
+
+    {% empty %}
+
+      <div class="home-block-text" style="text-align:center;">
+        <p>Content coming soon.</p>
+      </div>
+
+    {% endfor %}
+
   </div>
-{% endfor %}
-```
 
-  </div>
 </section>
+
 {% endif %}
 
 {% endblock %}

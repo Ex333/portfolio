@@ -1081,3 +1081,30 @@ transform: translateY(-2px);
     color:#666;
     line-height:1.6;
 }
+/* ==============================
+   BLOG ARTICLE IMAGES
+================================ */
+
+.blog-container{
+    max-width:820px;
+    margin:auto;
+    padding:0 24px;
+}
+.blog-article img{
+  max-width:100% !important;
+  width:100% !important;
+  height:auto !important;
+  display:block;
+  margin:40px auto;
+  border-radius:14px;
+}
+
+.blog-image-block{
+    width:100%;
+}
+
+.blog-image-block img{
+    width:100%;
+    height:auto;
+    object-fit:contain;
+}

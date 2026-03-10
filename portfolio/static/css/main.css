@@ -213,6 +213,17 @@ z-index:1000;
   box-shadow: var(--shadow-lg);
 }
 
+.home-blocks-container {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.home-block-text {
+    margin: 40px auto;
+    font-size: 18px;
+    line-height: 1.6;
+}
 /* ==============================
    HERO WALLPAPER (SUBPAGES ONLY)
 ================================ */

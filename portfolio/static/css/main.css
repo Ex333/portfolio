@@ -363,6 +363,29 @@ z-index:1000;
     font-size: 2rem;
   }
 }
+/* tablet */
+
+@media (max-width: 1000px) {
+
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+/* mobile */
+
+@media (max-width: 700px) {
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-card img {
+    height: 240px;
+  }
+
+}
 /* ==============================
    FOOTER
 ================================ */
@@ -574,17 +597,22 @@ footer {
 /* ==============================
    PROJECTS GRID
 ================================ */
+
 .projects-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
+  width: 100%;
 }
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0,1fr));
   gap: 40px;
+  width: 100%;
 }
+
+/* PROJECT CARD */
 
 .project-card {
   display: block;
@@ -593,6 +621,7 @@ footer {
   border-radius: 20px;
   text-decoration: none;
   color: white;
+  width: 100%;
   box-shadow: 0 20px 50px rgba(0,0,0,0.12);
   transition: transform .3s ease, box-shadow .3s ease;
   cursor: pointer;
@@ -602,8 +631,11 @@ footer {
   width: 100%;
   height: 320px;
   object-fit: cover;
+  display:block;
   transition: transform .5s ease;
 }
+
+/* HOVER */
 
 .project-card:hover {
   transform: translateY(-8px);
@@ -613,6 +645,8 @@ footer {
 .project-card:hover img {
   transform: scale(1.08);
 }
+
+/* OVERLAY */
 
 .project-overlay {
   position: absolute;
@@ -632,6 +666,42 @@ footer {
   opacity: 0.9;
 }
 
+/* ==============================
+   PROJECTS RESPONSIVE
+================================ */
+
+/* tablet */
+
+@media (max-width:1000px){
+
+.projects-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+/* mobile */
+
+@media (max-width:768px){
+
+.projects-container{
+padding:0 16px;
+}
+
+.projects-grid{
+grid-template-columns:1fr;
+gap:24px;
+}
+
+.project-card{
+width:100%;
+}
+
+.project-card img{
+height:220px;
+}
+
+}
 /* ==============================
    THANK YOU PAGE
 ================================ */

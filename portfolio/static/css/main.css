@@ -920,6 +920,10 @@ transition:0.3s;
 
 @media (max-width:900px){
 
+.hamburger{
+display:flex;
+}
+
 .nav{
 position:fixed;
 top:70px;

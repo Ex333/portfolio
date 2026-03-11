@@ -913,7 +913,15 @@ transition:0.3s;
 
 /* MOBILE NAV */
 
-@media (max-width:900px){
+@media (max-width:768px){
+
+.featured-project{
+  width: 100%;
+  max-width: 100%;
+} 
+.project-card{
+  width: 100%;
+}
 
 .hamburger{
 display:flex;

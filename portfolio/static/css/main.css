@@ -178,7 +178,7 @@ z-index:1000;
   margin: 0 auto;
   padding: 0 64px;
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 420px;
   gap: 80px;
   align-items: center;
 }

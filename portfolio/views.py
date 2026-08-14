@@ -1,3 +1,7 @@
+import json
+import urllib.parse
+import urllib.request
+
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.mail import send_mail
 from django.core.exceptions import PermissionDenied
@@ -91,19 +95,62 @@ def contact(request):
 
         if form.is_valid():
 
+            turnstile_token = request.POST.get("cf-turnstile-response")
+
+            if not turnstile_token:
+                return render(request, "contact.html", {
+                    "form": form,
+                    "turnstile_site_key": settings.TURNSTILE_SITE_KEY,
+                    "turnstile_error": "Please complete the verification."
+                })
+
+            verification_data = urllib.parse.urlencode({
+                "secret": settings.TURNSTILE_SECRET_KEY,
+                "response": turnstile_token,
+                "remoteip": request.META.get("REMOTE_ADDR"),
+            }).encode("utf-8")
+
+            verification_request = urllib.request.Request(
+                "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+                data=verification_data,
+                method="POST"
+            )
+
+            try:
+                with urllib.request.urlopen(
+                    verification_request,
+                    timeout=10
+                ) as response:
+
+                    verification_result = json.loads(
+                        response.read().decode("utf-8")
+                    )
+
+            except Exception:
+                return render(request, "contact.html", {
+                    "form": form,
+                    "turnstile_site_key": settings.TURNSTILE_SITE_KEY,
+                    "turnstile_error": "Verification failed. Please try again."
+                })
+
+            if not verification_result.get("success"):
+                return render(request, "contact.html", {
+                    "form": form,
+                    "turnstile_site_key": settings.TURNSTILE_SITE_KEY,
+                    "turnstile_error": "Verification failed. Please try again."
+                })
+
             name = form.cleaned_data["name"]
             email = form.cleaned_data["email"]
             message = form.cleaned_data["message"]
 
-            full_message = f"""
-New message from portfolio:
-
-Name: {name}
-Email: {email}
-
-Message:
-{message}
-"""
+            full_message = (
+                "New message from portfolio:\n\n"
+                f"Name: {name}\n"
+                f"Email: {email}\n\n"
+                "Message:\n"
+                f"{message}"
+            )
 
             send_mail(
                 subject="New Contact Form Message",
@@ -112,7 +159,6 @@ Message:
                 recipient_list=[settings.DEFAULT_FROM_EMAIL],
             )
 
-            # Auto reply
             send_mail(
                 subject="Thank you for contacting me!",
                 message=(
@@ -132,7 +178,8 @@ Message:
         form = ContactForm()
 
     return render(request, "contact.html", {
-        "form": form
+        "form": form,
+        "turnstile_site_key": settings.TURNSTILE_SITE_KEY,
     })
 
 
@@ -184,7 +231,6 @@ def blog(request):
 
     active_category = None
 
-    # CATEGORY FILTER
     if category_slug:
         active_category = get_object_or_404(
             BlogCategory,
@@ -192,7 +238,6 @@ def blog(request):
         )
         posts = posts.filter(category=active_category)
 
-    # SEARCH
     if query:
         posts = posts.filter(
             Q(title__icontains=query) |

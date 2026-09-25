@@ -1,11 +1,5 @@
 /* =========================================================
-   BLOG PAGE
-   Premium card layout
-========================================================= */
-
-
-/* =========================================================
-   CONTAINER
+   BLOG
 ========================================================= */
 
 .blog-container {
@@ -17,11 +11,62 @@
 
 
 /* =========================================================
+   BLOG HEADER
+========================================================= */
+
+.blog-header {
+    padding: 72px 0 34px;
+    text-align: center;
+}
+
+.blog-header-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.blog-eyebrow {
+    margin-bottom: 14px;
+
+    color: #1683d8;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.blog-header h1 {
+    margin: 0;
+
+    color: #111;
+
+    font-size: 48px;
+    font-weight: 700;
+
+    line-height: 1.15;
+    letter-spacing: -1.5px;
+}
+
+.blog-header p {
+    max-width: 650px;
+
+    margin: 18px auto 0;
+
+    color: #6b7280;
+
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
    SEARCH
 ========================================================= */
 
 .blog-search-section {
-    padding-top: 42px;
+    padding-top: 24px;
     margin-bottom: 34px;
 }
 
@@ -32,6 +77,7 @@
 
 .blog-search form {
     position: relative;
+
     width: 420px;
     max-width: 100%;
 }
@@ -46,6 +92,7 @@
     border-radius: 999px;
 
     background: #f5f5f5;
+
     color: #111;
 
     font-family: inherit;
@@ -54,9 +101,9 @@
     outline: none;
 
     transition:
-        background .25s ease,
-        border-color .25s ease,
-        box-shadow .25s ease;
+        background .2s ease,
+        border-color .2s ease,
+        box-shadow .2s ease;
 }
 
 .blog-search input::placeholder {
@@ -66,6 +113,7 @@
 .blog-search input:focus {
     background: #fff;
     border-color: #d1d5db;
+
     box-shadow: 0 8px 25px rgba(0,0,0,.07);
 }
 
@@ -76,9 +124,10 @@
     top: 5px;
 
     height: 38px;
+
     padding: 0 20px;
 
-    border: 0;
+    border: none;
     border-radius: 999px;
 
     background: #111;
@@ -90,9 +139,7 @@
 
     cursor: pointer;
 
-    transition:
-        transform .2s ease,
-        background .2s ease;
+    transition: .2s ease;
 }
 
 .blog-search button:hover {
@@ -102,11 +149,11 @@
 
 
 /* =========================================================
-   CATEGORY FILTER
+   CATEGORIES
 ========================================================= */
 
 .blog-filter {
-    margin-bottom: 56px;
+    margin-bottom: 52px;
 }
 
 .blog-categories {
@@ -122,13 +169,13 @@
     align-items: center;
     justify-content: center;
 
-    min-height: 42px;
+    height: 42px;
 
     padding: 0 20px;
 
     border-radius: 999px;
 
-    background: #f5f5f5;
+    background: #f4f4f4;
     color: #111;
 
     text-decoration: none;
@@ -139,12 +186,12 @@
     transition:
         background .2s ease,
         color .2s ease,
-        transform .2s ease,
-        box-shadow .2s ease;
+        transform .2s ease;
 }
 
 .blog-categories a:hover {
     background: #e9e9e9;
+
     transform: translateY(-1px);
 }
 
@@ -157,22 +204,23 @@
 
 
 /* =========================================================
-   BLOG GRID
+   GRID
 ========================================================= */
 
 .blog-grid {
     display: grid;
 
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
 
-    gap: 40px;
+    gap: 42px 32px;
 
     width: 100%;
 }
 
 
 /* =========================================================
-   BLOG CARD
+   CARD
 ========================================================= */
 
 .blog-card {
@@ -185,25 +233,23 @@
     overflow: hidden;
 
     box-shadow:
-        0 10px 30px rgba(0,0,0,.06);
+        0 8px 28px rgba(0,0,0,.055);
 
     transition:
         transform .3s ease,
         box-shadow .3s ease;
-
-    animation: blogCardIn .55s ease both;
 }
 
 .blog-card:hover {
-    transform: translateY(-7px);
+    transform: translateY(-6px);
 
     box-shadow:
-        0 25px 55px rgba(0,0,0,.12);
+        0 20px 45px rgba(0,0,0,.11);
 }
 
 
 /* =========================================================
-   CARD IMAGE
+   IMAGE
 ========================================================= */
 
 .blog-card-image {
@@ -211,7 +257,7 @@
 
     width: 100%;
 
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 3 / 2;
 
     overflow: hidden;
 
@@ -229,16 +275,16 @@
     object-fit: cover;
     object-position: center;
 
-    transition: transform .55s ease;
+    transition: transform .5s ease;
 }
 
 .blog-card:hover .blog-card-image img {
-    transform: scale(1.05);
+    transform: scale(1.045);
 }
 
 
 /* =========================================================
-   FALLBACK IMAGE
+   FALLBACK
 ========================================================= */
 
 .blog-fallback {
@@ -249,42 +295,43 @@
         linear-gradient(
             135deg,
             #111,
-            #292929
+            #252525
         );
 }
 
 
 /* =========================================================
-   CARD CONTENT
+   CONTENT
 ========================================================= */
 
 .blog-card-content {
-    padding: 24px 24px 26px;
+    padding: 22px 22px 24px;
+
+    display: flex;
+    flex-direction: column;
 }
 
 
 /* =========================================================
-   CATEGORY PILL
+   CATEGORY
 ========================================================= */
 
 .blog-card-categories {
-    display: flex;
-
-    margin-bottom: 14px;
+    margin-bottom: 12px;
 }
 
 .blog-category-pill {
     display: inline-flex;
     align-items: center;
 
-    padding: 5px 11px;
+    padding: 6px 11px;
 
     border-radius: 999px;
 
-    background: #eef6ff;
+    background: #eaf5ff;
     color: #1677c8;
 
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
 
     line-height: 1;
@@ -296,26 +343,28 @@
 ========================================================= */
 
 .blog-card-title {
-    margin: 0 0 12px;
+    margin: 0 0 11px;
 
-    font-size: 21px;
+    font-size: 20px;
     font-weight: 650;
 
     line-height: 1.35;
 
-    letter-spacing: -0.3px;
+    letter-spacing: -.3px;
 }
 
 .blog-card-title a {
-    color: #111;
+    color: #171717 !important;
 
-    text-decoration: none;
+    text-decoration: none !important;
+}
 
-    transition: color .2s ease;
+.blog-card-title a:visited {
+    color: #171717 !important;
 }
 
 .blog-card-title a:hover {
-    color: #1677c8;
+    color: #1683d8 !important;
 }
 
 
@@ -324,7 +373,7 @@
 ========================================================= */
 
 .blog-card-excerpt {
-    margin: 0 0 20px;
+    margin: 0 0 18px;
 
     color: #6b7280;
 
@@ -344,13 +393,22 @@
 ========================================================= */
 
 .blog-card-meta {
-    padding-top: 16px;
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+
+    padding-top: 15px;
 
     border-top: 1px solid #eeeeee;
 
     color: #888;
 
     font-size: 12px;
+}
+
+.meta-separator {
+    color: #bbb;
 }
 
 
@@ -364,39 +422,39 @@
 
     gap: 7px;
 
-    margin-top: 18px;
+    width: fit-content;
 
-    color: #1683d8;
+    margin-top: 17px;
 
-    text-decoration: none;
+    color: #1683d8 !important;
+
+    text-decoration: none !important;
 
     font-size: 13px;
     font-weight: 600;
+}
 
-    transition:
-        gap .2s ease,
-        color .2s ease;
+.blog-read-more:visited {
+    color: #1683d8 !important;
 }
 
 .blog-read-more span {
     font-size: 17px;
-    line-height: 1;
 
     transition: transform .2s ease;
 }
 
 .blog-read-more:hover {
-    color: #006bb6;
-    gap: 10px;
+    color: #006bb6 !important;
 }
 
 .blog-read-more:hover span {
-    transform: translateX(2px);
+    transform: translateX(3px);
 }
 
 
 /* =========================================================
-   EMPTY STATE
+   EMPTY
 ========================================================= */
 
 .blog-empty {
@@ -416,12 +474,13 @@
 
 .blog-pagination {
     display: flex;
+
     align-items: center;
     justify-content: center;
 
     gap: 18px;
 
-    margin: 60px 0 80px;
+    margin: 65px 0 80px;
 }
 
 .pagination-pill {
@@ -429,25 +488,24 @@
     align-items: center;
     justify-content: center;
 
-    padding: 10px 20px;
+    padding: 10px 21px;
 
     background: #111;
-    color: #fff;
+    color: #fff !important;
 
     border-radius: 999px;
 
-    text-decoration: none;
+    text-decoration: none !important;
 
     font-size: 13px;
     font-weight: 500;
 
-    transition:
-        transform .2s ease,
-        background .2s ease;
+    transition: .2s ease;
 }
 
 .pagination-pill:hover {
     background: #222;
+
     transform: translateY(-2px);
 }
 
@@ -455,54 +513,6 @@
     color: #777;
 
     font-size: 13px;
-}
-
-
-/* =========================================================
-   ANIMATION
-========================================================= */
-
-@keyframes blogCardIn {
-
-    from {
-        opacity: 0;
-        transform: translateY(18px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-}
-
-
-/* =========================================================
-   STAGGER
-========================================================= */
-
-.blog-card:nth-child(1) {
-    animation-delay: .03s;
-}
-
-.blog-card:nth-child(2) {
-    animation-delay: .08s;
-}
-
-.blog-card:nth-child(3) {
-    animation-delay: .13s;
-}
-
-.blog-card:nth-child(4) {
-    animation-delay: .18s;
-}
-
-.blog-card:nth-child(5) {
-    animation-delay: .23s;
-}
-
-.blog-card:nth-child(6) {
-    animation-delay: .28s;
 }
 
 
@@ -518,7 +528,8 @@
 
     .blog-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 28px;
+
+        gap: 30px;
     }
 
 }
@@ -534,12 +545,24 @@
         padding: 0 16px;
     }
 
+    .blog-header {
+        padding-top: 48px;
+    }
+
+    .blog-header h1 {
+        font-size: 36px;
+    }
+
+    .blog-header p {
+        font-size: 15px;
+    }
+
     .blog-search-section {
-        padding-top: 28px;
+        padding-top: 10px;
     }
 
     .blog-filter {
-        margin-bottom: 36px;
+        margin-bottom: 35px;
     }
 
     .blog-categories {
@@ -547,26 +570,21 @@
     }
 
     .blog-categories a {
-        min-height: 38px;
+        height: 38px;
+
         padding: 0 15px;
+
         font-size: 12px;
     }
 
     .blog-grid {
         grid-template-columns: 1fr;
-        gap: 24px;
+
+        gap: 26px;
     }
 
     .blog-card-content {
-        padding: 22px;
-    }
-
-    .blog-card-title {
-        font-size: 20px;
-    }
-
-    .blog-search form {
-        width: 100%;
+        padding: 20px;
     }
 
 }

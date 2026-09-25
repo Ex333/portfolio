@@ -1,47 +1,77 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}Blog{% endblock %}
+{% block title %}Blog | Mateusz Hałdaś{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/blog.css' %}">
+<link rel="stylesheet" href="{% static 'css/blog.css' %}?v=10">
 {% endblock %}
 
 {% block content %}
+
+<!-- =====================================================
+     BLOG HEADER
+===================================================== -->
+
+<section class="blog-header">
+
+    <div class="blog-container blog-header-inner">
+
+        <div class="blog-eyebrow">
+            TECHNICAL BLOG
+        </div>
+
+        <h1>
+            Linux, PostgreSQL & DevOps
+        </h1>
+
+        <p>
+            Practical guides, notes and hands-on experience
+            from real infrastructure and software projects.
+        </p>
+
+    </div>
+
+</section>
+
 
 <!-- =====================================================
      SEARCH
 ===================================================== -->
 
 <section class="blog-search-section">
-  <div class="blog-container">
 
-    <div class="blog-search">
-      <form method="get">
+    <div class="blog-container">
 
-        <input
-          type="text"
-          name="q"
-          placeholder="Search articles..."
-          value="{{ query }}"
-        >
+        <div class="blog-search">
 
-        {% if active_category %}
-          <input
-            type="hidden"
-            name="category"
-            value="{{ active_category.slug }}"
-          >
-        {% endif %}
+            <form method="get">
 
-        <button type="submit">
-          Search
-        </button>
+                <input
+                    type="text"
+                    name="q"
+                    placeholder="Search articles..."
+                    value="{{ query|default:'' }}"
+                >
 
-      </form>
+                {% if active_category %}
+                    <input
+                        type="hidden"
+                        name="category"
+                        value="{{ active_category.slug }}"
+                    >
+                {% endif %}
+
+                <button type="submit">
+                    Search
+                </button>
+
+            </form>
+
+        </div>
+
     </div>
 
-  </div>
 </section>
 
 
@@ -50,29 +80,33 @@
 ===================================================== -->
 
 <section class="blog-filter">
-  <div class="blog-container">
 
-    <div class="blog-categories">
+    <div class="blog-container">
 
-      <a
-        href="{% url 'blog' %}{% if query %}?q={{ query }}{% endif %}"
-        class="{% if not active_category %}active{% endif %}">
-        All
-      </a>
+        <div class="blog-categories">
 
-      {% for category in categories %}
+            <a
+                href="{% url 'blog' %}{% if query %}?q={{ query }}{% endif %}"
+                class="{% if not active_category %}active{% endif %}"
+            >
+                All
+            </a>
 
-        <a
-          href="?category={{ category.slug }}{% if query %}&q={{ query }}{% endif %}"
-          class="{% if active_category == category %}active{% endif %}">
-          {{ category.name }}
-        </a>
+            {% for category in categories %}
 
-      {% endfor %}
+                <a
+                    href="?category={{ category.slug }}{% if query %}&q={{ query }}{% endif %}"
+                    class="{% if active_category == category %}active{% endif %}"
+                >
+                    {{ category.name }}
+                </a>
+
+            {% endfor %}
+
+        </div>
 
     </div>
 
-  </div>
 </section>
 
 
@@ -82,159 +116,181 @@
 
 <section class="blog-list">
 
-  <div class="blog-container">
+    <div class="blog-container">
 
-    <div class="blog-grid">
+        <div class="blog-grid">
 
-      {% for post in page_obj %}
+            {% for post in page_obj %}
 
-        <article class="blog-card">
-
-          <!-- IMAGE -->
-          <a
-            href="{% url 'blog_detail' post.slug %}"
-            class="blog-card-image"
-          >
-
-            {% if post.thumbnail %}
-
-              <img
-                src="{{ post.thumbnail.url }}"
-                alt="{{ post.title }}"
-                loading="lazy"
-              >
-
-            {% elif post.cover_image %}
-
-              <img
-                src="{{ post.cover_image.url }}"
-                alt="{{ post.title }}"
-                loading="lazy"
-              >
-
-            {% else %}
-
-              <div class="blog-fallback"></div>
-
-            {% endif %}
-
-          </a>
+                <article class="blog-card">
 
 
-          <!-- CARD CONTENT -->
-          <div class="blog-card-content">
+                    <!-- ===============================
+                         IMAGE
+                    ================================ -->
+
+                    <a
+                        href="{% url 'blog_detail' post.slug %}"
+                        class="blog-card-image"
+                    >
+
+                        {% if post.thumbnail %}
+
+                            <img
+                                src="{{ post.thumbnail.url }}"
+                                alt="{{ post.title }}"
+                                loading="lazy"
+                            >
+
+                        {% elif post.cover_image %}
+
+                            <img
+                                src="{{ post.cover_image.url }}"
+                                alt="{{ post.title }}"
+                                loading="lazy"
+                            >
+
+                        {% else %}
+
+                            <div class="blog-fallback"></div>
+
+                        {% endif %}
+
+                    </a>
 
 
-            <!-- CATEGORY -->
-            {% if post.category %}
+                    <!-- ===============================
+                         CONTENT
+                    ================================ -->
 
-              <div class="blog-card-categories">
+                    <div class="blog-card-content">
 
-                <span class="blog-category-pill">
-                  {{ post.category.name }}
+
+                        <!-- CATEGORY -->
+
+                        {% if post.category %}
+
+                            <div class="blog-card-categories">
+
+                                <span class="blog-category-pill">
+                                    {{ post.category.name }}
+                                </span>
+
+                            </div>
+
+                        {% endif %}
+
+
+                        <!-- TITLE -->
+
+                        <h2 class="blog-card-title">
+
+                            <a
+                                href="{% url 'blog_detail' post.slug %}"
+                            >
+                                {{ post.title }}
+                            </a>
+
+                        </h2>
+
+
+                        <!-- EXCERPT -->
+
+                        <p class="blog-card-excerpt">
+
+                            {{ post.content|striptags|truncatewords:22 }}
+
+                        </p>
+
+
+                        <!-- META -->
+
+                        <div class="blog-card-meta">
+
+                            <span>
+                                {{ post.created_at|date:"d M Y" }}
+                            </span>
+
+                            {% if post.category %}
+                                <span class="meta-separator">·</span>
+                                <span>{{ post.category.name }}</span>
+                            {% endif %}
+
+                        </div>
+
+
+                        <!-- READ MORE -->
+
+                        <a
+                            href="{% url 'blog_detail' post.slug %}"
+                            class="blog-read-more"
+                        >
+                            Read article
+                            <span>→</span>
+                        </a>
+
+
+                    </div>
+
+                </article>
+
+
+            {% empty %}
+
+                <div class="blog-empty">
+                    No posts found.
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        <!-- =================================================
+             PAGINATION
+        ================================================= -->
+
+        {% if page_obj.paginator.num_pages > 1 %}
+
+            <div class="blog-pagination">
+
+                {% if page_obj.has_previous %}
+
+                    <a
+                        href="?page={{ page_obj.previous_page_number }}{% if active_category %}&category={{ active_category.slug }}{% endif %}{% if query %}&q={{ query }}{% endif %}"
+                        class="pagination-pill"
+                    >
+                        ← Previous
+                    </a>
+
+                {% endif %}
+
+
+                <span class="pagination-current">
+
+                    Page {{ page_obj.number }}
+                    of
+                    {{ page_obj.paginator.num_pages }}
+
                 </span>
 
-              </div>
 
-            {% endif %}
+                {% if page_obj.has_next %}
 
+                    <a
+                        href="?page={{ page_obj.next_page_number }}{% if active_category %}&category={{ active_category.slug }}{% endif %}{% if query %}&q={{ query }}{% endif %}"
+                        class="pagination-pill"
+                    >
+                        Next →
+                    </a>
 
-            <!-- TITLE -->
-            <h2 class="blog-card-title">
-
-              <a href="{% url 'blog_detail' post.slug %}">
-                {{ post.title }}
-              </a>
-
-            </h2>
-
-
-            <!-- EXCERPT -->
-            <p class="blog-card-excerpt">
-
-              {{ post.content|striptags|truncatewords:22 }}
-
-            </p>
-
-
-            <!-- META -->
-            <div class="blog-card-meta">
-
-              <span>
-                📅 {{ post.created_at|date:"d M Y" }}
-              </span>
+                {% endif %}
 
             </div>
 
-
-            <!-- READ MORE -->
-            <a
-              href="{% url 'blog_detail' post.slug %}"
-              class="blog-read-more"
-            >
-              Czytaj więcej
-              <span>→</span>
-            </a>
-
-
-          </div>
-
-        </article>
-
-      {% empty %}
-
-        <p class="blog-empty">
-          No posts found.
-        </p>
-
-      {% endfor %}
+        {% endif %}
 
     </div>
-
-
-    <!-- =================================================
-         PAGINATION
-    ================================================= -->
-
-    {% if page_obj.paginator.num_pages > 1 %}
-
-      <div class="blog-pagination">
-
-        {% if page_obj.has_previous %}
-
-          <a
-            href="?page={{ page_obj.previous_page_number }}{% if active_category %}&category={{ active_category.slug }}{% endif %}{% if query %}&q={{ query }}{% endif %}"
-            class="pagination-pill"
-          >
-            ← Previous
-          </a>
-
-        {% endif %}
-
-
-        <span class="pagination-current">
-          Page {{ page_obj.number }}
-          of
-          {{ page_obj.paginator.num_pages }}
-        </span>
-
-
-        {% if page_obj.has_next %}
-
-          <a
-            href="?page={{ page_obj.next_page_number }}{% if active_category %}&category={{ active_category.slug }}{% endif %}{% if query %}&q={{ query }}{% endif %}"
-            class="pagination-pill"
-          >
-            Next →
-          </a>
-
-        {% endif %}
-
-      </div>
-
-    {% endif %}
-
-  </div>
 
 </section>
 

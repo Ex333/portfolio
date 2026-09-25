@@ -1,9 +1,4 @@
 /* =========================================================
-   BLOG — PREMIUM LAYOUT
-========================================================= */
-
-
-/* =========================================================
    BLOG CONTAINER
 ========================================================= */
 
@@ -16,297 +11,24 @@
 
 
 /* =========================================================
-   BLOG GRID
-========================================================= */
-
-.blog-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 38px 40px;
-  margin-top: 58px;
-}
-
-
-/* =========================================================
-   BLOG TILE
-========================================================= */
-
-.blog-tile {
-  display: block;
-  position: relative;
-
-  width: 100%;
-
-  text-decoration: none;
-  color: inherit;
-
-  border-radius: 20px;
-  overflow: hidden;
-
-  opacity: 0;
-  animation: blogFadeUp 0.6s ease forwards;
-}
-
-
-/* =========================================================
-   IMAGE / CARD
-========================================================= */
-
-.blog-tile-image {
-  position: relative;
-
-  width: 100%;
-  aspect-ratio: 1.32 / 1;
-
-  overflow: hidden;
-
-  border-radius: 20px;
-
-  background: #111;
-
-  box-shadow:
-    0 12px 30px rgba(0, 0, 0, 0.10);
-
-  transition:
-    transform 0.35s ease,
-    box-shadow 0.35s ease;
-}
-
-
-/* =========================================================
-   IMAGE
-========================================================= */
-
-.blog-tile-image img {
-  position: absolute;
-  inset: 0;
-
-  width: 100%;
-  height: 100%;
-
-  display: block;
-
-  object-fit: cover;
-  object-position: center;
-
-  transition:
-    transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-
-
-/* =========================================================
-   FALLBACK
-========================================================= */
-
-.blog-fallback {
-  width: 100%;
-  height: 100%;
-
-  background:
-    linear-gradient(
-      135deg,
-      #101010 0%,
-      #1e1e1e 50%,
-      #303030 100%
-    );
-}
-
-
-/* =========================================================
-   DARK GRADIENT OVER IMAGE
-========================================================= */
-
-.blog-tile-overlay {
-  position: absolute;
-  inset: 0;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-
-  padding: 26px;
-
-  color: #fff;
-
-  background:
-    linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0) 35%,
-      rgba(0, 0, 0, 0.08) 48%,
-      rgba(0, 0, 0, 0.55) 72%,
-      rgba(0, 0, 0, 0.88) 100%
-    );
-}
-
-
-/* =========================================================
-   ARTICLE TITLE
-========================================================= */
-
-.blog-tile-overlay h2 {
-  margin: 0;
-
-  max-width: 95%;
-
-  font-size: 19px;
-  line-height: 1.28;
-
-  font-weight: 700;
-
-  letter-spacing: -0.25px;
-
-  color: #fff;
-
-  text-shadow:
-    0 1px 3px rgba(0, 0, 0, 0.35);
-}
-
-
-/* =========================================================
-   DATE / CATEGORY
-========================================================= */
-
-.blog-tile-overlay p {
-  margin: 9px 0 0;
-
-  font-size: 13px;
-  line-height: 1.4;
-
-  font-weight: 500;
-
-  color: rgba(255, 255, 255, 0.88);
-}
-
-
-/* =========================================================
-   HOVER
-========================================================= */
-
-.blog-tile:hover .blog-tile-image {
-  transform: translateY(-7px);
-
-  box-shadow:
-    0 22px 45px rgba(0, 0, 0, 0.18);
-}
-
-
-.blog-tile:hover .blog-tile-image img {
-  transform: scale(1.055);
-}
-
-
-/* =========================================================
-   CATEGORY FILTER
-========================================================= */
-
-.blog-categories {
-  display: flex;
-
-  justify-content: flex-start;
-  align-items: center;
-
-  gap: 10px;
-
-  flex-wrap: wrap;
-
-  margin-top: 40px;
-}
-
-
-/* =========================================================
-   CATEGORY BUTTONS
-========================================================= */
-
-.blog-categories a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 10px 18px;
-
-  border-radius: 999px;
-
-  text-decoration: none;
-
-  font-size: 13px;
-  font-weight: 500;
-
-  white-space: nowrap;
-
-  background: #f3f3f3;
-  color: #333;
-
-  transition:
-    background 0.25s ease,
-    color 0.25s ease,
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
-}
-
-
-/* =========================================================
-   CATEGORY HOVER
-========================================================= */
-
-.blog-categories a:hover {
-  background: #e9e9e9;
-
-  color: #111;
-
-  transform: translateY(-1px);
-}
-
-
-/* =========================================================
-   ACTIVE CATEGORY
-========================================================= */
-
-.blog-categories a.active {
-  background: #111;
-  color: #fff;
-
-  box-shadow:
-    0 5px 15px rgba(0, 0, 0, 0.12);
-}
-
-
-.blog-categories a.active:hover {
-  background: #000;
-  color: #fff;
-}
-
-
-/* =========================================================
-   SEARCH SECTION
+   SEARCH
 ========================================================= */
 
 .blog-search-section {
   margin-top: 42px;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
-
-
-/* =========================================================
-   SEARCH
-========================================================= */
 
 .blog-search {
   display: flex;
   justify-content: center;
 }
 
-
 .blog-search form {
   position: relative;
-
   width: 420px;
   max-width: 100%;
 }
-
-
-/* =========================================================
-   SEARCH INPUT
-========================================================= */
 
 .blog-search input {
   box-sizing: border-box;
@@ -318,29 +40,19 @@
   border: 1px solid #e5e7eb;
   border-radius: 999px;
 
-  background: #f5f5f5;
+  background: #f4f4f4;
 
   color: #111;
 
   font-family: inherit;
   font-size: 14px;
 
-  transition:
-    background 0.25s ease,
-    border-color 0.25s ease,
-    box-shadow 0.25s ease;
+  transition: 0.25s ease;
 }
-
 
 .blog-search input::placeholder {
-  color: #888;
+  color: #777;
 }
-
-
-.blog-search input:hover {
-  background: #f1f1f1;
-}
-
 
 .blog-search input:focus {
   outline: none;
@@ -349,14 +61,8 @@
 
   border-color: #d5d5d5;
 
-  box-shadow:
-    0 6px 20px rgba(0, 0, 0, 0.07);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
 }
-
-
-/* =========================================================
-   SEARCH BUTTON
-========================================================= */
 
 .blog-search button {
   position: absolute;
@@ -372,7 +78,7 @@
   border-radius: 999px;
 
   background: #111;
-  color: #fff;
+  color: white;
 
   font-family: inherit;
   font-size: 12px;
@@ -380,18 +86,318 @@
 
   cursor: pointer;
 
-  transition:
-    background 0.25s ease,
-    transform 0.25s ease;
+  transition: 0.25s ease;
 }
-
 
 .blog-search button:hover {
   background: #000;
+}
 
-  transform:
-    translateY(-50%)
-    translateY(-1px);
+
+/* =========================================================
+   CATEGORY FILTER
+========================================================= */
+
+.blog-categories {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  flex-wrap: wrap;
+
+  margin-top: 38px;
+}
+
+.blog-categories a {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px 18px;
+
+  border-radius: 999px;
+
+  background: #f3f3f3;
+
+  color: #333;
+
+  text-decoration: none;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.blog-categories a:hover {
+  background: #e9e9e9;
+
+  color: #111;
+
+  transform: translateY(-1px);
+}
+
+.blog-categories a.active {
+  background: #111;
+
+  color: #fff;
+
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+}
+
+
+/* =========================================================
+   BLOG GRID
+========================================================= */
+
+.blog-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 42px 40px;
+
+  margin-top: 58px;
+}
+
+
+/* =========================================================
+   BLOG CARD
+========================================================= */
+
+.blog-card {
+  min-width: 0;
+
+  opacity: 0;
+
+  animation:
+    blogFadeUp 0.6s ease forwards;
+}
+
+
+/* =========================================================
+   IMAGE
+========================================================= */
+
+.blog-card-image {
+  display: block;
+
+  position: relative;
+
+  width: 100%;
+
+  aspect-ratio: 1.42 / 1;
+
+  overflow: hidden;
+
+  border-radius: 18px;
+
+  background: #111;
+
+  text-decoration: none;
+
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.08);
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.blog-card-image img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  object-position: center;
+
+  transition:
+    transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.blog-card-image:hover {
+  transform: translateY(-5px);
+
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.14);
+}
+
+.blog-card-image:hover img {
+  transform: scale(1.04);
+}
+
+
+/* =========================================================
+   FALLBACK IMAGE
+========================================================= */
+
+.blog-fallback {
+  width: 100%;
+  height: 100%;
+
+  background:
+    linear-gradient(
+      135deg,
+      #161616,
+      #303030
+    );
+}
+
+
+/* =========================================================
+   CARD CONTENT
+========================================================= */
+
+.blog-card-content {
+  padding: 0 8px;
+}
+
+
+/* =========================================================
+   CATEGORY PILL
+========================================================= */
+
+.blog-card-categories {
+  display: flex;
+
+  gap: 7px;
+
+  margin-top: 18px;
+}
+
+.blog-category-pill {
+  display: inline-flex;
+
+  align-items: center;
+
+  padding: 6px 11px;
+
+  border-radius: 999px;
+
+  background: #e8f4ff;
+
+  color: #1683d8;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  line-height: 1;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.blog-card-title {
+  margin: 15px 0 0;
+
+  font-size: 19px;
+
+  line-height: 1.35;
+
+  font-weight: 700;
+
+  letter-spacing: -0.25px;
+}
+
+.blog-card-title a {
+  color: #222;
+
+  text-decoration: none;
+
+  transition: color 0.2s ease;
+}
+
+.blog-card-title a:hover {
+  color: #1683d8;
+}
+
+
+/* =========================================================
+   EXCERPT
+========================================================= */
+
+.blog-card-excerpt {
+  margin: 12px 0 0;
+
+  color: #666;
+
+  font-size: 14px;
+
+  line-height: 1.65;
+}
+
+
+/* =========================================================
+   META
+========================================================= */
+
+.blog-card-meta {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  margin-top: 18px;
+
+  padding-top: 15px;
+
+  border-top: 1px solid #e7e7e7;
+
+  color: #777;
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   READ MORE
+========================================================= */
+
+.blog-read-more {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  margin-top: 17px;
+
+  color: #1683d8;
+
+  text-decoration: none;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  transition:
+    gap 0.2s ease,
+    color 0.2s ease;
+}
+
+.blog-read-more span {
+  font-size: 17px;
+
+  line-height: 1;
+}
+
+.blog-read-more:hover {
+  gap: 12px;
+
+  color: #006fbd;
 }
 
 
@@ -403,31 +409,21 @@
   display: flex;
 
   justify-content: center;
+
   align-items: center;
 
   gap: 18px;
 
-  margin-top: 55px;
-  margin-bottom: 20px;
+  margin-top: 60px;
+
+  margin-bottom: 30px;
 }
-
-
-/* =========================================================
-   PAGINATION CURRENT
-========================================================= */
 
 .pagination-current {
-  font-size: 13px;
-
   color: #777;
 
-  white-space: nowrap;
+  font-size: 13px;
 }
-
-
-/* =========================================================
-   PAGINATION BUTTON
-========================================================= */
 
 .pagination-pill {
   display: inline-flex;
@@ -439,31 +435,41 @@
 
   border-radius: 999px;
 
+  background: #f3f3f3;
+
+  color: #222;
+
   text-decoration: none;
 
   font-size: 13px;
-  font-weight: 500;
 
-  background: #f3f3f3;
-  color: #222;
-
-  transition:
-    background 0.25s ease,
-    color 0.25s ease,
-    transform 0.25s ease;
+  transition: 0.25s ease;
 }
-
 
 .pagination-pill:hover {
   background: #111;
-  color: #fff;
 
-  transform: translateY(-1px);
+  color: white;
 }
 
 
 /* =========================================================
-   BLOG POST CONTENT IMAGES
+   EMPTY
+========================================================= */
+
+.blog-empty {
+  grid-column: 1 / -1;
+
+  text-align: center;
+
+  padding: 60px 0;
+
+  color: #777;
+}
+
+
+/* =========================================================
+   BLOG POST IMAGES
 ========================================================= */
 
 .blog-image-block {
@@ -480,7 +486,6 @@
   position: relative;
 }
 
-
 .blog-image-block img {
   width: 100%;
   height: 100%;
@@ -488,6 +493,7 @@
   display: block;
 
   object-fit: cover;
+
   object-position: center;
 }
 
@@ -500,54 +506,53 @@
 
   from {
     opacity: 0;
-    transform: translateY(24px);
+
+    transform:
+      translateY(25px);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0);
+
+    transform:
+      translateY(0);
   }
 
 }
 
-
-/* =========================================================
-   STAGGERED ANIMATION
-========================================================= */
-
-.blog-tile:nth-child(1) {
+.blog-card:nth-child(1) {
   animation-delay: 0.05s;
 }
 
-.blog-tile:nth-child(2) {
+.blog-card:nth-child(2) {
   animation-delay: 0.10s;
 }
 
-.blog-tile:nth-child(3) {
+.blog-card:nth-child(3) {
   animation-delay: 0.15s;
 }
 
-.blog-tile:nth-child(4) {
+.blog-card:nth-child(4) {
   animation-delay: 0.20s;
 }
 
-.blog-tile:nth-child(5) {
+.blog-card:nth-child(5) {
   animation-delay: 0.25s;
 }
 
-.blog-tile:nth-child(6) {
+.blog-card:nth-child(6) {
   animation-delay: 0.30s;
 }
 
-.blog-tile:nth-child(7) {
+.blog-card:nth-child(7) {
   animation-delay: 0.35s;
 }
 
-.blog-tile:nth-child(8) {
+.blog-card:nth-child(8) {
   animation-delay: 0.40s;
 }
 
-.blog-tile:nth-child(9) {
+.blog-card:nth-child(9) {
   animation-delay: 0.45s;
 }
 
@@ -563,9 +568,10 @@
   }
 
   .blog-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
 
-    gap: 28px;
+    gap: 32px;
   }
 
 }
@@ -581,37 +587,27 @@
     padding: 0 18px;
   }
 
-
   .blog-grid {
     grid-template-columns: 1fr;
 
-    gap: 24px;
+    gap: 35px;
 
-    margin-top: 40px;
+    margin-top: 42px;
   }
 
+  .blog-card-image {
+    aspect-ratio: 1.4 / 1;
 
-  .blog-tile-image {
-    aspect-ratio: 1.35 / 1;
-
-    border-radius: 18px;
+    border-radius: 17px;
   }
 
-
-  .blog-tile-overlay {
-    padding: 22px;
-  }
-
-
-  .blog-tile-overlay h2 {
+  .blog-card-title {
     font-size: 18px;
   }
 
-
-  .blog-tile-overlay p {
-    font-size: 12px;
+  .blog-card-excerpt {
+    font-size: 14px;
   }
-
 
   .blog-categories {
     gap: 8px;
@@ -619,38 +615,25 @@
     margin-top: 30px;
   }
 
-
   .blog-categories a {
     padding: 9px 15px;
 
     font-size: 12px;
   }
 
-
   .blog-search-section {
     margin-top: 30px;
   }
-
 
   .blog-search form {
     width: 100%;
   }
 
-
-  .blog-search input {
-    padding-left: 17px;
-    padding-right: 90px;
-  }
-
-
   .blog-pagination {
     flex-wrap: wrap;
 
-    gap: 10px;
-
-    margin-top: 40px;
+    margin-top: 45px;
   }
-
 
   .blog-image-block {
     height: 300px;
@@ -658,29 +641,6 @@
     border-radius: 16px;
 
     margin: 35px 0;
-  }
-
-}
-
-
-/* =========================================================
-   VERY SMALL PHONES
-========================================================= */
-
-@media (max-width: 380px) {
-
-  .blog-tile-overlay {
-    padding: 19px;
-  }
-
-
-  .blog-tile-overlay h2 {
-    font-size: 17px;
-  }
-
-
-  .blog-tile-overlay p {
-    font-size: 11px;
   }
 
 }

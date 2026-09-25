@@ -4,141 +4,238 @@
 {% block title %}Blog{% endblock %}
 
 {% block extra_css %}
-
 <link rel="stylesheet" href="{% static 'css/blog.css' %}">
 {% endblock %}
 
 {% block content %}
 
-<!-- SEARCH BAR -->
+<!-- =====================================================
+     SEARCH
+===================================================== -->
 
 <section class="blog-search-section">
   <div class="blog-container">
-<div class="blog-search">
-  <form method="get">
 
-    <input
-      type="text"
-      name="q"
-      placeholder="Search articles..."
-      value="{{ query }}"
-    >
+    <div class="blog-search">
+      <form method="get">
 
-    {% if active_category %}
-    <input type="hidden" name="category" value="{{ active_category.slug }}">
-    {% endif %}
+        <input
+          type="text"
+          name="q"
+          placeholder="Search articles..."
+          value="{{ query }}"
+        >
 
-    <button type="submit">Search</button>
+        {% if active_category %}
+          <input
+            type="hidden"
+            name="category"
+            value="{{ active_category.slug }}"
+          >
+        {% endif %}
 
-  </form>
-</div>
+        <button type="submit">
+          Search
+        </button>
 
+      </form>
+    </div>
 
   </div>
 </section>
 
-<!-- CATEGORY FILTER -->
+
+<!-- =====================================================
+     CATEGORY FILTER
+===================================================== -->
 
 <section class="blog-filter">
   <div class="blog-container">
 
+    <div class="blog-categories">
 
-<div class="blog-categories">
+      <a
+        href="{% url 'blog' %}{% if query %}?q={{ query }}{% endif %}"
+        class="{% if not active_category %}active{% endif %}">
+        All
+      </a>
 
-  <a href="{% url 'blog' %}{% if query %}?q={{ query }}{% endif %}"
-     class="{% if not active_category %}active{% endif %}">
-     All
-  </a>
+      {% for category in categories %}
 
-  {% for category in categories %}
-    <a href="?category={{ category.slug }}{% if query %}&q={{ query }}{% endif %}"
-       class="{% if active_category == category %}active{% endif %}">
-       {{ category.name }}
-    </a>
-  {% endfor %}
+        <a
+          href="?category={{ category.slug }}{% if query %}&q={{ query }}{% endif %}"
+          class="{% if active_category == category %}active{% endif %}">
+          {{ category.name }}
+        </a>
 
-</div>
+      {% endfor %}
 
+    </div>
 
   </div>
 </section>
 
-<!-- BLOG LIST -->
+
+<!-- =====================================================
+     BLOG LIST
+===================================================== -->
 
 <section class="blog-list">
+
   <div class="blog-container">
 
+    <div class="blog-grid">
 
-<div class="blog-grid">
+      {% for post in page_obj %}
 
-  {% for post in page_obj %}
-    <a href="{% url 'blog_detail' post.slug %}" class="blog-tile">
+        <article class="blog-card">
 
-      <div class="blog-tile-image">
+          <!-- IMAGE -->
+          <a
+            href="{% url 'blog_detail' post.slug %}"
+            class="blog-card-image"
+          >
 
-        {% if post.thumbnail %}
-          <img src="{{ post.thumbnail.url }}"
-               alt="{{ post.title }}"
-               loading="lazy">
+            {% if post.thumbnail %}
 
-        {% elif post.cover_image %}
-          <img src="{{ post.cover_image.url }}"
-               alt="{{ post.title }}"
-               loading="lazy">
+              <img
+                src="{{ post.thumbnail.url }}"
+                alt="{{ post.title }}"
+                loading="lazy"
+              >
 
-        {% else %}
-          <div class="blog-fallback"></div>
+            {% elif post.cover_image %}
+
+              <img
+                src="{{ post.cover_image.url }}"
+                alt="{{ post.title }}"
+                loading="lazy"
+              >
+
+            {% else %}
+
+              <div class="blog-fallback"></div>
+
+            {% endif %}
+
+          </a>
+
+
+          <!-- CARD CONTENT -->
+          <div class="blog-card-content">
+
+
+            <!-- CATEGORY -->
+            {% if post.category %}
+
+              <div class="blog-card-categories">
+
+                <span class="blog-category-pill">
+                  {{ post.category.name }}
+                </span>
+
+              </div>
+
+            {% endif %}
+
+
+            <!-- TITLE -->
+            <h2 class="blog-card-title">
+
+              <a href="{% url 'blog_detail' post.slug %}">
+                {{ post.title }}
+              </a>
+
+            </h2>
+
+
+            <!-- EXCERPT -->
+            <p class="blog-card-excerpt">
+
+              {{ post.content|striptags|truncatewords:22 }}
+
+            </p>
+
+
+            <!-- META -->
+            <div class="blog-card-meta">
+
+              <span>
+                📅 {{ post.created_at|date:"d M Y" }}
+              </span>
+
+            </div>
+
+
+            <!-- READ MORE -->
+            <a
+              href="{% url 'blog_detail' post.slug %}"
+              class="blog-read-more"
+            >
+              Czytaj więcej
+              <span>→</span>
+            </a>
+
+
+          </div>
+
+        </article>
+
+      {% empty %}
+
+        <p class="blog-empty">
+          No posts found.
+        </p>
+
+      {% endfor %}
+
+    </div>
+
+
+    <!-- =================================================
+         PAGINATION
+    ================================================= -->
+
+    {% if page_obj.paginator.num_pages > 1 %}
+
+      <div class="blog-pagination">
+
+        {% if page_obj.has_previous %}
+
+          <a
+            href="?page={{ page_obj.previous_page_number }}{% if active_category %}&category={{ active_category.slug }}{% endif %}{% if query %}&q={{ query }}{% endif %}"
+            class="pagination-pill"
+          >
+            ← Previous
+          </a>
+
         {% endif %}
 
-        <div class="blog-tile-overlay">
-          <h2>{{ post.title }}</h2>
 
-          <p>
-            {{ post.created_at|date:"d M Y" }}
-            {% if post.category %}
-              · {{ post.category.name }}
-            {% endif %}
-          </p>
-        </div>
+        <span class="pagination-current">
+          Page {{ page_obj.number }}
+          of
+          {{ page_obj.paginator.num_pages }}
+        </span>
+
+
+        {% if page_obj.has_next %}
+
+          <a
+            href="?page={{ page_obj.next_page_number }}{% if active_category %}&category={{ active_category.slug }}{% endif %}{% if query %}&q={{ query }}{% endif %}"
+            class="pagination-pill"
+          >
+            Next →
+          </a>
+
+        {% endif %}
 
       </div>
 
-    </a>
-
-  {% empty %}
-    <p>No posts found.</p>
-  {% endfor %}
-
-</div>
-
-
-<!-- PAGINATION -->
-{% if page_obj.paginator.num_pages > 1 %}
-<div class="blog-pagination">
-
-  {% if page_obj.has_previous %}
-    <a href="?page={{ page_obj.previous_page_number }}{% if active_category %}&category={{ active_category.slug }}{% endif %}{% if query %}&q={{ query }}{% endif %}"
-       class="pagination-pill">
-       ← Previous
-    </a>
-  {% endif %}
-
-  <span class="pagination-current">
-    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
-  </span>
-
-  {% if page_obj.has_next %}
-    <a href="?page={{ page_obj.next_page_number }}{% if active_category %}&category={{ active_category.slug }}{% endif %}{% if query %}&q={{ query }}{% endif %}"
-       class="pagination-pill">
-       Next →
-    </a>
-  {% endif %}
-
-</div>
-{% endif %}
-
+    {% endif %}
 
   </div>
+
 </section>
 
 {% endblock %}
